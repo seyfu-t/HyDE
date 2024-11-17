@@ -32,6 +32,5 @@ flatpak --user override --filesystem=~/.icons
 flatpak --user override --filesystem=~/.local/share/themes
 flatpak --user override --filesystem=~/.local/share/icons
 
-
 flatpak --user override --env=GTK_THEME=${gtkTheme}
 flatpak --user override --env=ICON_THEME=${gtkIcon}
