@@ -84,7 +84,7 @@ grep 'gsettings set org.gnome.desktop.interface icon-theme' "${hydeThemeDir}/hyp
 if [ -d /run/current-system/sw/share/themes ] ; then
     export themeDir=/run/current-system/sw/share/themes
 fi
-[ ! -d "${HOME}"/.themes ] || cp -nP "${HOME}"/.themes/* "${themesDir}"
+[ ! -d "${HOME}"/.themes ] || cp -snr "${HOME}"/.themes/* "${themesDir}"
 
 #// qtct
 
