@@ -187,9 +187,10 @@ check_tars Document-Font
 check_tars Monospace-Font
 print_prompt "" && [[ "${exit_flag}" = true ]] && exit 1
 
+
 # extract arcs
 prefix=("Gtk" "Icon" "Cursor")
-tgtDir=("$HOME/.themes" "$HOME/.icons" "$HOME/.icons")
+tgtDir=("$HOME/.local/share/themes" "$HOME/.local/share/icons" "$HOME/.local/share/icons")
 
 for indx in ${!prefix[@]}; do
     tarFile="$(find "${Theme_Dir}" -type f -name "${prefix[indx]}_*.tar.*")"

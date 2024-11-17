@@ -72,7 +72,7 @@ done
 [ -d "$HOME/.config/hyde" ] && rm -rf "$HOME/.config/hyde"
 [ -d "$HOME/.cache/hyde" ] && rm -rf "$HOME/.cache/hyde"
 
-echo -e "\n
+cat << "NOTE"
 -------------------------------------------------------
 .: Manual action required to complete uninstallation :.
 -------------------------------------------------------
@@ -80,6 +80,8 @@ echo -e "\n
 Remove HyDE related backups/icons/fonts/themes manually from these paths
 $HOME/.config/cfg_backups               # remove all previous backups
 $HOME/.local/share/fonts                # remove fonts from here
+$HOME/.local/share/icons                # remove fonts from here
+$HOME/.local/share/themes               # remove fonts from here
 $HOME/.icons                            # remove icons from here
 $HOME/.themes                           # remove themes from here
 
@@ -95,4 +97,4 @@ Revert back bootloader/pacman/sddm settings manually from these backups
 Uninstall the packages manually that are no longer required based on these list
 ${scrDir}/custom_hypr.lst
 ${scrDir}/custom_apps.lst
-"
+NOTE

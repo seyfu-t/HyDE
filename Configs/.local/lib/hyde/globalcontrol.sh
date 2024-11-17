@@ -8,6 +8,9 @@ export hydeConfDir="${confDir}/hyde"
 export cacheDir="$HOME/.cache/hyde"
 export thmbDir="${cacheDir}/thumbs"
 export dcolDir="${cacheDir}/dcols"
+export iconsDir="${XDG_DATA_HOME}/icons"
+export themesDir="${XDG_DATA_HOME}/themes"
+export fontsDir="${XDG_DATA_HOME}/themes"
 export hashMech="sha1sum"
 
 get_hashmap()
