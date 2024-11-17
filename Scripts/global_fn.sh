@@ -9,9 +9,15 @@ set -e
 scrDir="$(dirname "$(realpath "$0")")"
 cloneDir="$(dirname "${scrDir}")"
 confDir="${XDG_CONFIG_HOME:-$HOME/.config}"
-cacheDir="$HOME/.cache/hyde"
+cacheDir="${XDG_CACHE_HOME:-$HOME/.cache/hyde}"
 aurList=(yay paru)
 shlList=(zsh fish)
+
+export cloneDir
+export confDir
+export cacheDir
+export aurList
+export shlList
 
 pkg_installed() {
     local PkgIn=$1
@@ -91,4 +97,64 @@ prompt_timer() {
     export promptIn
     echo ""
     set -e
+}
+
+print_log () {
+    section=${log_section:-hyde}
+    colored=${log_colored:-true}
+    [ -n "${section}" ] && echo -ne "\e[32m[$section] \e[0m"
+    while (("$#")); do
+    # [ "${colored}" == "true" ] 
+        case "$1" in
+        -r|+r)
+            echo -ne "\e[31m$2\e[0m"
+            shift 2
+            ;; # Red
+        -g|+g)
+            echo -ne "\e[32m$2\e[0m"
+            shift 2
+            ;; # Green
+        -y|+y)
+            echo -ne "\e[33m$2\e[0m"
+            shift 2
+            ;; # Yellow
+        -b|+b)
+            echo -ne "\e[34m$2\e[0m"
+            shift 2
+            ;; # Blue
+        -m|+m)
+            echo -ne "\e[35m$2\e[0m"
+            shift 2
+            ;; # Magenta
+        -c|+c)
+            echo -ne "\e[36m$2\e[0m"
+            shift 2
+            ;; # Cyan
+        -wt|+w)
+            echo -ne "\e[37m$2\e[0m"
+            shift 2
+            ;; # White
+        -n|+n)
+            echo -ne "\e[96m$2\e[0m"
+            shift 2
+            ;; # Neon
+        -stat)
+            echo -ne "\e[46m $2 \e[0m :: "
+            shift 2
+            ;; # critical         
+        -crit)
+            echo -ne "\e[41m $2 \e[0m :: "
+            shift 2
+            ;; # critical         
+        -warn)
+            echo -ne "\e[43m $2 \e[0m :: "
+            shift 2
+            ;; # warning
+        *)
+            echo -ne "$1"
+            shift
+            ;;
+        esac
+    done
+    echo ""
 }
