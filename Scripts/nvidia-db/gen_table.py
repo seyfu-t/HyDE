@@ -1,5 +1,6 @@
 #/bin/env python3
 import os
+import argparse
 
 def generate_table(directory):
     table = []
@@ -38,8 +39,12 @@ def generate_table_of_contents(directory):
     return table_of_contents
 
 if __name__ == "__main__":
+    parser = argparse.ArgumentParser(description="Generate Nvidia driver tables and table of contents.")
+    parser.add_argument("-f", "--file", required=True, help="The output file to write the tables to.")
+    args = parser.parse_args()
+
     directory = "."
-    output_file = "./NVIDIA-TABLE.md"
+    output_file = args.file
     
     nvidia_table = generate_table(directory)
     write_table_to_file(nvidia_table, output_file, "<!-- START NVIDIA TABLE -->\n", "<!-- END NVIDIA TABLE -->\n")
