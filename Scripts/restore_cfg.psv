@@ -5,7 +5,7 @@ their respective package dependency.
 Note:
 - Lines starting with '#' are comments
 - The only known variable is '${HOME}'
-- This is a 4 column file separated by '|', 
+- This is a 4 column file separated by '|'
 - Each column should use spaces to separate array
 
 Structure:
@@ -46,9 +46,8 @@ P|${HOME}/.config|libinput-gestures.conf|libinput-gestures
 
 Synchronized:
 
+S|${HOME}/.config/waybar|modules config.jsonc theme.css style.css|waybar
 S|${HOME}/.config|dunst|dunst
-S|${HOME}/.config/hyde|wallbash|hyprland
-S|${HOME}/.local/share|hyde|hyprland
 S|${HOME}/.local/lib|hyde|hyprland
 S|${HOME}/.config|kitty|kitty
 S|${HOME}/.config|Kvantum|kvantum
@@ -58,10 +57,6 @@ S|${HOME}/.config|qt5ct|qt5ct
 S|${HOME}/.config|qt6ct|qt6ct
 S|${HOME}/.config|rofi|rofi
 S|${HOME}/.config|swaylock|swaylock-effects
-S|${HOME}/.config/waybar|modules|waybar
-S|${HOME}/.config/waybar|config.jsonc|waybar
-S|${HOME}/.config/waybar|style.css|waybar
-S|${HOME}/.config/waybar|theme.css|waybar
 S|${HOME}/.config|wlogout|wlogout
 S|${HOME}/.config|xsettingsd|nwg-look
 S|${HOME}/.config|nwg-look|nwg-look
@@ -74,4 +69,7 @@ S|${HOME}/.local/share|dolphin|dolphin
 S|${HOME}/.local/share/kxmlgui5|dolphin|dolphin
 S|${HOME}/.local/share/kio/servicemenus|hydewallpaper.desktop|dolphin
 
-Overwrite: The Hyde specific files
+Overwrite: Strict Hyde specific files
+
+O|${HOME}/.config/hyde|wallbash|hyprland
+O|${HOME}/.local/share|hyde|hyprland

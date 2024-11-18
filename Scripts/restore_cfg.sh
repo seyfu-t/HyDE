@@ -137,7 +137,7 @@ deploy_psv() {
                 "O")
                     [ "${flg_DryRun}" -ne 1 ] && mv "${pth}/${cfg_chk}" "${BkpDir}${tgt}"
                     [ "${flg_DryRun}" -ne 1 ] && cp -r "${CfgDir}$tgt/${cfg_chk}" "${pth}"
-                    print_log -r "[move to backup]" " > " -crit "[overwrite]" -b " :: " "${pth}" -r " <--  " "${CfgDir}${tgt}/${cfg_chk}"
+                    print_log -r "[move to backup]" " > " -r "[overwrite]" -b " :: " "${pth}" -r " <--  " "${CfgDir}${tgt}/${cfg_chk}"
                     ;;
                 "S")
                     [ "${flg_DryRun}" -ne 1 ] && cp -r "${pth}/${cfg_chk}" "${BkpDir}${tgt}"
