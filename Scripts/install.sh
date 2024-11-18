@@ -210,8 +210,9 @@ EOF
         [ -f "${themePath}/.sort" ] || echo "${#themeNameQ[@]}" >"${themePath}/.sort"
         print_log -g "[THEME] " -stat "added" "${themeName}"
     done <"${scrDir}/themepatcher.lst"
+    set +e
     [ "${flg_DryRun}" -eq 1 ] || parallel --bar --link "\"${scrDir}/themepatcher.sh\"" "{1}" "{2}" "{3}" "{4}" ::: "${themeNameQ[@]}" ::: "${themeRepoQ[@]}" ::: "--skipcaching" ::: "false"
-    wait
+    set -e
     print_log -g "[generate] " "cache ::" "Wallpapers..."
     [ "${flg_DryRun}" -eq 1 ] || "$HOME/.local/lib/hyde/swwwallcache.sh" -t ""
     if [ "${flg_DryRun}" -ne 1 ] && [ -n "$HYPRLAND_INSTANCE_SIGNATURE" ]; then
