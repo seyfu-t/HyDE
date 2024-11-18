@@ -74,7 +74,7 @@ nvidia_detect() {
     fi
     if [ "${1}" == "--drivers" ]; then
         while read -r -d ' ' nvcode; do
-            awk -F '|' -v nvc="${nvcode}" 'substr(nvc,1,length($3)) == $3 {split(FILENAME,driver,"/"); print driver[length(driver)],"\nnvidia-utils"}' "${scrDir}"/.nvidia/nvidia*dkms
+            awk -F '|' -v nvc="${nvcode}" 'substr(nvc,1,length($3)) == $3 {split(FILENAME,driver,"/"); print driver[length(driver)],"\nnvidia-utils"}' "${scrDir}"/nvidia-db/nvidia*dkms
         done <<<"${dGPU[@]}"
         return 0
     fi

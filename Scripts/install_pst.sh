@@ -64,13 +64,13 @@ fi
 # flatpak
 if ! pkg_installed flatpak; then
     print_log -r "[FLATPAK]" -b "list :: " "flatpak application"
-    awk -F '#' '$1 != "" {print "["++count"]", $1}' "${scrDir}/.extra/custom_flat.lst"
+    awk -F '#' '$1 != "" {print "["++count"]", $1}' "${scrDir}/extra/custom_flat.lst"
     prompt_timer 60 "Install these flatpaks? [Y/n]"
     fpkopt=${promptIn,,}
 
     if [ "${fpkopt}" = "y" ]; then
         print_log -g "[FLATPAK]" -b "install :: " "flatpaks"
-        "${scrDir}/.extra/install_fpk.sh"
+        "${scrDir}/extra/install_fpk.sh"
     else
         print_log -y "[FLATPAK]" -b "skip :: " "flatpak installation"
     fi
