@@ -12,6 +12,7 @@ export dcolDir
 [ -d "${thmbDir}" ] || mkdir -p "${thmbDir}"
 [ -d "${dcolDir}" ] || mkdir -p "${dcolDir}"
 [ -d "${cacheDir}/landing" ] || mkdir -p "${cacheDir}/landing"
+[ -d "${cacheDir}/wallbash" ] || mkdir -p "${cacheDir}/wallbash"
 
 if [ ! -z "${wallbashCustomCurve}" ] && [[ "${wallbashCustomCurve}" =~ ^([0-9]+[[:space:]][0-9]+\\n){8}[0-9]+[[:space:]][0-9]+$ ]] ; then
     export wallbashCustomCurve

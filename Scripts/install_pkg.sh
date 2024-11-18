@@ -1,15 +1,18 @@
 #!/usr/bin/env bash
+# shellcheck disable=SC2154
+# shellcheck disable=SC1091
 #|---/ /+----------------------------------------+---/ /|#
 #|--/ /-| Script to install pkgs from input list |--/ /-|#
 #|-/ /--| Prasanth Rangan                        |-/ /--|#
 #|/ /---+----------------------------------------+/ /---|#
 
 scrDir=$(dirname "$(realpath "$0")")
-source "${scrDir}/global_fn.sh"
-if [ $? -ne 0 ]; then
+if ! source "${scrDir}/global_fn.sh" ; then 
     echo "Error: unable to source global_fn.sh..."
     exit 1
 fi
+
+export log_section="package"
 
 "${scrDir}/install_aur.sh" "${getAur}" 2>&1
 chk_list "aurhlpr" "${aurList[@]}"
@@ -25,7 +28,7 @@ while read -r pkg deps; do
         continue
     fi
 
-    if [ ! -z "${deps}" ]; then
+    if [ -n "${deps}" ]; then
         deps="${deps%"${deps##*[![:space:]]}"}"
         while read -r cdep; do
             pass=$(cut -d '#' -f 1 "${listPkg}" | awk -F '|' -v chk="${cdep}" '{if($1 == chk) {print 1;exit}}')
@@ -36,34 +39,37 @@ while read -r pkg deps; do
                     break
                 fi
             fi
-        done < <(echo "${deps}" | xargs -n1)
+        done < <(xargs -n1 <<<"${deps}")
 
         if [[ ${pass} -ne 1 ]]; then
-            echo -e "\033[0;33m[skip]\033[0m ${pkg} is missing (${deps}) dependency..."
+            print_log -m "missing" "dependency for ${pkg}..."
             continue
         fi
     fi
 
     if pkg_installed "${pkg}"; then
-        echo -e "\033[0;33m[skip]\033[0m ${pkg} is already installed..."
+        print_log -y "[skip] " "${pkg}"
     elif pkg_available "${pkg}"; then
         repo=$(pacman -Si "${pkg}" | awk -F ': ' '/Repository / {print $2}')
-        echo -e "\033[0;32m[${repo}]\033[0m queueing ${pkg} from official arch repo..."
+        print_log -b "[queue] " -g "${repo}" -b "::" "${pkg}"
         archPkg+=("${pkg}")
     elif aur_available "${pkg}"; then
-        echo -e "\033[0;34m[aur]\033[0m queueing ${pkg} from arch user repo..."
+        print_log -b "[queue] " -g "aur" -b "::" "${pkg}"
         aurhPkg+=("${pkg}")
     else
-        echo "Error: unknown package ${pkg}..."
+        print_log -r "[error] " "unknown package ${pkg}..."
     fi
 done < <(cut -d '#' -f 1 "${listPkg}")
 
 IFS=${ofs}
 
-if [[ ${#archPkg[@]} -gt 0 ]]; then
-    sudo pacman ${use_default} -S "${archPkg[@]}"
-fi
+# shellcheck disable=SC2154
+if [ "${flg_DryRun}" -ne 1 ]; then
+    if [[ ${#archPkg[@]} -gt 0 ]]; then
+        sudo pacman "${use_default}" -S "${archPkg[@]}"
+    fi
 
-if [[ ${#aurhPkg[@]} -gt 0 ]]; then
-    "${aurhlpr}" ${use_default} -S "${aurhPkg[@]}"
+    if [[ ${#aurhPkg[@]} -gt 0 ]]; then
+        "${aurhlpr}" "${use_default}" -S "${aurhPkg[@]}"
+    fi
 fi

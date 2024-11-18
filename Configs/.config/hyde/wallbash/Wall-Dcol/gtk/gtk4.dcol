@@ -1,4 +1,4 @@
-$HOME/.themes/Wallbash-Gtk/gtk-4.0/gtk.css|cp $HOME/.themes/Wallbash-Gtk/gtk-4.0/gtk.css $HOME/.themes/Wallbash-Gtk/gtk-4.0/gtk-dark.css
+${themesDir}/Wallbash-Gtk/gtk-4.0/gtk.css|cp ${themesDir}/Wallbash-Gtk/gtk-4.0/gtk.css ${themesDir}/Wallbash-Gtk/gtk-4.0/gtk-dark.css
 /* GTK NAMED COLORS -- USE RESPONSIBLY! */
 
 /* widget text/foreground color */

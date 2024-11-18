@@ -21,3 +21,7 @@ spicetify-cli                                          # cli to customize spotif
 
 # --------------------------------------------------- // Apps
 # neovim                                               # vim based text editor
+
+# --------------------------------------------------- // Shell
+# oh-my-zsh-git|zsh                                      # Optional plugin manager for zsh
+# pokemon-colorscripts-git|zsh                           # display pokemon sprites (optional)

@@ -1,28 +1,29 @@
 #!/usr/bin/env bash
+        # shellcheck disable=SC2086
+        # shellcheck disable=SC2154
 #|---/ /+--------------------------------------+---/ /|#
 #|--/ /-| Script to apply post install configs |--/ /-|#
 #|-/ /--| Prasanth Rangan                      |-/ /--|#
 #|/ /---+--------------------------------------+/ /---|#
 
 scrDir=$(dirname "$(realpath "$0")")
-source "${scrDir}/global_fn.sh"
-if [ $? -ne 0 ]; then
+# shellcheck disable=SC1091
+if ! source "${scrDir}/global_fn.sh";then
     echo "Error: unable to source global_fn.sh..."
     exit 1
 fi
 
 # sddm
 if pkg_installed sddm; then
-
-    echo -e "\033[0;32m[DISPLAYMANAGER]\033[0m detected // sddm"
+    print_log -c "[DISPLAYMANAGER] " -b "detected :: " "sddm"
     if [ ! -d /etc/sddm.conf.d ]; then
         sudo mkdir -p /etc/sddm.conf.d
     fi
 
     if [ ! -f /etc/sddm.conf.d/kde_settings.t2.bkp ]; then
-        echo -e "\033[0;32m[DISPLAYMANAGER]\033[0m configuring sddm..."
-        echo -e "Select sddm theme:\n[1] Candy\n[2] Corners"
-        read -p " :: Enter option number : " sddmopt
+        print_log -g "[DISPLAYMANAGER] " -b " :: " "configuring sddm..."
+        print_log -g "[DISPLAYMANAGER] " -b " :: " "Select sddm theme:" -r "\n[1]" -b " Candy" -r "\n[2]" -b " Corners"
+        read -pr " :: Enter option number : " sddmopt
 
         case $sddmopt in
         1) sddmtheme="Candy" ;;
@@ -34,27 +35,27 @@ if pkg_installed sddm; then
         sudo cp /etc/sddm.conf.d/kde_settings.conf /etc/sddm.conf.d/kde_settings.t2.bkp
         sudo cp /usr/share/sddm/themes/${sddmtheme}/kde_settings.conf /etc/sddm.conf.d/
     else
-        echo -e "\033[0;33m[SKIP]\033[0m sddm is already configured..."
+        print_log -y "[DISPLAYMANAGER] " -b " :: " "sddm is already configured..."
     fi
 
-    if [ ! -f /usr/share/sddm/faces/${USER}.face.icon ] && [ -f ${cloneDir}/Source/misc/${USER}.face.icon ]; then
-        sudo cp ${cloneDir}/Source/misc/${USER}.face.icon /usr/share/sddm/faces/
-        echo -e "\033[0;32m[DISPLAYMANAGER]\033[0m avatar set for ${USER}..."
+    if [ ! -f "/usr/share/sddm/faces/${USER}.face.icon" ] && [ -f "${cloneDir}/Source/misc/${USER}.face.icon" ]; then
+        sudo cp "${cloneDir}/Source/misc/${USER}.face.icon" /usr/share/sddm/faces/
+        print_log -g "[DISPLAYMANAGER] " -b " :: " "avatar set for ${USER}..."   
     fi
 
 else
-    echo -e "\033[0;33m[WARNING]\033[0m sddm is not installed..."
+    print_log -y "[DISPLAYMANAGER] " -b " :: " "sddm is not installed..."
 fi
 
 # dolphin
 if pkg_installed dolphin && pkg_installed xdg-utils; then
-
-    echo -e "\033[0;32m[FILEMANAGER]\033[0m detected // dolphin"
+    print_log -c "[FILEMANAGER] " -b "detected :: " "dolphin"
     xdg-mime default org.kde.dolphin.desktop inode/directory
-    echo -e "\033[0;32m[FILEMANAGER]\033[0m setting" `xdg-mime query default "inode/directory"` "as default file explorer..."
+    print_log -g "[FILEMANAGER] " -b " :: " "setting $(xdg-mime query default "inode/directory") as default file explorer..."
 
 else
-    echo -e "\033[0;33m[WARNING]\033[0m dolphin is not installed..."
+    print_log -y "[FILEMANAGER] " -b " :: " "dolphin is not installed..."
+    printt_log -y "[FILEMANAGER] " -b " :: " "Setting $(xdg-mime query default "inode/directory") as default file explorer..."
 fi
 
 # shell
@@ -62,19 +63,18 @@ fi
 
 # flatpak
 if ! pkg_installed flatpak; then
-
-    echo -e "\033[0;32m[FLATPAK]\033[0m flatpak application list..."
+    print_log -r "[FLATPAK]" -b "list :: " "flatpak application"
     awk -F '#' '$1 != "" {print "["++count"]", $1}' "${scrDir}/.extra/custom_flat.lst"
     prompt_timer 60 "Install these flatpaks? [Y/n]"
     fpkopt=${promptIn,,}
 
     if [ "${fpkopt}" = "y" ]; then
-        echo -e "\033[0;32m[FLATPAK]\033[0m installing flatpaks..."
+        print_log -g "[FLATPAK]" -b "install :: " "flatpaks"
         "${scrDir}/.extra/install_fpk.sh"
     else
-        echo -e "\033[0;33m[SKIP]\033[0m installing flatpaks..."
+        print_log -y "[FLATPAK]" -b "skip :: " "flatpak installation"
     fi
 
 else
-    echo -e "\033[0;33m[SKIP]\033[0m flatpak is already installed..."
+    print_log -y "[FLATPAK]" -b " :: " "flatpak is already installed"
 fi

@@ -1,4 +1,5 @@
 #!/usr/bin/env bash
+# shellcheck disable=SC2154
 #|---/ /+------------------------------------+---/ /|#
 #|--/ /-| Script to extract fonts and themes |--/ /-|#
 #|-/ /--| Prasanth Rangan                    |-/ /--|#
@@ -26,7 +27,7 @@ while read -r lst; do
     tgt=$(awk -F '|' '{print $2}' <<<"$lst")
     tgt=$(eval "echo $tgt")
 
-    if [[ "${tgt}" =~ /usr/share/ && -d /run/current-system/sw/share/ ]]; then
+    if [[ "${tgt}" =~ /(usr|usr\/local)\/share/ && -d /run/current-system/sw/share/ ]]; then
         continue
     fi
 
@@ -37,15 +38,14 @@ while read -r lst; do
 
     if [ -w "${tgt}" ]; then
         # shellcheck disable=SC2154
-        tar -xzf "${cloneDir}/Source/arcs/${fnt}.tar.gz" -C "${tgt}/"
-        :
+        [ "${flg_DryRun}" -eq 1 ] || tar -xzf "${cloneDir}/Source/arcs/${fnt}.tar.gz" -C "${tgt}/"
     else
         print_log -warn "not writable" "Extracting as root: ${tgt} "
-        sudo tar -xzf "${cloneDir}/Source/arcs/${fnt}.tar.gz" -C "${tgt}/"
+        [ "${flg_DryRun}" -eq 1 ] || sudo tar -xzf "${cloneDir}/Source/arcs/${fnt}.tar.gz" -C "${tgt}/"
     fi
     print_log "${fnt}.tar.gz" -r " --> " "${tgt}... "
 
 done <"${scrDir}/restore_fnt.lst"
-
+echo ""
 print_log -stat "rebuild" "font cache"
-fc-cache -f
+[ "${flg_DryRun}" -eq 1 ] || fc-cache -f
