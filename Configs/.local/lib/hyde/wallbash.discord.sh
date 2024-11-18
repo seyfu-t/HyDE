@@ -5,7 +5,7 @@
 
 scrDir="$(dirname "$(realpath "$0")")"
 source "${scrDir}/globalcontrol.sh"
-discord_col="${cacheDir}/landing/discord.css"
+discord_col="${cacheDir}/wallbash/discord.css"
 declare -a client_list=()
 
 

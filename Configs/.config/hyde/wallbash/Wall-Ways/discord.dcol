@@ -1,4 +1,4 @@
-${cacheDir}/landing/discord.css|${scrDir}/wallbashdiscord.sh
+${cacheDir}/wallbash/discord.css|${scrDir}/wallbash.discord.sh
 
 :root {
 	--accent-color: #<wallbash_1xa1>;
