@@ -9,11 +9,11 @@ cat <<"EOF"
 
 -------------------------------------------------
         .
-       / \         _       _  _      ___  ___ 
+       / \         _       _  _      ___  ___
       /^  \      _| |_    | || |_  _|   \| __|
-     /  _  \    |_   _|   | __ | || | |) | _| 
+     /  _  \    |_   _|   | __ | || | |) | _|
     /  | | ~\     |_|     |_||_|\_, |___/|___|
-   /.-'   '-.\                  |__/          
+   /.-'   '-.\                  |__/
 
 -------------------------------------------------
 
@@ -58,10 +58,10 @@ while getopts idrstnh: RunStep; do
         export flg_Shell=0
         print_log -r "[shell] " -b "Reevaluate :: " "shell options"
         ;;
-    t) export flg_DryRun=1 ;;
+    t) flg_DryRun=1 ;;
     *)
         cat <<EOF
-Usage: $0 [options]  
+Usage: $0 [options]
             i : [i]nstall hyprland without configs
             d : install hyprland [d]efaults without configs --noconfirm
             r : [r]estore config files
@@ -74,6 +74,9 @@ EOF
         ;;
     esac
 done
+
+# Only export that are used outside this script
+export flg_DryRun flg_Nvidia flg_Shell
 
 if [ "${flg_DryRun}" -eq 1 ]; then
     print_log -n "[test-run] " -b "enabled :: " "Testing without executing"
