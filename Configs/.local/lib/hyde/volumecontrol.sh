@@ -53,7 +53,7 @@ notify_vol() {
 
 notify_mute() {
     mute=$(pamixer "${srce}" --get-mute | cat)
-    [ "${srce}" == "--default-source" ] && dvce="mic" || dvce="speaker"
+    [ "${srce}" == "--default-source" ] && dvce="microphone" || dvce="speaker"
     if [ "${mute}" == "true" ]; then
         notify-send -a "t2" -r 69 -t 800 -i "${icodir}/muted-${dvce}.svg" "muted" "${nsink}"
     else
@@ -119,9 +119,9 @@ select_output() {
     if [ -n "$selection" ]; then
         device=$(pactl list sinks | grep -C2 -F "Description: $selection" | grep Name | cut -d: -f2 | xargs)
         if pactl set-default-sink "$device"; then
-            notify-send -t 2000 -r 2 -u low "Activated: $selection"
+            notify-send -t 2000 -i "${icodir}/unmuted-speaker.svg" -r 69 -u low "Activated: $selection"
         else
-            notify-send -t 2000 -r 2 -u critical "Error activating $selection"
+            notify-send -t 2000 -r 69 -u critical "Error activating $selection"
         fi
     else
         pactl list sinks | grep -ie "Description:" | awk -F ': ' '{print $2}' | sort
