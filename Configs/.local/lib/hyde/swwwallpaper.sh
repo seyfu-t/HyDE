@@ -1,9 +1,10 @@
-#!/usr/bin/env sh
+#!/usr/bin/env bash
+    # shellcheck disable=SC2154
 
 
 #// lock instance
 
-lockFile="/tmp/hyde$(id -u)$(basename ${0}).lock"
+lockFile="$HYDE_RUNTIME_DIR/$(basename "${0}").lock"
 [ -e "${lockFile}" ] && echo "An instance of the script is already running..." && exit 1
 touch "${lockFile}"
 trap 'rm -f ${lockFile}' EXIT
@@ -44,6 +45,7 @@ Wall_Change()
 #// set variables
 
 scrDir="$(dirname "$(realpath "$0")")"
+# shellcheck disable=SC1091
 source "${scrDir}/globalcontrol.sh"
 wallSet="${hydeThemeDir}/wall.set"
 wallCur="${cacheDir}/wall.set"
@@ -77,7 +79,7 @@ while getopts "nps:" option ; do
         Wall_Change p
         ;;
     s ) # set input wallpaper
-        if [ ! -z "${OPTARG}" ] && [ -f "${OPTARG}" ] ; then
+        if [ -n "${OPTARG}" ] && [ -f "${OPTARG}" ] ; then
             get_hashmap "${OPTARG}"
         fi
         Wall_Cache
@@ -95,9 +97,8 @@ done
 
 #// check swww daemon
 
-swww query &> /dev/null
-if [ $? -ne 0 ] ; then
-    swww-daemon --format xrgb &
+if ! swww query &> /dev/null; then
+    swww-daemon --format xrgb & disown
     swww query && swww restore
 fi
 
@@ -111,5 +112,5 @@ fi
 
 #// apply wallpaper
 
-echo ":: applying wall :: \"$(readlink -f "${wallSet}")\""
+print_log -sec "wallpaper" -stat "apply" "$(readlink -f "${wallSet}")"
 swww img "$(readlink "${wallSet}")" --transition-bezier .43,1.19,1,.4 --transition-type "${xtrans}" --transition-duration "${wallTransDuration}" --transition-fps "${wallFramerate}" --invert-y --transition-pos "$(hyprctl cursorpos | grep -E '^[0-9]' || echo "0,0")" &

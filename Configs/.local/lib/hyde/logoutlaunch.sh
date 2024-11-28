@@ -1,4 +1,4 @@
-#!/usr/bin/env sh
+#!/usr/bin/env bash
 
 
 #// Check if wlogout is already running
@@ -12,9 +12,11 @@ fi
 
 #// set file variables
 
-scrDir=`dirname "$(realpath "$0")"`
-source $scrDir/globalcontrol.sh
+scrDir=$(dirname "$(realpath "$0")")
+# shellcheck disable=SC1091
+source "$scrDir/globalcontrol.sh"
 [ -z "${1}" ] || wlogoutStyle="${1}"
+confDir="${confDir:-$HOME/.config}"
 wLayout="${confDir}/wlogout/layout_${wlogoutStyle}"
 wlTmplt="${confDir}/wlogout/style_${wlogoutStyle}.css"
 
@@ -54,29 +56,33 @@ export fntSize=$(( y_mon * 2 / 100 ))
 
 #// detect wallpaper brightness
 
+cacheDir="${cacheDir:$XDG_CACHE_HOME/hyde}"
+dcol_mode="${dcol_mode:-dark}"
+# shellcheck disable=SC1091
 [ -f "${cacheDir}/wall.dcol" ] && source "${cacheDir}/wall.dcol"
+
 #  Theme mode: detects the color-scheme set in hypr.theme and falls back if nothing is parsed.
+enableWallDcol="${enableWallDcol:-1}"
 if [ "${enableWallDcol}" -eq 0 ]; then
-    colorScheme="$({ grep -q "^[[:space:]]*\$COLOR[-_]SCHEME\s*=" "${hydeThemeDir}/hypr.theme" && grep "^[[:space:]]*\$COLOR[-_]SCHEME\s*=" "${hydeThemeDir}/hypr.theme" | cut -d '=' -f2 | sed 's/^[[:space:]]*//;s/[[:space:]]*$//' ;} || 
-                        grep 'gsettings set org.gnome.desktop.interface color-scheme' "${hydeThemeDir}/hypr.theme" | awk -F "'" '{print $((NF - 1))}')"
-    colorScheme=${colorScheme:-$(gsettings get org.gnome.desktop.interface color-scheme)} 
-    # should be declared explicitly so we can easily debug
-    grep -q "dark" <<< "${colorScheme}" && dcol_mode="dark"
-    grep -q "light" <<< "${colorScheme}" && dcol_mode="light"
+hydeThemeDir="${hydeThemeDir:-$confDir/hyde/themes/$hydeTheme}"
+dcol_mode=$(get_hyprConf "COLOR_SCHEME")
+dcol_mode=${dcol_mode#prefer-}
+# shellcheck disable=SC1091
 [ -f "${hydeThemeDir}/theme.dcol" ] && source "${hydeThemeDir}/theme.dcol"
 fi
-[ "${dcol_mode}" == "dark" ] && export BtnCol="white" || export BtnCol="black"
+{ [ "${dcol_mode}" == "dark" ] && export BtnCol="white" ;} || export BtnCol="black"
 
 
 #// eval hypr border radius
 
+hypr_border="${hypr_border:-10}"
 export active_rad=$(( hypr_border * 5 ))
 export button_rad=$(( hypr_border * 8 ))
 
 
 #// eval config files
 
-wlStyle="$(envsubst < $wlTmplt)"
+wlStyle="$(envsubst < "${wlTmplt}")"
 
 
 #// launch wlogout

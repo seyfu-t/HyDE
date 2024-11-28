@@ -1,10 +1,11 @@
-#!/usr/bin/env sh
-
+#!/usr/bin/env bash
 
 # detect hypr theme and initialize variables
 
-scrDir=`dirname "$(realpath "$0")"`
-source $scrDir/globalcontrol.sh
+scrDir=$(dirname "$(realpath "$0")")
+# shellcheck disable=SC1091
+source "${scrDir}/globalcontrol.sh"
+# shellcheck disable=SC2154
 waybar_dir="${confDir}/waybar"
 modules_dir="$waybar_dir/modules"
 conf_ctl="$waybar_dir/config.ctl"
@@ -15,10 +16,11 @@ src_file="${confDir}/hypr/themes/theme.conf"
 
 # calculate height from control file or monitor res
 
-b_height=`grep '^1|' $conf_ctl | cut -d '|' -f 2`
+b_height=$(grep '^1|' "$conf_ctl" | cut -d '|' -f 2)
 
-if [ -z $b_height ] || [ "$b_height" == "0" ]; then
-    y_monres=`cat /sys/class/drm/*/modes | head -1 | cut -d 'x' -f 2`
+if [ -z "$b_height" ] || [ "$b_height" == "0" ]; then
+    y_monres=$(cat /sys/class/drm/*/modes | head -1 | cut -d 'x' -f 2)
+    y_monres=$(hyprctl -j monitors | jq '.[] | select(.focused == true) | (.height / .scale)')
     b_height=$(( y_monres*3/100 ))
 fi
 
@@ -38,7 +40,7 @@ export w_paddin=$(( b_height*10/100 ))   # workspace padding 10% of height
 export w_padact=$(( b_height*40/100 ))   # workspace active padding 40% of height
 export s_fontpx=$(( b_height*34/100 ))   # font size 34% of height
 
-if [ $b_height -lt 30 ] ; then
+if [ "$b_height" -lt 30 ] ; then
     export e_paddin=0
 fi
 if [ $s_fontpx -lt 10 ] ; then
@@ -48,7 +50,8 @@ fi
 
 # adjust values for vert/horz
 
-export w_position=`grep '^1|' $conf_ctl | cut -d '|' -f 3`
+w_position="$(grep '^1|' "$conf_ctl" | cut -d '|' -f 3)"
+export w_position
 case ${w_position} in
     top|bottom)
         export x1g_margin=${g_margin}
@@ -73,7 +76,7 @@ case ${w_position} in
         export x4lc_radius=${c_radius}
         export x1="top"
         export x2="bottom"
-        export x3="left" 
+        export x3="left"
         export x4="right" ;;
     left|right)
         export x1g_margin=0
@@ -98,21 +101,21 @@ case ${w_position} in
         export x4lc_radius=${c_radius}
         export x1="left"
         export x2="right"
-        export x3="top" 
+        export x3="top"
         export x4="bottom" ;;
 esac
 
 
 # list modules and generate theme style
-
-export modules_ls=$(grep -m 1 '".*.": {'  --exclude="$modules_dir/footer.jsonc" $modules_dir/*.jsonc | cut -d '"' -f 2 | awk -F '/' '{ if($1=="custom") print "#custom-"$NF"," ; else print "#"$NF","}')
-envsubst < $in_file > $out_file
+export modules_ls
+# modules_ls=$(grep -m 1 '".*.": {'  --exclude="$modules_dir/footer.jsonc" "${modules_dir}"/*.jsonc | cut -d '"' -f 2 | awk -F '/' '{ if($1=="custom") print "#custom-"$NF"," ; else print "#"$NF","}')
+modules_ls=$(grep -m 1 '".*.": {' --exclude="$modules_dir/footer.jsonc" "${modules_dir}"/*.jsonc | cut -d '"' -f 2 | awk -F '/' '{print ($1=="custom" ? "#custom-"$NF : "#"$NF)","}')
+envsubst < "$in_file" > "$out_file"
 
 
 # override rounded couners
 
-hypr_border=`awk -F '=' '{if($1~" rounding ") print $2}' $src_file | sed 's/ //g'`
-if [ "$hypr_border" == "0" ] ; then
-    sed -i "/border-radius: /c\    border-radius: 0px;" $out_file
+hypr_border=$(awk -F '=' '{if($1~" rounding ") print $2}' "$src_file" | sed 's/ //g')
+if [ "$hypr_border" == "0"  ] ; then
+    sed -i "/border-radius: /c\    border-radius: 0px;" "$out_file"
 fi
-

@@ -1,10 +1,10 @@
-#!/usr/bin/env sh
+#!/usr/bin/env bash
 
 # Check if the script is already running
 pgrep -cf "${0##*/}" | grep -qv 1 && echo "An instance of the script is already running..." && exit 1
-
-scrDir=`dirname "$(realpath "$0")"`
-source $scrDir/globalcontrol.sh
+scrDir=$(dirname "$(realpath "$0")")
+# shellcheck disable=SC1091
+source "$scrDir/globalcontrol.sh"
 
 # Check if SwayOSD is installed
 use_swayosd=false
@@ -14,24 +14,27 @@ fi
 
 print_error()
 {
+local cmd
+cmd=$(basename "$0")
 cat << EOF
-    $(basename ${0}) <action> [step] 
+    "${cmd}" <action> [step]
     ...valid actions are...
         i -- <i>ncrease brightness [+5%]
         d -- <d>ecrease brightness [-5%]
 
     Example:
-        $(basename ${0}) i 10    # Increase brightness by 10%
-        $(basename ${0}) d       # Decrease brightness by default step (5%)
+        "${cmd}" i 10    # Increase brightness by 10%
+        "${cmd}" d       # Decrease brightness by default step (5%)
 EOF
 }
 
 send_notification() {
-    brightness=`brightnessctl info | grep -oP "(?<=\()\d+(?=%)" | cat`
+    brightness=$(brightnessctl info | grep -oP "(?<=\()\d+(?=%)" | cat)
     brightinfo=$(brightnessctl info | awk -F "'" '/Device/ {print $2}')
-    angle="$(((($brightness + 2) / 5) * 5))"
-    ico="$HOME/.config/dunst/icons/vol/vol-${angle}.svg"
-    bar=$(seq -s "." $(($brightness / 15)) | sed 's/[0-9]//g')
+    angle="$((((brightness + 2) / 5) * 5))"
+    # shellcheck disable=SC2154
+    ico="${iconsDir}/Wallbash-Icon/media/knob-${angle}.svg"
+    bar=$(seq -s "." $((brightness / 15)) | sed 's/[0-9]//g')
     notify-send -a "t2" -r 91190 -t 800 -i "${ico}" "${brightness}${bar}" "${brightinfo}"
 }
 
@@ -49,7 +52,7 @@ i|-i)  # increase the backlight
     fi
 
     $use_swayosd && swayosd-client --brightness raise "$step" && exit 0
-    brightnessctl set +${step}%
+    brightnessctl set +"${step}"%
     send_notification ;;
 d|-d)  # decrease the backlight
 
@@ -59,11 +62,11 @@ d|-d)  # decrease the backlight
     fi
 
     if [[ $(get_brightness) -le 1 ]]; then
-        brightnessctl set ${step}%
+        brightnessctl set "${step}"%
         $use_swayosd && exit 0
     else
         $use_swayosd && swayosd-client --brightness lower "$step" && exit 0
-        brightnessctl set ${step}%-
+        brightnessctl set "${step}"%-
     fi
 
     send_notification ;;

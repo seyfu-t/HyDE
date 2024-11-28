@@ -36,7 +36,7 @@ Options:
     --help Display this help message
 Example:
  $(basename "$0") -j -p -d '>' -f custom_file.txt -w 80 -h 90"
-Users can also add a global overrides inside ${hydeConfDir}/hyde.conf
+Users can also add a global overrides inside ${hydeConfDir}/hyderc
   Available overrides:
 
     kb_hint_delim=">"                         ﯦ add a custom custom delimiter

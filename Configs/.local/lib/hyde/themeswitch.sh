@@ -1,25 +1,26 @@
-#!/usr/bin/env sh
-
+#!/usr/bin/env bash
+# shellcheck disable=SC2154
 
 #// set variables
 
 scrDir="$(dirname "$(realpath "$0")")"
+# shellcheck disable=SC1091
 source "${scrDir}/globalcontrol.sh"
 [ -z "${hydeTheme}" ] && echo "ERROR: unable to detect theme" && exit 1
 get_themes
 
-
 #// define functions
 
-Theme_Change()
-{
+Theme_Change() {
     local x_switch=$1
-    for i in ${!thmList[@]} ; do
-        if [ "${thmList[i]}" == "${hydeTheme}" ] ; then
-            if [ "${x_switch}" == 'n' ] ; then
-                setIndex=$(( (i + 1) % ${#thmList[@]} ))
-            elif [ "${x_switch}" == 'p' ] ; then
-                setIndex=$(( i - 1 ))
+
+    # shellcheck disable=SC2154
+    for i in "${!thmList[@]}"; do
+        if [ "${thmList[i]}" == "${hydeTheme}" ]; then
+            if [ "${x_switch}" == 'n' ]; then
+                setIndex=$(((i + 1) % ${#thmList[@]}))
+            elif [ "${x_switch}" == 'p' ]; then
+                setIndex=$((i - 1))
             fi
             themeSet="${thmList[setIndex]}"
             break
@@ -27,103 +28,134 @@ Theme_Change()
     done
 }
 
-
 #// evaluate options
 
-while getopts "nps:" option ; do
+while getopts "nps:" option; do
     case $option in
 
-    n ) # set next theme
+    n) # set next theme
         Theme_Change n
-        export xtrans="grow" ;;
+        export xtrans="grow"
+        ;;
 
-    p ) # set previous theme
+    p) # set previous theme
         Theme_Change p
-        export xtrans="outer" ;;
+        export xtrans="outer"
+        ;;
 
-    s ) # set selected theme
+    s) # set selected theme
         themeSet="$OPTARG" ;;
 
-    * ) # invalid option
+    *) # invalid option
         echo "... invalid option ..."
         echo "$(basename "${0}") -[option]"
         echo "n : set next theme"
         echo "p : set previous theme"
         echo "s : set input theme"
-        exit 1 ;;
+        exit 1
+        ;;
     esac
 done
 
-
 #// update control file
 
-if ! $(echo "${thmList[@]}" | grep -wq "${themeSet}") ; then
-    themeSet="${hydeTheme}"
-fi
+# shellcheck disable=SC2076
+[[ ! " ${thmList[*]} " =~ " ${themeSet} " ]] && themeSet="${hydeTheme}"
 
 set_conf "hydeTheme" "${themeSet}"
-echo ":: applying theme :: \"${themeSet}\""
+print_log -sec "theme" -stat "apply" "${themeSet}"
+
 export reload_flag=1
+# shellcheck disable=SC1091
 source "${scrDir}/globalcontrol.sh"
 
-
 #// hypr
-[ -n "$HYPRLAND_INSTANCE_SIGNATURE" ] &&  hyprctl keyword misc:disable_autoreload 1 -q
-sed '1d' "${hydeThemeDir}/hypr.theme" > "${confDir}/hypr/themes/theme.conf" # Useless and already handled by swwwallbash.sh but kept for robustness
-gtkTheme="$(
-{ grep -q "^[[:space:]]*\$GTK[-_]THEME\s*=" "${hydeThemeDir}/hypr.theme" && grep "^[[:space:]]*\$GTK[-_]THEME\s*=" "${hydeThemeDir}/hypr.theme" | cut -d '=' -f2 | sed 's/^[[:space:]]*//;s/[[:space:]]*$//' ;} || 
-grep 'gsettings set org.gnome.desktop.interface gtk-theme' "${hydeThemeDir}/hypr.theme" | awk -F "'" '{print $((NF - 1))}'
-)"
-
-gtkIcon="$(
-{ grep -q "^[[:space:]]*\$ICON[-_]THEME\s*=" "${hydeThemeDir}/hypr.theme" && grep "^[[:space:]]*\$ICON[-_]THEME\s*=" "${hydeThemeDir}/hypr.theme" | cut -d '=' -f2 | sed 's/^[[:space:]]*//;s/[[:space:]]*$//' ;} ||  
-grep 'gsettings set org.gnome.desktop.interface icon-theme' "${hydeThemeDir}/hypr.theme" | awk -F "'" '{print $(NF - 1)}'
-)"
+[ -n "$HYPRLAND_INSTANCE_SIGNATURE" ] && hyprctl keyword misc:disable_autoreload 1 -q
+# shellcheck disable=SC2154
+sed '1d' "${hydeThemeDir}/hypr.theme" >"${confDir}/hypr/themes/theme.conf" # Useless and already handled by swwwallbash.sh but kept for robustness
+# shellcheck disable=SC2154
+if [ "${enableWallDcol}" -eq 0 ]; then
+    gtkTheme="$(get_hyprConf "GTK_THEME")"
+else
+    gtkTheme="Wallbash-Gtk"
+fi
+gtkIcon="$(get_hyprConf "ICON_THEME")"
+cursorTheme="$(get_hyprConf "CURSOR_THEME")"
 
 # legacy and directory resolution
-if [ -d /run/current-system/sw/share/themes ] ; then
-    export themeDir=/run/current-system/sw/share/themes
+if [ -d /run/current-system/sw/share/themes ]; then
+    export themesDir=/run/current-system/sw/share/themes
 fi
-[ ! -d "${HOME}"/.themes ] || cp -snr "${HOME}"/.themes/* "${themesDir}"
+
+if [ ! -d "${themesDir}/${gtkTheme}" ] && [ -d "$HOME/.themes/${gtkTheme}" ]; then
+    cp -rns "$HOME/.themes/${gtkTheme}" "${themesDir}/${gtkTheme}"
+fi
 
 #// qtct
 
 sed -i "/^icon_theme=/c\icon_theme=${gtkIcon}" "${confDir}/qt5ct/qt5ct.conf"
 sed -i "/^icon_theme=/c\icon_theme=${gtkIcon}" "${confDir}/qt6ct/qt6ct.conf"
+
+# // kde plasma
 sed -i "/^Theme=/c\Theme=${gtkIcon}" "${confDir}/kdeglobals"
+
+# Ensure [UiSettings] ColorScheme exists in kdeglobals // dolphin fix
+if ! grep -q "^\[UiSettings\]" "${confDir}/kdeglobals"; then
+    echo -e "\n[UiSettings]\nColorScheme=${gtkTheme}" >> "${confDir}/kdeglobals"
+elif ! grep -q "^ColorScheme=" "${confDir}/kdeglobals"; then
+    sed -i "/^\[UiSettings\]/a ColorScheme=${gtkTheme}" "${confDir}/kdeglobals"
+fi
+
+# // gtk2
+
+sed -i -e "/^gtk-theme-name=/c\gtk-theme-name=\"${gtkTheme}\"" \
+    -e "/^include /c\include \"$HOME/.gtkrc-2.0.mime\"" \
+    -e "/^gtk-cursor-theme-name=/c\gtk-cursor-theme-name=\"${cursorTheme}\"" \
+    -e "/^gtk-icon-theme-name=/c\gtk-icon-theme-name=\"${gtkIcon}\"" "$HOME/.gtkrc-2.0"
 
 #// gtk3
 
-sed -i "/^gtk-theme-name=/c\gtk-theme-name=${gtkTheme}" $confDir/gtk-3.0/settings.ini
-sed -i "/^gtk-icon-theme-name=/c\gtk-icon-theme-name=${gtkIcon}" $confDir/gtk-3.0/settings.ini
-
+sed -i -e "/^gtk-theme-name=/c\gtk-theme-name=\"${gtkTheme}\"" \
+    -e "/^gtk-icon-theme-name=/c\gtk-icon-theme-name=\"${gtkIcon}\"" "$confDir/gtk-3.0/settings.ini"
 
 #// gtk4
+if [ -d "${themesDir}/${gtkTheme}/gtk-4.0" ]; then
+    gtk4Theme="${gtkTheme}"
+else
+    gtk4Theme="Wallbash-Gtk"
+    print_log -sec "theme" -stat "use" "'Wallbash-Gtk' as gtk4 theme"
+fi
 rm -rf "${confDir}/gtk-4.0"
-ln -s "${themeDir}/${gtkTheme}/gtk-4.0" "${confDir}/gtk-4.0"
-
+ln -s "${themesDir}/${gtk4Theme}/gtk-4.0" "${confDir}/gtk-4.0"
 
 #// flatpak GTK
 
-if pkg_installed flatpak ; then
-        flatpak --user override --filesystem=~/.local/share/themes
-        flatpak --user override --filesystem=~/.local/share/icons
-    if [ "${enableWallDcol}" -eq 0 ] ; then
-        flatpak --user override --env=GTK_THEME="${gtkTheme}"
-        flatpak --user override --env=ICON_THEME="${gtkIcon}"
-    else
-        flatpak --user override --env=GTK_THEME="Wallbash-Gtk"
-        flatpak --user override --env=ICON_THEME="${gtkIcon}"
-    fi
+pkg_installed flatpak && flatpak \
+    --user override \
+    --filesystem="${themesDir}":ro \
+    --filesystem="$HOME/.themes":ro \
+    --filesystem="$HOME/.icons":ro \
+    --filesystem=~/.local/share/icons:ro \
+    --env=GTK_THEME="${gtk4Theme}" \
+    --env=ICON_THEME="${gtkIcon}"
+
+# // xsettingsd
+
+sed -i -e "/^Net\/ThemeName /c\Net\/ThemeName \"${gtkTheme}\"" \
+    -e "/^Net\/IconThemeName /c\Net\/IconThemeName \"${gtkIcon}\"" \
+    -e "/^Gtk\/CursorThemeName /c\Gtk\/CursorThemeName \"${cursorTheme}\"" \
+    "$confDir/xsettingsd/xsettingsd.conf"
+
+# // Legacy themes using ~/.themes also fixed GTK4 not following xdg
+
+if [ ! -d "$HOME/.themes" ]; then
+    mkdir -p "$HOME/.themes"
 fi
 
-
-#// dunst
-
-sed -i "/^    icon_theme =/c\    icon_theme = \"${gtkIcon}\"" "${confDir}/dunst/dunst.conf"
-
+if [ ! -L "$HOME/.themes" ] && [ -d "${themesDir}/" ]; then
+    ln -snf "${themesDir}/" "$HOME/.themes"
+fi
 
 #// wallpaper
 
 "${scrDir}/swwwallpaper.sh" -s "$(readlink "${hydeThemeDir}/wall.set")"
-
