@@ -43,31 +43,34 @@ P|${HOME}/.config/hypr|themes|hyprland
 P|${HOME}/.config/waybar|config.ctl|waybar
 P|${HOME}/.config|baloofilerc|dolphin
 P|${HOME}/.config|libinput-gestures.conf|libinput-gestures
+P|${HOME}/.local/state|dolphinstaterc|dolphin
+
 
 Synchronized:
 
+S|${HOME}/.config/menus|applications.menu|dolphin
 S|${HOME}/.config/waybar|modules config.jsonc theme.css style.css|waybar
+S|${HOME}/.config|dolphinrc|dolphin
 S|${HOME}/.config|dunst|dunst
-S|${HOME}/.local/lib|hyde|hyprland
+S|${HOME}/.config|fastfetch|fastfetch
+S|${HOME}/.config|gtk-3.0|nwg-look
+S|${HOME}/.config|kdeglobals|dolphin
 S|${HOME}/.config|kitty|kitty
 S|${HOME}/.config|Kvantum|kvantum
 S|${HOME}/.config|MangoHud|mangohud
-S|${HOME}/.config|fastfetch|fastfetch
+S|${HOME}/.config|nwg-look|nwg-look
 S|${HOME}/.config|qt5ct|qt5ct
 S|${HOME}/.config|qt6ct|qt6ct
 S|${HOME}/.config|rofi|rofi
 S|${HOME}/.config|swaylock|swaylock-effects
 S|${HOME}/.config|wlogout|wlogout
 S|${HOME}/.config|xsettingsd|nwg-look
-S|${HOME}/.config|nwg-look|nwg-look
-S|${HOME}/.config|gtk-3.0|nwg-look
-S|${HOME}|.gtkrc-2.0|nwg-look
-S|${HOME}/.config/menus|applications.menu|dolphin
-S|${HOME}/.config|dolphinrc|dolphin
-S|${HOME}/.config|kdeglobals|dolphin
+S|${HOME}/.local/lib|hyde|hyprland
 S|${HOME}/.local/share/kio/servicemenus|hydewallpaper.desktop|dolphin
 S|${HOME}/.local/share/kxmlgui5|dolphin|dolphin
 S|${HOME}/.local/share|dolphin|dolphin
+S|${HOME}/.local/share/icons|Wallbash-Icon|hyprland
+S|${HOME}|.gtkrc-2.0|nwg-look
 
 Overwrite: Strict Hyde specific files
 
