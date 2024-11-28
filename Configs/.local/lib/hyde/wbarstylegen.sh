@@ -114,8 +114,7 @@ envsubst < "$in_file" > "$out_file"
 
 
 # override rounded couners
-
-hypr_border=$(awk -F '=' '{if($1~" rounding ") print $2}' "$src_file" | sed 's/ //g')
-if [ "$hypr_border" == "0"  ] ; then
+hypr_border=${hypr_border:-$(hyprctl -j getoption decoration:rounding | jq '.int')}
+if [ "$hypr_border" == "0"  ] || [ -z "$hypr_border" ] ; then
     sed -i "/border-radius: /c\    border-radius: 0px;" "$out_file"
 fi
