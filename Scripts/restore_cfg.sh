@@ -59,7 +59,7 @@ deploy_list() {
                 [[ ${flg_DryRun} -ne 1 ]] && cp -r "${CfgDir}${tgt}/${cfg_chk}" "${pth}"
                 echo -e "\033[0;32m[restore]\033[0m ${pth} <-- ${CfgDir}${tgt}/${cfg_chk}..."
             elif [ "${ovrWrte}" == "Y" ]; then
-                [[ ${flg_DryRun} -ne 1 ]] && cp -r "${CfgDir}$tgt/${cfg_chk}" "${pth}"
+                [[ ${flg_DryRun} -ne 1 ]] && cp -r "${CfgDir}${tgt}/${cfg_chk}" "${pth}"
                 echo -e "\033[0;33m[overwrite]\033[0m ${pth} <-- ${CfgDir}${tgt}/${cfg_chk}..."
             else
                 echo -e "\033[0;33m[preserve]\033[0m Skipping ${pth}/${cfg_chk} to preserve user setting..."
@@ -116,9 +116,9 @@ deploy_psv() {
             tgt="${pth//${HOME}/}"
             crnt_cfg="${pth}/${cfg_chk}"
 
-            if [ ! -e "${CfgDir}$tgt/${cfg_chk}" ] && [ "${ctlFlag}" != "B" ]; then
-                echo "Source: ${CfgDir}$tgt/${cfg_chk} does not exist, skipping..."
-                print_log -y "[skip]" -b "no source" "${CfgDir}$tgt/${cfg_chk} does not exist"
+            if [ ! -e "${CfgDir}${tgt}/${cfg_chk}" ] && [ "${ctlFlag}" != "B" ]; then
+                echo "Source: ${CfgDir}${tgt}/${cfg_chk} does not exist, skipping..."
+                print_log -y "[skip]" -b "no source" "${CfgDir}${tgt}/${cfg_chk} does not exist"
                 continue
             fi
 
@@ -136,17 +136,17 @@ deploy_psv() {
                     ;;
                 "O")
                     [ "${flg_DryRun}" -ne 1 ] && mv "${pth}/${cfg_chk}" "${BkpDir}${tgt}"
-                    [ "${flg_DryRun}" -ne 1 ] && cp -r "${CfgDir}$tgt/${cfg_chk}" "${pth}"
+                    [ "${flg_DryRun}" -ne 1 ] && cp -r "${CfgDir}${tgt}/${cfg_chk}" "${pth}"
                     print_log -r "[move to backup]" " > " -r "[overwrite]" -b " :: " "${pth}" -r " <--  " "${CfgDir}${tgt}/${cfg_chk}"
                     ;;
                 "S")
                     [ "${flg_DryRun}" -ne 1 ] && cp -r "${pth}/${cfg_chk}" "${BkpDir}${tgt}"
-                    [ "${flg_DryRun}" -ne 1 ] && cp -rf "${CfgDir}$tgt/${cfg_chk}" "${pth}"
+                    [ "${flg_DryRun}" -ne 1 ] && cp -rf "${CfgDir}${tgt}/${cfg_chk}" "${pth}"
                     print_log -g "[copy to backup]" " > " -y "[sync]" -b " :: " "${pth}" -r " <--  " "${CfgDir}${tgt}/${cfg_chk}"
                     ;;
                 "P")
                     [ "${flg_DryRun}" -ne 1 ] && cp -r "${pth}/${cfg_chk}" "${BkpDir}${tgt}"
-                    if ! [ "${flg_DryRun}" -ne 1 ] && cp -rn "${CfgDir}$tgt/${cfg_chk}" "${pth}" 2>/dev/null; then
+                    if ! [ "${flg_DryRun}" -ne 1 ] && cp -rn "${CfgDir}${tgt}/${cfg_chk}" "${pth}" 2>/dev/null; then
                         print_log -g "[copy to backup]" " > " -g "[populate]" -b " :: " "${pth}${tgt}/${cfg_chk}"
                     else
                         print_log -g "[copy to backup]" " > " -g "[preserved]" -b " :: " "${pth}" + 208 " <--  " "${CfgDir}${tgt}/${cfg_chk}"
@@ -155,8 +155,8 @@ deploy_psv() {
                 esac
             else
                 if [ "${ctlFlag}" != "B" ]; then
-                    [ "${flg_DryRun}" -ne 1 ] && cp -r "${CfgDir}$tgt/${cfg_chk}" "${pth}"
-                    print_log -y "[*populate*]" -b " :: " "${pth}" -r " <--  " "${CfgDir}$tgt/${cfg_chk}"
+                    [ "${flg_DryRun}" -ne 1 ] && cp -r "${CfgDir}${tgt}/${cfg_chk}" "${pth}"
+                    print_log -y "[*populate*]" -b " :: " "${pth}" -r " <--  " "${CfgDir}${tgt}/${cfg_chk}"
                 fi
             fi
 
@@ -167,6 +167,7 @@ deploy_psv() {
 
 # shellcheck disable=SC2034
 log_section="deploy"
+flg_DryRun=${flg_DryRun:-0}
 
 scrDir=$(dirname "$(realpath "$0")")
 if ! source "${scrDir}/global_fn.sh"; then
@@ -226,7 +227,7 @@ if [ -z "${ThemeOverride}" ]; then
     [ "${flg_DryRun}" -ne 1 ] && sed -i "/source.*=.*share\/hyde\/hyprland.conf.*/d" "$HYPRLAND_CONF"
     if ! grep -Fqx "$SOURCE_LINE" "$HYPRLAND_CONF"; then
         # Add the source line at the top of the file
-        [ "${flg_DryRun}" -ne 1 ] && sed -i "1s|^|$SOURCE_LINE\n\n|" "$HYPRLAND_CONF"
+        [ "${flg_DryRun}" -ne 1 ] && sed -i "1s|^|$SOURCE_LINE\n|" "$HYPRLAND_CONF"
         print_log -g "sourced" -b " :: " "hyprland.conf"
     else
         print_log -y "existing" -b " :: " "source line"

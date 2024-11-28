@@ -1,4 +1,4 @@
-This is a pipe separated value file. 
+This is a pipe separated value file.
 It contains the paths of the dotfiles and
 their respective package dependency.
 
@@ -62,12 +62,12 @@ S|${HOME}/.config|xsettingsd|nwg-look
 S|${HOME}/.config|nwg-look|nwg-look
 S|${HOME}/.config|gtk-3.0|nwg-look
 S|${HOME}|.gtkrc-2.0|nwg-look
+S|${HOME}/.config/menus|applications.menu|dolphin
 S|${HOME}/.config|dolphinrc|dolphin
 S|${HOME}/.config|kdeglobals|dolphin
-S|${HOME}/.config/menus|applications.menu|dolphin
-S|${HOME}/.local/share|dolphin|dolphin
-S|${HOME}/.local/share/kxmlgui5|dolphin|dolphin
 S|${HOME}/.local/share/kio/servicemenus|hydewallpaper.desktop|dolphin
+S|${HOME}/.local/share/kxmlgui5|dolphin|dolphin
+S|${HOME}/.local/share|dolphin|dolphin
 
 Overwrite: Strict Hyde specific files
 

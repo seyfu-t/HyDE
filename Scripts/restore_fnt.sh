@@ -5,6 +5,8 @@
 #|-/ /--| Prasanth Rangan                    |-/ /--|#
 #|/ /---+------------------------------------+/ /---|#
 
+flg_DryRun=${flg_DryRun:-0}
+
 scrDir=$(dirname "$(realpath "$0")")
 export log_section="extract"
 # shellcheck disable=SC1091
