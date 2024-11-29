@@ -4,6 +4,10 @@ scrDir="$(dirname "$(realpath "$0")")"
 export scrDir
 # shellcheck disable=SC1091
 source "${scrDir}/globalcontrol.sh"
+confDir="${confDir:-$XDG_CONFIG_HOME}"
+hydeThemeDir="${hydeThemeDir:-$confDir/hyde/themes}"
+hydeTheme="${hydeTheme:-}"
+enableWallDcol="${enableWallDcol:-}"
 
 # Validate the theme configuration file
 cat <<WALLBASH >"${confDir}/hypr/themes/wallbash.conf"
