@@ -74,5 +74,4 @@ S|${HOME}/.config/hyde|wallbash|hyprland
 Overwrite: Strict Hyde specific files
 
 O|${HOME}/.local/share|hyde|hyprland
-O|${HOME}/.local/share/icons|Wallbash-Icon|hyprland
 
