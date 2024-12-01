@@ -1,6 +1,5 @@
 #!/usr/bin/env bash
-    # shellcheck disable=SC2154
-
+# shellcheck disable=SC2154
 
 #// lock instance
 
@@ -9,14 +8,12 @@ lockFile="$HYDE_RUNTIME_DIR/$(basename "${0}").lock"
 touch "${lockFile}"
 trap 'rm -f ${lockFile}' EXIT
 
-
 #// define functions
 
-Wall_Cache()
-{
+Wall_Cache() {
     ln -fs "${wallList[setIndex]}" "${wallSet}"
     ln -fs "${wallList[setIndex]}" "${wallCur}"
-    "${scrDir}/swwwallcache.sh" -w "${wallList[setIndex]}" &> /dev/null
+    "${scrDir}/swwwallcache.sh" -w "${wallList[setIndex]}" &>/dev/null
     "${scrDir}/swwwallbash.sh" "${wallList[setIndex]}" &
     ln -fs "${thmbDir}/${wallHash[setIndex]}.sqre" "${wallSqr}"
     ln -fs "${thmbDir}/${wallHash[setIndex]}.thmb" "${wallTmb}"
@@ -25,22 +22,20 @@ Wall_Cache()
     ln -fs "${dcolDir}/${wallHash[setIndex]}.dcol" "${wallDcl}"
 }
 
-Wall_Change()
-{
+Wall_Change() {
     curWall="$(set_hash "${wallSet}")"
-    for i in "${!wallHash[@]}" ; do
-        if [ "${curWall}" == "${wallHash[i]}" ] ; then
-            if [ "${1}" == "n" ] ; then
-                setIndex=$(( (i + 1) % ${#wallList[@]} ))
-            elif [ "${1}" == "p" ] ; then
-                setIndex=$(( i - 1 ))
+    for i in "${!wallHash[@]}"; do
+        if [ "${curWall}" == "${wallHash[i]}" ]; then
+            if [ "${1}" == "n" ]; then
+                setIndex=$(((i + 1) % ${#wallList[@]}))
+            elif [ "${1}" == "p" ]; then
+                setIndex=$((i - 1))
             fi
             break
         fi
     done
     Wall_Cache
 }
-
 
 #// set variables
 
@@ -55,7 +50,6 @@ wallBlr="${cacheDir}/wall.blur"
 wallQad="${cacheDir}/wall.quad"
 wallDcl="${cacheDir}/wall.dcol"
 
-
 #// check wall
 
 setIndex=0
@@ -65,50 +59,48 @@ wallPathArray+=("${wallAddCustomPath[@]}")
 get_hashmap "${wallPathArray[@]}"
 [ ! -e "$(readlink -f "${wallSet}")" ] && echo "fixig link :: ${wallSet}" && ln -fs "${wallList[setIndex]}" "${wallSet}"
 
-
 #// evaluate options
 
-while getopts "nps:" option ; do
+while getopts "nps:" option; do
     case $option in
-    n ) # set next wallpaper
+    n) # set next wallpaper
         xtrans="grow"
         Wall_Change n
         ;;
-    p ) # set previous wallpaper
+    p) # set previous wallpaper
         xtrans="outer"
         Wall_Change p
         ;;
-    s ) # set input wallpaper
-        if [ -n "${OPTARG}" ] && [ -f "${OPTARG}" ] ; then
+    s) # set input wallpaper
+        if [ -n "${OPTARG}" ] && [ -f "${OPTARG}" ]; then
             get_hashmap "${OPTARG}"
         fi
         Wall_Cache
         ;;
-    * ) # invalid option
+    *) # invalid option
         echo "... invalid option ..."
         echo "$(basename "${0}") -[option]"
         echo "n : set next wall"
         echo "p : set previous wall"
         echo "s : set input wallpaper"
-        exit 1 ;;
+        exit 1
+        ;;
     esac
 done
 
-
 #// check swww daemon
 
-if ! swww query &> /dev/null; then
-    swww-daemon --format xrgb & disown
+if ! swww query &>/dev/null; then
+    swww-daemon --format xrgb &
+    disown
     swww query && swww restore
 fi
-
 
 #// set defaults
 
 [ -z "${xtrans}" ] && xtrans="grow"
 [ -z "${wallFramerate}" ] && wallFramerate=60
 [ -z "${wallTransDuration}" ] && wallTransDuration=0.4
-
 
 #// apply wallpaper
 
