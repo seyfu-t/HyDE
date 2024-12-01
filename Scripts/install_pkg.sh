@@ -7,11 +7,12 @@
 #|/ /---+----------------------------------------+/ /---|#
 
 scrDir=$(dirname "$(realpath "$0")")
-if ! source "${scrDir}/global_fn.sh" ; then 
+if ! source "${scrDir}/global_fn.sh"; then
     echo "Error: unable to source global_fn.sh..."
     exit 1
 fi
 
+flg_DryRun=${flg_DryRun:-0}
 export log_section="package"
 
 "${scrDir}/install_aur.sh" "${getAur}" 2>&1
@@ -63,13 +64,14 @@ done < <(cut -d '#' -f 1 "${listPkg}")
 
 IFS=${ofs}
 
-# shellcheck disable=SC2154
 if [ "${flg_DryRun}" -ne 1 ]; then
     if [[ ${#archPkg[@]} -gt 0 ]]; then
-        sudo pacman "${use_default}" -S "${archPkg[@]}"
+        print_log -b "[install] " "arch packages..."
+        sudo pacman ${use_default:+"$use_default"} -S "${archPkg[@]}"
     fi
 
     if [[ ${#aurhPkg[@]} -gt 0 ]]; then
-        "${aurhlpr}" "${use_default}" -S "${aurhPkg[@]}"
+        print_log -b "[install] " "aur packages..."
+        "${aurhlpr}" ${use_default:+"$use_default"} -S "${aurhPkg[@]}"
     fi
 fi
