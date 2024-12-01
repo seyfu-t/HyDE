@@ -101,7 +101,7 @@ sed -i "/^Theme=/c\Theme=${gtkIcon}" "${confDir}/kdeglobals"
 
 # Ensure [UiSettings] ColorScheme exists in kdeglobals // dolphin fix
 if ! grep -q "^\[UiSettings\]" "${confDir}/kdeglobals"; then
-    echo -e "\n[UiSettings]\nColorScheme=${gtkTheme}" >> "${confDir}/kdeglobals"
+    echo -e "\n[UiSettings]\nColorScheme=${gtkTheme}" >>"${confDir}/kdeglobals"
 elif ! grep -q "^ColorScheme=" "${confDir}/kdeglobals"; then
     sed -i "/^\[UiSettings\]/a ColorScheme=${gtkTheme}" "${confDir}/kdeglobals"
 fi

@@ -118,7 +118,7 @@ if [ -z "${hydeTheme}" ] || [ ! -d "${hydeConfDir}/themes/${hydeTheme}" ]; then
 fi
 
 hydeThemeDir="${hydeConfDir}/themes/${hydeTheme}"
-walbashDirs=(
+wallbashDirs=(
     "${hydeConfDir}/wallbash"
     "${XDG_DATA_HOME}/hyde/wallbash"
     "/usr/local/share/hyde/wallbash"
@@ -127,7 +127,7 @@ walbashDirs=(
 
 export hydeTheme
 export hydeThemeDir
-export walbashDirs
+export wallbashDirs
 export enableWallDcol
 
 #// hypr vars
@@ -292,7 +292,7 @@ get_hyprConf() {
             ;;
         esac
     else
-        echo "${gsVal}"::
+        echo "${gsVal}"
     fi
 
 }
