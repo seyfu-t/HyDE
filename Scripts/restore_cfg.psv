@@ -31,7 +31,7 @@ Populate or Preserved:
 
 P|${HOME}/.config/Code - OSS/User|settings.json|code
 P|${HOME}/.config/Code/User|settings.json|visual-studio-code-bin
-P|${HOME}/.config/hypr|hyprland.conf windowrules.conf keybindings.conf monitors.conf animations.conf |hyprland
+P|${HOME}/.config/hypr|hyde.conf hyprland.conf windowrules.conf keybindings.conf monitors.conf animations.conf |hyprland
 P|${HOME}/.config/hypr|nvidia.conf|hyprland nvidia-utils
 P|${HOME}/.config/hypr|themes|hyprland
 P|${HOME}/.config/waybar|config.ctl|waybar

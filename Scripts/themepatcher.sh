@@ -107,14 +107,15 @@ else
     Git_Path=${Git_Repo#*://*/}
     Git_Owner=${Git_Path%/*}
     branch_dir=${branch//\//_}
+    cacheDir=${cacheDir:-"$HOME/.cache/hyde"}
     Theme_Dir="${cacheDir}/themepatcher/${branch_dir}-${Git_Owner}"
 
     if [ -d "$Theme_Dir" ]; then
         print_prompt "Directory $Theme_Dir already exists. Using existing directory."
         if cd "$Theme_Dir"; then
             git fetch --all &>/dev/null
-            git reset --hard @{upstream} &>/dev/null
-            cd - &>/dev/null
+            git reset --hard "@{upstream}" &>/dev/null
+            cd - &>/dev/null || exit
         else
             print_prompt -y "Could not navigate to $Theme_Dir. Skipping git pull."
         fi
@@ -137,14 +138,14 @@ Fav_Theme_Dir="${Theme_Dir}/Configs/.config/hyde/themes/${Fav_Theme}"
 config=$(find "${wallbashDirs[@]}" -type f -path "*/theme*" -name "*.dcol" 2>/dev/null | awk '!seen[substr($0, match($0, /[^/]+$/))]++' | awk -v favTheme="${Fav_Theme}" -F 'theme/' '{gsub(/\.dcol$/, ".theme"); print ".config/hyde/themes/" favTheme "/" $2}')
 restore_list=""
 
-while IFS= read -r fchk; do
-    if [[ -e "${Theme_Dir}/Configs/${fchk}" ]]; then
-        print_prompt -g "[OK] " "${fchk}"
-        fbase=$(basename "${fchk}")
-        fdir=$(dirname "${fchk}")
-        restore_list+="Y|Y|\${HOME}/${fdir}|${fbase}|hyprland\n"
+while IFS= read -r fileCheck; do
+    if [[ -e "${Theme_Dir}/Configs/${fileCheck}" ]]; then
+        print_prompt -g "[OK] " "${fileCheck}"
+        fileBase=$(basename "${fileCheck}")
+        fileDir=$(dirname "${fileCheck}")
+        restore_list+="Y|Y|\${HOME}/${fileDir}|${fileBase}|hyprland\n"
     else
-        print_prompt -y "[!!] " "${fchk} --> do not exist in ${Theme_Dir}/Configs/"
+        print_prompt -y "[!!] " "${fileCheck} --> do not exist in ${Theme_Dir}/Configs/"
     fi
 done <<<"$config"
 if [ -f "${Fav_Theme_Dir}/theme.dcol" ]; then
@@ -155,17 +156,19 @@ readonly restore_list
 
 # Get Wallpapers
 wallpapers=$(find "${Fav_Theme_Dir}" -type f \( -iname "*.gif" -o -iname "*.jpg" -o -iname "*.jpeg" -o -iname "*.png" \))
-wallcount="$(echo "${wallpapers}" | wc -l)"
-{ [ -z "${wallpapers}" ] && print_prompt -r "[ERROR] " "No wallpapers found" && exit_flag=true; } || { readonly wallpapers && print_prompt -g "\n[OK] " "wallpapers :: [count] ${wallcount} (.gif+.jpg+.jpeg+.png)"; }
+wpCount="$(echo "${wallpapers}" | wc -l)"
+{ [ -z "${wallpapers}" ] && print_prompt -r "[ERROR] " "No wallpapers found" && exit_flag=true; } || { readonly wallpapers && print_prompt -g "\n[OK] " "wallpapers :: [count] ${wpCount} (.gif+.jpg+.jpeg+.png)"; }
 
-# overparsing 😁
+# parse thoroughly 😁
 check_tars() {
     local trVal
     local inVal="${1}"
-    local gsLow=$(echo "${inVal}" | tr '[:upper:]' '[:lower:]')
+    local gsLow
+    local gsVal
+    gsLow=$(echo "${inVal}" | tr '[:upper:]' '[:lower:]')
     # Use hyprland variables that are set in the hypr.theme file
     # Using case we can have a predictable output
-    local gsVal="$(
+    gsVal="$(
         case "${gsLow}" in
         sddm)
             grep "^[[:space:]]*\$SDDM[-_]THEME\s*=" "${Fav_Theme_Dir}/hypr.theme" | cut -d '=' -f2 | sed 's/^[[:space:]]*//;s/[[:space:]]*$//'
@@ -189,19 +192,19 @@ check_tars() {
             grep "^[[:space:]]*\$MONOSPACE[-_]FONT\s*=" "${Fav_Theme_Dir}/hypr.theme" | cut -d '=' -f2 | sed 's/^[[:space:]]*//;s/[[:space:]]*$//'
             ;;
 
-        *) # fallback to older imple
-            awk -F"[\"']" '/^[[:space:]]*exec[[:space:]]*=[[:space:]]*gsettings[[:space:]]*set[[:space:]]*org.gnome.desktop.interface[[:space:]]*'${gsLow}'-theme[[:space:]]*/ {last=$2} END {print last}' "${Fav_Theme_Dir}/hypr.theme"
+        *) # fallback to older method
+            awk -F"[\"']" '/^[[:space:]]*exec[[:space:]]*=[[:space:]]*gsettings[[:space:]]*set[[:space:]]*org.gnome.desktop.interface[[:space:]]*'"${gsLow}"'-theme[[:space:]]*/ {last=$2} END {print last}' "${Fav_Theme_Dir}/hypr.theme"
             ;;
         esac
     )"
 
-    # fallback to older imple
-    gsVal=${gsVal:-$(awk -F"[\"']" '/^[[:space:]]*exec[[:space:]]*=[[:space:]]*gsettings[[:space:]]*set[[:space:]]*org.gnome.desktop.interface[[:space:]]*'${gsLow}'-theme[[:space:]]*/ {last=$2} END {print last}' "${Fav_Theme_Dir}/hypr.theme")}
+    # fallback to older method
+    gsVal=${gsVal:-$(awk -F"[\"']" '/^[[:space:]]*exec[[:space:]]*=[[:space:]]*gsettings[[:space:]]*set[[:space:]]*org.gnome.desktop.interface[[:space:]]*'"${gsLow}"'-theme[[:space:]]*/ {last=$2} END {print last}' "${Fav_Theme_Dir}/hypr.theme")}
 
-    if [ ! -z "${gsVal}" ]; then
+    if [ -n "${gsVal}" ]; then
         print_prompt -g "[OK] " "hypr.theme :: [${gsLow}]" -b " ${gsVal}"
         trArc="$(find "${Theme_Dir}" -type f -name "${inVal}_*.tar.*")"
-        [ -f "${trArc}" ] && [ $(echo "${trArc}" | wc -l) -eq 1 ] && trVal="$(basename "$(tar -tf "${trArc}" | cut -d '/' -f1 | sort -u)")" && trVal="$(echo "${trVal}" | grep -w "${gsVal}")"
+        [ -f "${trArc}" ] && [ "$(echo "${trArc}" | wc -l)" -eq 1 ] && trVal="$(basename "$(tar -tf "${trArc}" | cut -d '/' -f1 | sort -u)")" && trVal="$(echo "${trVal}" | grep -w "${gsVal}")"
         print_prompt -g "[OK] " "../*.tar.* :: [${gsLow}]" -b " ${trVal}"
         [ "${trVal}" != "${gsVal}" ] && print_prompt -r "[ERROR] " "${gsLow}-theme set in hypr.theme does not exist in ${inVal}_*.tar.*" && exit_flag=true
     else
@@ -223,17 +226,18 @@ print_prompt "" && [[ "${exit_flag}" = true ]] && exit 1
 prefix=("Gtk" "Icon" "Cursor")
 tgtDir=("$HOME/.local/share/themes" "$HOME/.local/share/icons" "$HOME/.local/share/icons")
 
-for indx in ${!prefix[@]}; do
-    tarFile="$(find "${Theme_Dir}" -type f -name "${prefix[indx]}_*.tar.*")"
+for i in "${!prefix[@]}"; do
+    tarFile="$(find "${Theme_Dir}" -type f -name "${prefix[i]}_*.tar.*")"
     [ -f "${tarFile}" ] || continue
-    [ -d "${tgtDir[indx]}" ] || mkdir -p "${tgtDir[indx]}"
+    [ -d "${tgtDir[i]}" ] || mkdir -p "${tgtDir[i]}"
     tgtChk="$(basename "$(tar -tf "${tarFile}" | cut -d '/' -f1 | sort -u)")"
-    [ -d "${tgtDir[indx]}/${tgtChk}" ] && print_prompt -y "[skip] " "\"${tgtDir[indx]}/${tgtChk}\" already exists" && continue
-    print_prompt -g "[extracting] " "${tarFile} --> ${tgtDir[indx]}"
-    tar -xf "${tarFile}" -C "${tgtDir[indx]}"
+    [ -d "${tgtDir[i]}/${tgtChk}" ] && print_prompt -y "[skip] " "\"${tgtDir[i]}/${tgtChk}\" already exists" && continue
+    print_prompt -g "[extracting] " "${tarFile} --> ${tgtDir[i]}"
+    tar -xf "${tarFile}" -C "${tgtDir[i]}"
 done
 
 # populate wallpaper
+confDir=${confDir:-"$HOME/.config"}
 Fav_Theme_Walls="${confDir}/hyde/themes/${Fav_Theme}/wallpapers"
 [ ! -d "${Fav_Theme_Walls}" ] && mkdir -p "${Fav_Theme_Walls}"
 while IFS= read -r walls; do
