@@ -6,17 +6,44 @@
 
 print_prompt() {
     [[ "${verbose}" == "false" ]] && return 0
-    while (( "$#" )); do
+    while (("$#")); do
         case "$1" in
-            -r) echo -ne "\e[31m$2\e[0m"; shift 2 ;; # Red
-            -g) echo -ne "\e[32m$2\e[0m"; shift 2 ;; # Green
-            -y) echo -ne "\e[33m$2\e[0m"; shift 2 ;; # Yellow
-            -b) echo -ne "\e[34m$2\e[0m"; shift 2 ;; # Blue
-            -m) echo -ne "\e[35m$2\e[0m"; shift 2 ;; # Magenta
-            -c) echo -ne "\e[36m$2\e[0m"; shift 2 ;; # Cyan
-            -w) echo -ne "\e[37m$2\e[0m"; shift 2 ;; # White
-            -n) echo -ne "\e[96m$2\e[0m"; shift 2 ;; # Neon
-            *) echo -ne "$1"; shift ;;
+        -r)
+            echo -ne "\e[31m$2\e[0m"
+            shift 2
+            ;; # Red
+        -g)
+            echo -ne "\e[32m$2\e[0m"
+            shift 2
+            ;; # Green
+        -y)
+            echo -ne "\e[33m$2\e[0m"
+            shift 2
+            ;; # Yellow
+        -b)
+            echo -ne "\e[34m$2\e[0m"
+            shift 2
+            ;; # Blue
+        -m)
+            echo -ne "\e[35m$2\e[0m"
+            shift 2
+            ;; # Magenta
+        -c)
+            echo -ne "\e[36m$2\e[0m"
+            shift 2
+            ;; # Cyan
+        -w)
+            echo -ne "\e[37m$2\e[0m"
+            shift 2
+            ;; # White
+        -n)
+            echo -ne "\e[96m$2\e[0m"
+            shift 2
+            ;; # Neon
+        *)
+            echo -ne "$1"
+            shift
+            ;;
         esac
     done
     echo ""
@@ -34,7 +61,7 @@ set +e
 
 # error function
 ask_help() {
-cat << HELP
+    cat <<HELP
 ...Usage...
 $(print_prompt "$0 " -y "Theme-Name " -c "/Path/to/Configs")
 $(print_prompt "$0 " -y "Theme-Name " -c "https://github.com/User/Repository")
@@ -47,8 +74,12 @@ if [[ -z $1 || -z $2 ]]; then
     exit 1
 fi
 
-dcolDir="${confDir}/hyde/wallbash/Wall-Dcol"
-[ ! -d "${dcolDir}" ] && print_prompt "[ERROR]" "${dcolDir} do not exist!" && exit 1
+wallbashDirs=(
+    "${hydeConfDir}/wallbash"
+    "${XDG_DATA_HOME}/hyde/wallbash"
+    "/usr/local/share/hyde/wallbash"
+    "/usr/share/hyde/wallbash"
+)
 
 # set parameters
 Fav_Theme="$1"
@@ -81,15 +112,15 @@ else
     if [ -d "$Theme_Dir" ]; then
         print_prompt "Directory $Theme_Dir already exists. Using existing directory."
         if cd "$Theme_Dir"; then
-            git fetch --all &> /dev/null
-            git reset --hard @{upstream} &> /dev/null
-            cd - &> /dev/null
+            git fetch --all &>/dev/null
+            git reset --hard @{upstream} &>/dev/null
+            cd - &>/dev/null
         else
             print_prompt -y "Could not navigate to $Theme_Dir. Skipping git pull."
         fi
     else
         print_prompt "Directory $Theme_Dir does not exist. Cloning repository into new directory."
-        git clone -b "$branch" --depth 1 "$Git_Repo" "$Theme_Dir" &> /dev/null
+        git clone -b "$branch" --depth 1 "$Git_Repo" "$Theme_Dir" &>/dev/null
         if [ $? -ne 0 ]; then
             print_prompt "Git clone failed"
             exit 1
@@ -97,34 +128,35 @@ else
     fi
 fi
 
-print_prompt "Patching" -g " --// ${Fav_Theme} //-- "  "from " -b "${Theme_Dir}\n"
+print_prompt "Patching" -g " --// ${Fav_Theme} //-- " "from " -b "${Theme_Dir}\n"
 
 Fav_Theme_Dir="${Theme_Dir}/Configs/.config/hyde/themes/${Fav_Theme}"
 [ ! -d "${Fav_Theme_Dir}" ] && print_prompt -r "[ERROR] " "'${Fav_Theme_Dir}'" -y " Do not Exist" && exit 1
 
-config=$(find "${dcolDir}" -type f -name "*.dcol" | awk -v favTheme="${Fav_Theme}" -F 'Wall-Dcol/' '{gsub(/\.dcol$/, ".theme"); print ".config/hyde/themes/" favTheme "/" $2}')
+# config=$(find "${dcolDir}" -type f -name "*.dcol" | awk -v favTheme="${Fav_Theme}" -F 'theme/' '{gsub(/\.dcol$/, ".theme"); print ".config/hyde/themes/" favTheme "/" $2}')
+config=$(find "${wallbashDirs[@]}" -type f -path "*/theme*" -name "*.dcol" 2>/dev/null | awk '!seen[substr($0, match($0, /[^/]+$/))]++' | awk -v favTheme="${Fav_Theme}" -F 'theme/' '{gsub(/\.dcol$/, ".theme"); print ".config/hyde/themes/" favTheme "/" $2}')
 restore_list=""
 
 while IFS= read -r fchk; do
     if [[ -e "${Theme_Dir}/Configs/${fchk}" ]]; then
-        print_prompt -g "[OK] "  "${fchk}"
+        print_prompt -g "[OK] " "${fchk}"
         fbase=$(basename "${fchk}")
         fdir=$(dirname "${fchk}")
         restore_list+="Y|Y|\${HOME}/${fdir}|${fbase}|hyprland\n"
     else
         print_prompt -y "[!!] " "${fchk} --> do not exist in ${Theme_Dir}/Configs/"
     fi
-done <<< "$config"
-if [ -f "${Fav_Theme_Dir}/theme.dcol" ];then
-print_prompt -n "[ok] "  "found theme.dcol to override wallpaper dominant colors"
-restore_list+="Y|Y|\${HOME}/.config/hyde/themes/${Fav_Theme}|theme.dcol|hyprland\n"
+done <<<"$config"
+if [ -f "${Fav_Theme_Dir}/theme.dcol" ]; then
+    print_prompt -n "[ok] " "found theme.dcol to override wallpaper dominant colors"
+    restore_list+="Y|Y|\${HOME}/.config/hyde/themes/${Fav_Theme}|theme.dcol|hyprland\n"
 fi
 readonly restore_list
 
 # Get Wallpapers
 wallpapers=$(find "${Fav_Theme_Dir}" -type f \( -iname "*.gif" -o -iname "*.jpg" -o -iname "*.jpeg" -o -iname "*.png" \))
 wallcount="$(echo "${wallpapers}" | wc -l)"
-{ [ -z "${wallpapers}" ] && print_prompt -r "[ERROR] " "No wallpapers found" && exit_flag=true ;} || { readonly wallpapers && print_prompt -g "\n[OK] " "wallpapers :: [count] ${wallcount} (.gif+.jpg+.jpeg+.png)" ;}
+{ [ -z "${wallpapers}" ] && print_prompt -r "[ERROR] " "No wallpapers found" && exit_flag=true; } || { readonly wallpapers && print_prompt -g "\n[OK] " "wallpapers :: [count] ${wallcount} (.gif+.jpg+.jpeg+.png)"; }
 
 # overparsing 😁
 check_tars() {
@@ -163,7 +195,7 @@ check_tars() {
         esac
     )"
 
-        # fallback to older imple
+    # fallback to older imple
     gsVal=${gsVal:-$(awk -F"[\"']" '/^[[:space:]]*exec[[:space:]]*=[[:space:]]*gsettings[[:space:]]*set[[:space:]]*org.gnome.desktop.interface[[:space:]]*'${gsLow}'-theme[[:space:]]*/ {last=$2} END {print last}' "${Fav_Theme_Dir}/hypr.theme")}
 
     if [ ! -z "${gsVal}" ]; then
@@ -187,7 +219,6 @@ check_tars Document-Font
 check_tars Monospace-Font
 print_prompt "" && [[ "${exit_flag}" = true ]] && exit 1
 
-
 # extract arcs
 prefix=("Gtk" "Icon" "Cursor")
 tgtDir=("$HOME/.local/share/themes" "$HOME/.local/share/icons" "$HOME/.local/share/icons")
@@ -207,12 +238,12 @@ Fav_Theme_Walls="${confDir}/hyde/themes/${Fav_Theme}/wallpapers"
 [ ! -d "${Fav_Theme_Walls}" ] && mkdir -p "${Fav_Theme_Walls}"
 while IFS= read -r walls; do
     cp -f "${walls}" "${Fav_Theme_Walls}"
-done <<< "${wallpapers}"
+done <<<"${wallpapers}"
 
 # restore configs with theme override
-echo -en "${restore_list}" > "${Theme_Dir}/restore_cfg.lst"
+echo -en "${restore_list}" >"${Theme_Dir}/restore_cfg.lst"
 print_prompt -g "\n[exec] " "restore_cfg.sh \"${Theme_Dir}/restore_cfg.lst\" \"${Theme_Dir}/Configs\" \"${Fav_Theme}\"\n"
-"${scrDir}/restore_cfg.sh" "${Theme_Dir}/restore_cfg.lst" "${Theme_Dir}/Configs" "${Fav_Theme}" &> /dev/null
-[ "${3}" == "--skipcaching" ] || "$HOME/.local/share/bin/swwwallcache.sh" -t "${Fav_Theme}"
+"${scrDir}/restore_cfg.sh" "${Theme_Dir}/restore_cfg.lst" "${Theme_Dir}/Configs" "${Fav_Theme}" &>/dev/null
+[ "${3}" == "--skipcaching" ] || "$HOME/.local/lib/hyde/swwwallcache.sh" -t "${Fav_Theme}"
 
 exit 0
