@@ -76,4 +76,4 @@ fastfetch                                              # system information fetc
 pokego-bin|zsh                                        # display pokemon sprites in terminal (written GO)
 
 # --------------------------------------------------- // HyDE
-hyde-cli-git                                           # cli tool to manage hyde
+# hyde-cli-git                                           # cli tool to manage hyde \\ Deprecated for HyDE
