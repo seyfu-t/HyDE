@@ -76,7 +76,7 @@ EOF
 done
 
 # Only export that are used outside this script
-export flg_DryRun flg_Nvidia flg_Shell
+export flg_DryRun flg_Nvidia flg_Shell flg_Install
 
 if [ "${flg_DryRun}" -eq 1 ]; then
     print_log -n "[test-run] " -b "enabled :: " "Testing without executing"
@@ -120,21 +120,20 @@ EOF
     # prepare package list #
     #----------------------#
     shift $((OPTIND - 1))
-    cust_pkg=$1
+    custom_pkg=$1
     cp "${scrDir}/custom_hypr.lst" "${scrDir}/install_pkg.lst"
     trap 'rm "${scrDir}/install_pkg.lst"' EXIT
 
-    if [ -f "${cust_pkg}" ] && [ -n "${cust_pkg}" ]; then
-        cat "${cust_pkg}" >>"${scrDir}/install_pkg.lst"
+    if [ -f "${custom_pkg}" ] && [ -n "${custom_pkg}" ]; then
+        cat "${custom_pkg}" >>"${scrDir}/install_pkg.lst"
     fi
-
     #--------------------------------#
     # add nvidia drivers to the list #
     #--------------------------------#
     if nvidia_detect; then
         if [ ${flg_Nvidia} -eq 1 ]; then
-            cat /usr/lib/modules/*/pkgbase | while read -r krnl; do
-                echo "${krnl}-headers" >>"${scrDir}/install_pkg.lst"
+            cat /usr/lib/modules/*/pkgbase | while read -r kernel; do
+                echo "${kernel}-headers" >>"${scrDir}/install_pkg.lst"
             done
             nvidia_detect --drivers >>"${scrDir}/install_pkg.lst"
         else
@@ -180,7 +179,7 @@ EOF
     #--------------------------------#
     # install packages from the list #
     #--------------------------------#
-    [ ${flg_DryRun} -ne 1 ] || "${scrDir}/install_pkg.sh" "${scrDir}/install_pkg.lst"
+    [ ${flg_DryRun} -eq 1 ] || "${scrDir}/install_pkg.sh" "${scrDir}/install_pkg.lst"
 fi
 
 #---------------------------#
@@ -260,15 +259,15 @@ if [ ${flg_Service} -eq 1 ]; then
 
 EOF
 
-    while read -r servChk; do
+    while read -r serviceChk; do
 
-        if [[ $(systemctl list-units --all -t service --full --no-legend "${servChk}.service" | sed 's/^\s*//g' | cut -f1 -d' ') == "${servChk}.service" ]]; then
-            print_log -y "[skip] " -b "active " "Service ${servChk}"
+        if [[ $(systemctl list-units --all -t service --full --no-legend "${serviceChk}.service" | sed 's/^\s*//g' | cut -f1 -d' ') == "${serviceChk}.service" ]]; then
+            print_log -y "[skip] " -b "active " "Service ${serviceChk}"
         else
-            print_log -y "start" "Service ${servChk}"
+            print_log -y "start" "Service ${serviceChk}"
             if $flg_DryRun -ne 1; then
-                sudo systemctl enable "${servChk}.service"
-                sudo systemctl start "${servChk}.service"
+                sudo systemctl enable "${serviceChk}.service"
+                sudo systemctl start "${serviceChk}.service"
             fi
         fi
 
