@@ -77,15 +77,15 @@ if [ -f /etc/pacman.conf ] && [ ! -f /etc/pacman.conf.hyde.bkp ]; then
     print_log -g "[PACMAN] " -b "modify :: " "adding extra spice to pacman..."
 
     # shellcheck disable=SC2154
-    [ "${flg_DryRun}" -eq 1 ] && cp /etc/pacman.conf /etc/pacman.conf.hyde.bkp
-    [ "${flg_DryRun}" -eq 1 ] && sudo sed -i "/^#Color/c\Color\nILoveCandy
+    [ "${flg_DryRun}" -eq 1 ] || cp /etc/pacman.conf /etc/pacman.conf.hyde.bkp
+    [ "${flg_DryRun}" -eq 1 ] || sudo sed -i "/^#Color/c\Color\nILoveCandy
     /^#VerbosePkgLists/c\VerbosePkgLists
     /^#ParallelDownloads/c\ParallelDownloads = 5" /etc/pacman.conf
-    [ "${flg_DryRun}" -eq 1 ] && sudo sed -i '/^#\[multilib\]/,+1 s/^#//' /etc/pacman.conf
+    [ "${flg_DryRun}" -eq 1 ] || sudo sed -i '/^#\[multilib\]/,+1 s/^#//' /etc/pacman.conf
 
     print_log -g "[PACMAN] " -b "update :: " "packages..."
-    [ "${flg_DryRun}" -eq 1 ] && sudo pacman -Syyu
-    [ "${flg_DryRun}" -eq 1 ] && sudo pacman -Fy
+    [ "${flg_DryRun}" -eq 1 ] || sudo pacman -Syyu
+    [ "${flg_DryRun}" -eq 1 ] || sudo pacman -Fy
 else
     print_log -y "[PACMAN] " -b "skipped :: " "pacman is already configured..."
 fi
