@@ -265,7 +265,7 @@ EOF
             print_log -y "[skip] " -b "active " "Service ${serviceChk}"
         else
             print_log -y "start" "Service ${serviceChk}"
-            if $flg_DryRun -ne 1; then
+            if [ $flg_DryRun -ne 1 ]; then
                 sudo systemctl enable "${serviceChk}.service"
                 sudo systemctl start "${serviceChk}.service"
             fi
