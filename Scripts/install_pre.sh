@@ -11,6 +11,8 @@ if ! source "${scrDir}/global_fn.sh"; then
     exit 1
 fi
 
+flg_DryRun=${flg_DryRun:-0}
+
 # grub
 if pkg_installed grub && [ -f /boot/grub/grub.cfg ]; then
     print_log -c "[bootloader] " -b "detected :: " "grub..."
