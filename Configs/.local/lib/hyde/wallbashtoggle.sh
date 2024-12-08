@@ -57,5 +57,5 @@ export reload_flag=1
 [[ "${setMode}" -lt 0 ]] && setMode=$((${#wallbashModes[@]} - 1))
 set_conf "enableWallDcol" "${setMode}"
 "${scrDir}/themeswitch.sh"
-notify-send -a "t1" -i "${iconsDir}/Wallbash-Icon/hyprdots.png" " ${wallbashModes[setMode]} mode"
+notify-send -a "HyDE Alert" -i "${iconsDir}/Wallbash-Icon/hyprdots.png" " ${wallbashModes[setMode]} mode"
 

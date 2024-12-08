@@ -48,16 +48,16 @@ notify_vol() {
     iconStyle="knob"
     ico="${icodir}/${iconStyle}-${angle}.svg"
     bar=$(seq -s "." $((vol / 15)) | sed 's/[0-9]//g')
-    notify-send -a "t2" -r 69 -t 800 -i "${ico}" "${vol}${bar}" "${nsink}"
+    notify-send -a "HyDE Notify" -r 69 -t 800 -i "${ico}" "${vol}${bar}" "${nsink}"
 }
 
 notify_mute() {
     mute=$(pamixer "${srce}" --get-mute | cat)
     [ "${srce}" == "--default-source" ] && dvce="microphone" || dvce="speaker"
     if [ "${mute}" == "true" ]; then
-        notify-send -a "t2" -r 69 -t 800 -i "${icodir}/muted-${dvce}.svg" "muted" "${nsink}"
+        notify-send -a "HyDE Notify" -r 69 -t 800 -i "${icodir}/muted-${dvce}.svg" "muted" "${nsink}"
     else
-        notify-send -a "t2" -r 69 -t 800 -i "${icodir}/unmuted-${dvce}.svg" "unmuted" "${nsink}"
+        notify-send -a "HyDE Notify" -r 69 -t 800 -i "${icodir}/unmuted-${dvce}.svg" "unmuted" "${nsink}"
     fi
 }
 

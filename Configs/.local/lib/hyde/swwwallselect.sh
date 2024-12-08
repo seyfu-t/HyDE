@@ -54,10 +54,10 @@ if [ -n "${rofiSel}" ]; then
     done
     if [ -n "${setWall}" ]; then
         "${scrDir}/swwwallpaper.sh" -s "${setWall}"
-        echo notify-send -a "t1" -i "${thmbDir}/$(set_hash "${setWall}").sqre" " ${rofiSel}"
-        notify-send -a "t1" -i "${thmbDir}/$(set_hash "${setWall}").sqre" " ${rofiSel}"
+        echo notify-send -a "HyDE Alert" -i "${thmbDir}/$(set_hash "${setWall}").sqre" " ${rofiSel}"
+        notify-send -a "HyDE Alert" -i "${thmbDir}/$(set_hash "${setWall}").sqre" " ${rofiSel}"
     else
-        notify-send -a "t1" "Wallpaper not found"
+        notify-send -a "HyDE Alert" "Wallpaper not found"
     fi
 
 fi
