@@ -22,13 +22,23 @@ icon_corner_radius = ${hypr_border}
 dmenu = $(which rofi) -config "${confDir}/rofi/notification.rasi" -dmenu -p dunst:
 icon_theme = "${gtkIcon},${allIcons}"
 
+# [Type-1]
+# appname = "t1"
+# format = "<b>%s</b>"
+
+# [Type-2]
+# appname = "HyDE Notify"
+# format = "<span size="250%">%s</span>\n%b"
+
 [Type-1]
-appname = "t1"
+appname = "HyDE Alert"
 format = "<b>%s</b>"
 
 [Type-2]
-appname = "t2"
+appname = "HyDE Notify"
 format = "<span size="250%">%s</span>\n%b"
+
+
 
 [urgency_critical]
 background = "#f5e0dc"
