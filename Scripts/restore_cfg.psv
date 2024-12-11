@@ -27,9 +27,11 @@ B = Backup - Backup the target file
               All P,S,O flags will also backup the target target file
 
 Hyde specific files:
-P|${HOME}/.config/hypr|hyde.conf hyprland.conf windowrules.conf keybindings.conf monitors.conf|hyprland
+P|${HOME}/.config/hypr|hyde.conf windowrules.conf keybindings.conf monitors.conf|hyprland
 P|${HOME}/.config/hypr|nvidia.conf|hyprland nvidia-utils
 P|${HOME}/.config/hypr/themes|theme.conf wallbash.conf colors.conf|hyprland
+P|${HOME}/.config/hypr|hyprland.conf|hyprland
+# S|${HOME}/.config/hypr|hyprland.conf|hyprland
 S|${HOME}/.config|gtk-3.0|nwg-look
 S|${HOME}/.config|nwg-look|nwg-look
 S|${HOME}/.config|xsettingsd|nwg-look
