@@ -77,3 +77,4 @@ pokego-bin|zsh                                        # display pokemon sprites 
 
 # --------------------------------------------------- // HyDE
 # hyde-cli-git                                           # cli tool to manage hyde \\ Deprecated for HyDE
+hypridle                                               # idle daemon
