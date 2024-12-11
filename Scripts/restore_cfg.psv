@@ -27,9 +27,11 @@ B = Backup - Backup the target file
               All P,S,O flags will also backup the target target file
 
 Hyde specific files:
-P|${HOME}/.config/hypr|hyde.conf hyprland.conf windowrules.conf keybindings.conf monitors.conf animations.conf  |hyprland
+P|${HOME}/.config/hypr|hyde.conf windowrules.conf keybindings.conf monitors.conf|hyprland
 P|${HOME}/.config/hypr|nvidia.conf|hyprland nvidia-utils
 P|${HOME}/.config/hypr/themes|theme.conf wallbash.conf colors.conf|hyprland
+P|${HOME}/.config/hypr|hyprland.conf|hyprland
+# S|${HOME}/.config/hypr|hyprland.conf|hyprland
 S|${HOME}/.config|gtk-3.0|nwg-look
 S|${HOME}/.config|nwg-look|nwg-look
 S|${HOME}/.config|xsettingsd|nwg-look
@@ -38,6 +40,7 @@ S|${HOME}/.config|Kvantum|kvantum
 S|${HOME}/.config|qt5ct|qt5ct
 S|${HOME}/.config|qt6ct|qt6ct
 S|${HOME}/.config/hyde|wallbash|hyprland
+S|${HOME}/.config/hypr|animations|hyprland
 
 
 O|${HOME}/.local/share|hyde|hyprland
@@ -93,8 +96,8 @@ S|${HOME}/.config|wlogout|wlogout
 
 Lock Screen:
 S|${HOME}/.config|swaylock|swaylock-effects
-P|${HOME}/.config/hypr/hyprlock|wallbash.conf|hyprlock
 P|${HOME}/.config/hypr|hyprlock.conf|hyprlock
+S|${HOME}/.config/hypr|hyprlock|hyprlock
 
 Idle daemon:
 P|${HOME}/.config/hypr|hypridle.conf|hypridle
