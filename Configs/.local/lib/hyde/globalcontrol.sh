@@ -285,8 +285,11 @@ get_hyprConf() {
         "SDDM_THEME") echo "" ;;
         *)
             grep "^[[:space:]]*\$default.${hyVar}\s*=" \
+                "XDG_DATA_HOME/hyde/hyde.conf" \
                 "$XDG_DATA_HOME/hyde/hyprland.conf" \
+                "/usr/local/share/hyde/hyde.conf" \
                 "/usr/local/share/hyde/hyprland.conf" \
+                "/usr/share/hyde/hyde.conf" \
                 "/usr/share/hyde/hyprland.conf" 2>/dev/null |
                 cut -d '=' -f2 | sed 's/^[[:space:]]*//;s/[[:space:]]*$//' | head -n 1
             ;;
