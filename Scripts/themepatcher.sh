@@ -50,8 +50,9 @@ print_prompt() {
 }
 
 scrDir=$(dirname "$(realpath "$0")")
-source "${scrDir}/global_fn.sh"
-if [ $? -ne 0 ]; then
+# shellcheck disable=SC1091
+# if [ $? -ne 0 ]; then
+if ! source "${scrDir}/global_fn.sh"; then
     echo "Error: unable to source global_fn.sh..."
     exit 1
 fi
@@ -75,8 +76,8 @@ if [[ -z $1 || -z $2 ]]; then
 fi
 
 wallbashDirs=(
-    "${hydeConfDir}/wallbash"
-    "${XDG_DATA_HOME}/hyde/wallbash"
+    "$HOME/.config/hyde/wallbash"
+    "$HOME/.local/share/hyde/wallbash"
     "/usr/local/share/hyde/wallbash"
     "/usr/share/hyde/wallbash"
 )
@@ -93,6 +94,7 @@ else
         Git_Repo=${Git_Repo%/tree/*}
     else
         branches=$(curl -s "https://api.github.com/repos/${Git_Repo#*://*/}/branches" | jq -r '.[].name')
+        # shellcheck disable=SC2206
         branches=($branches)
         if [[ ${#branches[@]} -le 1 ]]; then
             branch=${branches[0]}
@@ -121,8 +123,7 @@ else
         fi
     else
         print_prompt "Directory $Theme_Dir does not exist. Cloning repository into new directory."
-        git clone -b "$branch" --depth 1 "$Git_Repo" "$Theme_Dir" &>/dev/null
-        if [ $? -ne 0 ]; then
+        if ! git clone -b "$branch" --depth 1 "$Git_Repo" "$Theme_Dir" &>/dev/null; then
             print_prompt "Git clone failed"
             exit 1
         fi

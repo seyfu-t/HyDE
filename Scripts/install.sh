@@ -79,7 +79,7 @@ EOF
 done
 
 # Only export that are used outside this script
-export flg_DryRun flg_Nvidia flg_Shell flg_Install
+export flg_DryRun flg_Nvidia flg_Shell flg_Install flg_ThemeInstall
 
 if [ "${flg_DryRun}" -eq 1 ]; then
     print_log -n "[test-run] " -b "enabled :: " "Testing without executing"
@@ -212,26 +212,8 @@ EOF
 
     "${scrDir}/restore_fnt.sh"
     "${scrDir}/restore_cfg.sh"
-    if [ "$flg_ThemeInstall" -eq 1 ]; then
-        print_log -g "[THEME] " -warn "imports" "from List"
-        while IFS='"' read -r _ themeName _ themeRepo; do
-            themeNameQ+=("${themeName//\"/}")
-            themeRepoQ+=("${themeRepo//\"/}")
-            themePath="${confDir}/hyde/themes/${themeName}"
-            [ -d "${themePath}" ] || mkdir -p "${themePath}"
-            [ -f "${themePath}/.sort" ] || echo "${#themeNameQ[@]}" >"${themePath}/.sort"
-            print_log -g "[THEME] " -stat "added" "${themeName}"
-        done <"${scrDir}/themepatcher.lst"
-        set +e
-        [ "${flg_DryRun}" -eq 1 ] || parallel --bar --link "\"${scrDir}/themepatcher.sh\"" "{1}" "{2}" "{3}" "{4}" ::: "${themeNameQ[@]}" ::: "${themeRepoQ[@]}" ::: "--skipcaching" ::: "false"
-        set -e
-        print_log -g "[generate] " "cache ::" "Wallpapers..."
-        [ "${flg_DryRun}" -eq 1 ] || "$HOME/.local/lib/hyde/swwwallcache.sh" -t ""
-        if [ "${flg_DryRun}" -ne 1 ] && [ -n "$HYPRLAND_INSTANCE_SIGNATURE" ]; then
-            print_log -g "[THEME] " -n " reload ::" "Current theme"
-            "$HOME/.local/lib/hyde/themeswitch.sh" &>/dev/null
-        fi
-    fi
+    "${scrDir}/restore_thm.sh"
+
 fi
 
 #---------------------#
