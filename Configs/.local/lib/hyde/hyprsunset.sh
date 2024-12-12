@@ -15,21 +15,24 @@ if [[ ! -f $temp_file ]]; then
 fi
 
 current_temp=$(cat "$temp_file")
-
-if [[ $action == "i" ]]; then
+case $action in
+i)
     new_temp=$((current_temp + step * multiplier))
     if [[ $new_temp -gt $max_temp ]]; then
         new_temp=$max_temp
     fi
-elif [[ $action == "d" ]]; then
+    ;;
+d)
     new_temp=$((current_temp - step * multiplier))
     if [[ $new_temp -lt $min_temp ]]; then
         new_temp=$min_temp
     fi
-else
+    ;;
+*)
     echo "Invalid action. Use 'i' to increase or 'd' to decrease."
     exit 1
-fi
+    ;;
+esac
 
 echo $new_temp
 echo $new_temp >"$temp_file"

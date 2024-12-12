@@ -34,7 +34,7 @@ fn_mpris() {
         if [ -f "$HOME/.face.icon" ]; then
             cp -f "$HOME/.face.icon" "${THUMB}".png
         else
-            cp "$XDG_DATA_HOME/icons/Wallbash-Icon/hyprdots.png" "${THUMB}".png
+            cp "$XDG_DATA_HOME/icons/Wallbash-Icon/hyde.png" "${THUMB}".png
         fi
         pkill -USR2 hyprlock # updates the mpris thumbnail
         return 1

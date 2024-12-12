@@ -60,5 +60,5 @@ rofiSel=$(
 if [ -n "${rofiSel}" ]; then
     "${scrDir}/themeswitch.sh" -s "${rofiSel}"
     # shellcheck disable=SC2154
-    notify-send -a "HyDE Alert" -i "${iconsDir}/Wallbash-Icon/hyprdots.png" " ${rofiSel}"
+    notify-send -a "HyDE Alert" -i "${iconsDir}/Wallbash-Icon/hyde.png" " ${rofiSel}"
 fi
