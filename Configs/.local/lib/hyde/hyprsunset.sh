@@ -34,7 +34,6 @@ d)
     ;;
 esac
 
-echo $new_temp
 echo $new_temp >"$temp_file"
 if [[ -n $(pgrep hyprsunset) ]]; then
     pkill hyprsunset

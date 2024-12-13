@@ -299,3 +299,58 @@ get_hyprConf() {
     fi
 
 }
+
+# Rofi spawn location
+get_rofi_follow_mouse() {
+    readarray -t curPos < <(hyprctl cursorpos -j | jq -r '.x,.y')
+    readarray -t monRes < <(hyprctl -j monitors | jq '.[] | select(.focused==true) | .width,.height,.scale,.x,.y')
+    readarray -t offRes < <(hyprctl -j monitors | jq -r '.[] | select(.focused==true).reserved | map(tostring) | join("\n")')
+    monRes[2]="${monRes[2]//./}"
+    monRes[0]=$((monRes[0] * 100 / monRes[2]))
+    monRes[1]=$((monRes[1] * 100 / monRes[2]))
+    curPos[0]=$((curPos[0] - monRes[3]))
+    curPos[1]=$((curPos[1] - monRes[4]))
+
+    if [ "${curPos[0]}" -ge "$((monRes[0] / 2))" ]; then
+        local x_pos="east"
+        local x_off="-$((monRes[0] - curPos[0] - offRes[2]))"
+    else
+        local x_pos="west"
+        local x_off="$((curPos[0] - offRes[0]))"
+    fi
+
+    if [ "${curPos[1]}" -ge "$((monRes[1] / 2))" ]; then
+        local y_pos="south"
+        local y_off="-$((monRes[1] - curPos[1] - offRes[3]))"
+    else
+        local y_pos="north"
+        local y_off="$((curPos[1] - offRes[1]))"
+    fi
+
+    local coordinates="window{location:${x_pos} ${y_pos};anchor:${x_pos} ${y_pos};x-offset:${x_off}px;y-offset:${y_off}px;}"
+    echo "${coordinates}"
+}
+
+#? handle pasting
+paste_string() {
+    if ! command -v wtype >/dev/null; then exit 0; fi
+    ignore_paste_file=${cacheDir}/landing/ignore.paste
+
+    if [[ ! -e "${ignore_paste_file}" ]]; then
+        cat <<EOF >"${ignore_paste_file}"
+kitty
+org.kde.konsole
+terminator
+XTerm
+Alacritty
+xterm-256color
+EOF
+    fi
+
+    ignore_class=$(echo "$@" | awk -F'--ignore=' '{print $2}')
+    [ -n "${ignore_class}" ] && echo "${ignore_class}" >>"${ignore_paste_file}" && print_prompt -y "[ignore]" "'$ignore_class'" && exit 0
+    class=$(hyprctl -j activewindow | jq -r '.initialClass')
+    if ! grep -q "${class}" "${ignore_paste_file}"; then
+        hyprctl -q dispatch exec 'wtype -M ctrl V -m ctrl'
+    fi
+}
