@@ -7,10 +7,10 @@ WALLPAPER="${cacheDir}/wall.set"
 
 # Converts and ensures background to be a png
 fn_background() {
+    WP="$(realpath "${WALLPAPER}")"
     BG="${cacheDir}/wall.set.png"
-    mime=$(file --mime-type "${WALLPAPER}" | grep "image/png")
-    rm "${BG}"
-    cp -f "${WALLPAPER}" "${BG}"
+    cp -f "${WP}" "${BG}"
+    mime=$(file --mime-type "${WP}" | grep -E "image/(png|jpg|webp)")
     #? Run this in the background because converting takes time
     ([[ -z ${mime} ]] && magick "${BG}"[0] "${BG}") &
 }
@@ -51,8 +51,14 @@ fn_art() {
     echo "$XDG_CACHE_HOME/hyde/landing/mpris.art"
 }
 
+fn_select() {
+    :
+
+}
+
 if declare -f "fn_${1}" >/dev/null; then
     "fn_${1}"
 else
+    hyprlock.sh background
     hyprlock
 fi
