@@ -31,9 +31,4 @@ if [ "$flg_ThemeInstall" -eq 1 ]; then
     parallel --bar --link "\"${scrDir}/themepatcher.sh\"" "{1}" "{2}" "{3}" "{4}" ::: "${themeNameQ[@]}" ::: "${themeRepoQ[@]}" ::: "--skipcaching" ::: "false"
     set -e
     print_log -g "[generate] " "cache ::" "Wallpapers..."
-    [ "${flg_DryRun}" -eq 1 ] || "$HOME/.local/lib/hyde/swwwallcache.sh" -t ""
-    if [ "${flg_DryRun}" -ne 1 ] && [ -n "$HYPRLAND_INSTANCE_SIGNATURE" ]; then
-        print_log -g "[THEME] " -n " reload ::" "Current theme"
-        "$HOME/.local/lib/hyde/themeswitch.sh" &>/dev/null
-    fi
 fi

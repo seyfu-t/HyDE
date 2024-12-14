@@ -17,7 +17,7 @@ export log_section="package"
 
 "${scrDir}/install_aur.sh" "${getAur}" 2>&1
 chk_list "aurhlpr" "${aurList[@]}"
-listPkg="${1:-"${scrDir}/custom_hypr.lst"}"
+listPkg="${1:-"${scrDir}/pkg_core.lst"}"
 archPkg=()
 aurhPkg=()
 ofs=$IFS

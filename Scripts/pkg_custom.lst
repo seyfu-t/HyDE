@@ -3,6 +3,8 @@
 # trash-cli-git                                        # cli to manage trash files
 # libinput-gestures                                    # actions touchpad gestures using libinput
 # gestures                                             # gui for libinput-gestures
+wttrbar                                                # for weather
+python-requests|wttrbar                                        # script dependency
 
 # --------------------------------------------------- // Dependencies
 xdg-desktop-portal-gtk                                 # xdg desktop portal using gtk
@@ -40,6 +42,3 @@ spicetify-cli                                          # cli to customize spotif
 
 # --------------------------------------------------- // OSD
 swayosd-git                                             #A GTK based on screen display for keyboard shortcuts like caps-lock and volume
-
-# --------------------------------------------------- // Theme
-nwg-look                                                # GTK3 settings editor adapted to work on wlroots-based compositors
