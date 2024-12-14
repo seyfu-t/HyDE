@@ -1,3 +1,9 @@
+
+█▀▄ █▀▀ █▀█ █▀█ █▀▀ █▀▀ ▄▀█ ▀█▀ █▀▀ █▀▄
+█▄▀ ██▄ █▀▀ █▀▄ ██▄ █▄▄ █▀█ ░█░ ██▄ █▄▀
+
+We will be using ./restore_cfg.psv to restore the dotfiles
+
 This is a pipe separated value file.
 It contains the paths of the dotfiles and
 their respective package dependency.

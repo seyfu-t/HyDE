@@ -9,28 +9,30 @@ Note:
 - Each column should use spaces to separate array
 
 Structure:
-#?        flag|path|file|dependency
+#?        flag|path|target|dependency
 
 Flags:
-P = Populate/Preserved - Copy the file to the specified path
-                          Only if the file does not exist
-                          Preserved the target file
-S = Sync - Copy the file to the specified path
-            Overwrite the target file
-              Ignore other files that is not from the list
-              Ignore other files that is not from the ./Configs
-O = Overwrite - Copy the file to the specified path
-                Overwrite the target file
+P = Populate/Preserved - Copy the target to the specified path
+                          Only if the target does not exist
+                          Preserved the target
+S = Sync - Copy the target to the specified path
+            Overwrite the target target
+              Ignore other targets that is not from the list
+              Ignore other targets that is not from the ./Configs
+O = Overwrite - Copy the target to the specified path
+                Overwrite the target target
                 If Target is a directory, Overwrite EVERYTHING
                 If Target is a file, Overwrite the file
-B = Backup - Backup the target file
-              All P,S,O flags will also backup the target target file
+B = Backup - Backup the target
+              All P,S,O flags will also backup the target file/directory
 
- Hyde specific files 
+
+ Hyde core files 
 P|${HOME}/.config/hypr|hyde.conf windowrules.conf keybindings.conf userprefs.conf monitors.conf|hyprland
 P|${HOME}/.config/hypr|nvidia.conf|hyprland nvidia-utils
 P|${HOME}/.config/hypr/themes|theme.conf wallbash.conf colors.conf|hyprland
 S|${HOME}/.config/hypr|hyprland.conf|hyprland
+S|${HOME}/.local|bin||hyprland
 
 S|${HOME}/.config|gtk-3.0|nwg-look
 S|${HOME}/.config|nwg-look|nwg-look
