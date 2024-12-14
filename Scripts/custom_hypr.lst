@@ -48,6 +48,8 @@ qt5-imageformats                                       # for dolphin image thumb
 ffmpegthumbs                                           # for dolphin video thumbnails
 kde-cli-tools                                          # for dolphin file type defaults
 libnotify                                              # for notifications
+wttrbar                                                # for weather
+python-requests                                        # scrpit dependency
 
 # --------------------------------------------------- // Theming
 nwg-look                                               # gtk configuration tool
