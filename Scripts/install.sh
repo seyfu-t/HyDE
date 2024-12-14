@@ -130,6 +130,19 @@ EOF
     if [ -f "${custom_pkg}" ] && [ -n "${custom_pkg}" ]; then
         cat "${custom_pkg}" >>"${scrDir}/install_pkg.lst"
     fi
+
+    #-----------------------------#
+    # remove blacklisted packages #
+    #-----------------------------#
+    if [ -f "${scrDir}/pkg_black.lst" ]; then
+        grep -v -f <(grep -v '^#' "${scrDir}/pkg_black.lst" | sed 's/#.*//;s/ //g;/^$/d') <(sed 's/#.*//' "${scrDir}/install_pkg.lst") >"${scrDir}/install_pkg_filtered.lst"
+        mv "${scrDir}/install_pkg_filtered.lst" "${scrDir}/install_pkg.lst"
+    fi
+
+    cat "${scrDir}/install_pkg.lst"
+
+    exit 0
+
     #--------------------------------#
     # add nvidia drivers to the list #
     #--------------------------------#

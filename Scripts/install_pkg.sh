@@ -23,6 +23,14 @@ aurhPkg=()
 ofs=$IFS
 IFS='|'
 
+#-----------------------------#
+# remove blacklisted packages #
+#-----------------------------#
+if [ -f "${scrDir}/pkg_black.lst" ]; then
+    grep -v -f <(grep -v '^#' "${scrDir}/pkg_black.lst" | sed 's/#.*//;s/ //g;/^$/d') <(sed 's/#.*//' "${scrDir}/install_pkg.lst") >"${scrDir}/install_pkg_filtered.lst"
+    mv "${scrDir}/install_pkg_filtered.lst" "${scrDir}/install_pkg.lst"
+fi
+
 while read -r pkg deps; do
     pkg="${pkg// /}"
     if [ -z "${pkg}" ]; then
