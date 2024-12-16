@@ -12,7 +12,7 @@ wallbashModes=("theme" "auto" "dark" "light")
 
 rofi_wallbash() {
     rofiScale=$ROFI_WALLBASH_MODE_SCALE
-    [[ "${rofiScale}" =~ ^[0-9]+$ ]] || rofiScale=10
+    [[ "${rofiScale}" =~ ^[0-9]+$ ]] || rofiScale=${ROFI_SCALE:-10}
     r_scale="configuration {font: \"JetBrainsMono Nerd Font ${rofiScale}\";}"
     elem_border=$((hypr_border * 4))
     r_override="window{border-radius:${elem_border}px;} element{border-radius:${elem_border}px;}"

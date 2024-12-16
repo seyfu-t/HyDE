@@ -11,7 +11,7 @@ rofi_config="${confDir}/rofi/styles/style_${rofiStyle:-1}.rasi"
 
 rofiScale="${ROFI_LAUNCHER_SCALE}"
 rofiScale="${ROFI_SCALE:-ROFI_LAUNCHER_SCALE}"
-[[ "${rofiScale}" =~ ^[0-9]+$ ]] || rofiScale=10
+[[ "${rofiScale}" =~ ^[0-9]+$ ]] || rofiScale=${ROFI_SCALE:-10}
 
 if [ ! -f "${rofi_config}" ]; then
     rofi_config="$(find "${confDir}/rofi/styles" -type f -name "style_*.rasi" | sort -t '_' -k 2 -n | head -1)"

@@ -10,7 +10,7 @@ rofiConf="${confDir}/rofi/selector.rasi"
 
 #// set rofi scaling
 rofiScale="${ROFI_THEME_SCALE}"
-[[ "${rofiScale}" =~ ^[0-9]+$ ]] || rofiScale=10
+[[ "${rofiScale}" =~ ^[0-9]+$ ]] || rofiScale=${ROFI_SCALE:-10}
 r_scale="configuration {font: \"JetBrainsMono Nerd Font ${rofiScale}\";}"
 # shellcheck disable=SC2154
 elem_border=$((hypr_border * 5))

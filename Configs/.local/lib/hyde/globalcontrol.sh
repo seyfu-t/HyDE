@@ -319,15 +319,17 @@ get_hyprConf() {
 }
 
 # Rofi spawn location
-get_rofi_follow_mouse() {
+get_rofi_pos() {
     readarray -t curPos < <(hyprctl cursorpos -j | jq -r '.x,.y')
-    readarray -t monRes < <(hyprctl -j monitors | jq '.[] | select(.focused==true) | .width,.height,.scale,.x,.y')
-    readarray -t offRes < <(hyprctl -j monitors | jq -r '.[] | select(.focused==true).reserved | map(tostring) | join("\n")')
+    eval "$(hyprctl -j monitors | jq -r '.[] | select(.focused==true) |
+        "monRes=(\(.width) \(.height) \(.scale) \(.x) \(.y)) offRes=(\(.reserved | join(" ")))"')"
+
     monRes[2]="${monRes[2]//./}"
     monRes[0]=$((monRes[0] * 100 / monRes[2]))
     monRes[1]=$((monRes[1] * 100 / monRes[2]))
     curPos[0]=$((curPos[0] - monRes[3]))
     curPos[1]=$((curPos[1] - monRes[4]))
+    offRes=("${offRes// / }")
 
     if [ "${curPos[0]}" -ge "$((monRes[0] / 2))" ]; then
         local x_pos="east"

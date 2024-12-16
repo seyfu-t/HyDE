@@ -19,6 +19,11 @@ transition_default = "random"
 [rofi]
 scale = 8 # rofi fallback scaling
 
+[rofi.animation]
+scale = 8
+
+[rofi.glyph]
+scale = 8
 
 [rofi.launcher]
 # style = "10"

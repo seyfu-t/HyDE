@@ -79,14 +79,14 @@ checkContent() {
 
 # Set rofi scaling
 rofiScale="${ROFI_CLIPHIST_SCALE}"
-[[ "${rofiScale}" =~ ^[0-9]+$ ]] || rofiScale=10
+[[ "${rofiScale}" =~ ^[0-9]+$ ]] || rofiScale=${ROFI_SCALE:-10}
 r_scale="configuration {font: \"JetBrainsMono Nerd Font ${rofiScale}\";}"
 hypr_border=${hypr_border:-"$(hyprctl -j getoption decoration:rounding | jq '.int')"}
 wind_border=$((hypr_border * 3 / 2))
 elem_border=$((hypr_border == 0 ? 5 : hypr_border))
 
 # Set rofi location
-rofi_position=$(get_rofi_follow_mouse)
+rofi_position=$(get_rofi_pos)
 
 hypr_width=${hypr_width:-"$(hyprctl -j getoption general:border_size | jq '.int')"}
 r_override="window{border:${hypr_width}px;border-radius:${wind_border}px;}wallbox{border-radius:${elem_border}px;} element{border-radius:${elem_border}px;}"
@@ -99,7 +99,7 @@ else
 fi
 
 case "${main_action}" in
-c | -c | --copy | "History")
+-c | --copy | "History")
     selected_item=$( (
         echo -e ":f:a:v:\t📌 Favorites"
         echo -e ":o:p:t:\t⚙️ Options"
@@ -114,7 +114,7 @@ c | -c | --copy | "History")
     paste_string "${*}"
     echo -e "${selected_item}\t" | cliphist delete
     ;;
-d | -d | --delete | "Delete")
+-d | --delete | "Delete")
     export delMode=true
     (
         cliphist list
@@ -229,7 +229,7 @@ d | -d | --delete | "Delete")
         ;;
     esac
     ;;
-w | -w | --wipe | "Clear History")
+-w | --wipe | "Clear History")
     if [ "$(echo -e "Yes\nNo" | rofi -dmenu -theme-str "entry { placeholder: \"☢️ Clear Clipboard History?\";}" -theme-str "${r_scale}" -theme-str "${r_override}" -theme-str "${rofi_position}" -config "${rofi_config}")" == "Yes" ]; then
         cliphist wipe
         notify-send "Clipboard history cleared."

@@ -11,7 +11,7 @@ rofiAssetDir="${confDir}/rofi/assets"
 
 #// set rofi scaling
 rofiScale=$ROFI_STYLE_SCALE
-[[ "${rofiScale}" =~ ^[0-9]+$ ]] || rofiScale=10
+[[ "${rofiScale}" =~ ^[0-9]+$ ]] || rofiScale=${ROFI_SCALE:-10}
 r_scale="configuration {font: \"JetBrainsMono Nerd Font ${rofiScale}\";}"
 elem_border=$((hypr_border * 5))
 icon_border=$((elem_border - 5))

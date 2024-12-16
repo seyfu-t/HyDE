@@ -61,7 +61,8 @@ fn_art() {
 # hyprlock selector
 fn_select() {
     # Set rofi scaling
-    [[ "${rofiScale}" =~ ^[0-9]+$ ]] || rofiScale=10
+
+    [[ "${rofiScale}" =~ ^[0-9]+$ ]] || rofiScale=${ROFI_SCALE:-10}
     r_scale="configuration {font: \"JetBrainsMono Nerd Font ${rofiScale}\";}"
 
     # Window and element styling
@@ -87,7 +88,7 @@ fn_select() {
             -theme-str "entry { placeholder: \"🔎 Hyprlock Layout...\"; }" \
             -theme-str "${r_scale}" \
             -theme-str "${r_override}" \
-            -theme-str "$(get_rofi_follow_mouse)" \
+            -theme-str "$(get_rofi_pos)" \
             -theme "$rofi_config")
     if [ -z "$selected_layout" ]; then
         echo "No selection made"
