@@ -88,4 +88,4 @@ More information [here](./theme/README).
 
 ### scripts
 
-For customization, store your scripts in `./wallbash/scripts`. Use the `$WALLBASH_SCRIPTS` variable to navigate this directory.****
+For customization, store your scripts in `./wallbash/scripts`. Use the `$WALLBASH_SCRIPTS` variable to navigate this directory.
