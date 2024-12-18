@@ -117,6 +117,7 @@ $layout_items"
         echo "\$HYPRLOCK_LAYOUT=$selected_layout" >>"$hyde_conf"
     fi
     "${scrDir}/font.sh" resolve "${layout_dir}/${selected_layout}.conf"
+    fn_profile
     # Notify the user
     notify-send -i "system-lock-screen" "Hyprlock layout:" "${selected_layout}"
 
@@ -127,6 +128,7 @@ fn_help() {
     echo "Commands:"
     echo "  background   - Converts and ensures background to be a png"
     echo "  mpris        - Handles mpris thumbnail generation"
+    echo "  profile      - Generates the profile picture"
     echo "  cava         - Placeholder function for cava"
     echo "  art          - Prints the path to the mpris art"
     echo "  select       - Selects the hyprlock layout"
@@ -136,6 +138,5 @@ fn_help() {
 if declare -f "fn_${1}" >/dev/null; then
     "fn_${1}"
 else
-    fn_profile
     hyprlock
 fi
