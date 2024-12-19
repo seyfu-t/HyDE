@@ -92,7 +92,6 @@ export gtkTheme gtkIcon cursorTheme
 fn_wallbash() {
     local template="${1}"
     local target_file exec_command
-    echo "$PATH"
     WALLBASH_SCRIPTS="${template%%hyde/wallbash*}hyde/wallbash/scripts"
     if [[ "${template}" == *.theme ]]; then
         # This is approach is to handle the theme files
