@@ -78,7 +78,15 @@ height = "40em"
 line = 16
 
 [screenshot]
-annotation_tool = "swappy" # Annotation tool for screenshots
+annotation_tool = "swappy" # Annotation tool
+annotation_pre_command = [
+    # 'shader=$(hyprshade current) && hyprshade off && trap restore_shader EXIT', # Use this when you're using hyprshade
+] # Pre command for annotation tool
+annotation_post_command = [
+    # "[ -n \"\\$shader\" ] && hyprshade on \\$shader", # Use this when you're using hyprshade
+    "",
+] # Post command for annotation tool
+
 
 [rofi.bookmark]
 file = "$HOME/.config/hyde/bookmarks.lst"
