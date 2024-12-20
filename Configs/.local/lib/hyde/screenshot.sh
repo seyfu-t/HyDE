@@ -36,7 +36,7 @@ confDir="${confDir:-$XDG_CONFIG_HOME}"
 save_dir="${2:-$XDG_PICTURES_DIR/Screenshots}"
 save_file=$(date +'%y%m%d_%Hh%Mm%Ss_screenshot.png')
 temp_screenshot="/tmp/screenshot.png"
-annotation_tool=${SCREENSHOT_ANNOTATION_TOOL:-satty}
+annotation_tool=${SCREENSHOT_ANNOTATION_TOOL:-swappy}
 
 annotation_args=${SCREENSHOT_ANNOTATION_ARGS:-"-o" "${save_dir}/${save_file}" "-f" "${temp_screenshot}"}
 annotation_args=$(eval echo "$annotation_args")
