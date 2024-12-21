@@ -69,7 +69,7 @@ Usage: $0 [options]
             r : [r]estore config files
             s : enable system [s]ervices
             n : ignore/[n]o [n]vidia actions
-            h : reevaluate S[h]ell
+            h : re-evaluate S[h]ell
             m : no the[m]e reinstallations
             t : [t]est run without executing (-irst to dry run all)
 EOF
