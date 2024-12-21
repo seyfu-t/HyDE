@@ -79,7 +79,8 @@ EOF
 done
 
 # Only export that are used outside this script
-export flg_DryRun flg_Nvidia flg_Shell flg_Install flg_ThemeInstall
+HYDE_LOG="$(date +'%y%m%d_%Hh%Mm%Ss')"
+export flg_DryRun flg_Nvidia flg_Shell flg_Install flg_ThemeInstall HYDE_LOG
 
 if [ "${flg_DryRun}" -eq 1 ]; then
     print_log -n "[test-run] " -b "enabled :: " "Testing without executing"

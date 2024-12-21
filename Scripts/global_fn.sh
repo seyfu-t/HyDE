@@ -100,12 +100,9 @@ prompt_timer() {
     echo ""
     set -e
 }
-
 print_log() {
     local executable="${0##*/}"
-    local logTime
-    logTime=$(date +'%y%m%d_%Hh%Mm%Ss')
-    local logFile="${cacheDir}/logs/${logTime}/${executable}"
+    local logFile="${cacheDir}/logs/${HYDE_LOG}/${executable}"
     mkdir -p "$(dirname "${logFile}")"
     local section=${log_section:-hyde}
     {
@@ -175,6 +172,9 @@ print_log() {
             esac
         done
         echo ""
-    } | tee >(sed 's/\x1b\[[0-9;]*m//g' >>"${logFile}")
-
+    } | if [ -n "${HYDE_LOG}" ]; then
+        tee >(sed 's/\x1b\[[0-9;]*m//g' >>"${logFile}")
+    else
+        cat
+    fi
 }
