@@ -11,8 +11,8 @@ cloneDir="$(dirname "${scrDir}")" # fallback, we will use CLONE_DIR now
 cloneDir="${CLONE_DIR:-${cloneDir}}"
 confDir="${XDG_CONFIG_HOME:-$HOME/.config}"
 cacheDir="${XDG_CACHE_HOME:-$HOME/.cache}/hyde"
-aurList=(yay paru)
-shlList=(zsh fish)
+aurList=("yay-bin" "paru-bin" "yay" "paru")
+shlList=("zsh" "fish")
 
 export cloneDir
 export confDir
@@ -37,10 +37,11 @@ chk_list() {
         if pkg_installed "${pkg}"; then
             printf -v "${vrType}" "%s" "${pkg}"
             # shellcheck disable=SC2163 # dynamic variable
-            export "${vrType}"
+            export "${vrType}" # export the variable // reference of the variable
             return 0
         fi
     done
+    # print_log -sec "install" -warn "no package found in the list..." "${inList[@]}"
     return 1
 }
 
@@ -104,7 +105,7 @@ print_log() {
     local executable="${0##*/}"
     local logFile="${cacheDir}/logs/${HYDE_LOG}/${executable}"
     mkdir -p "$(dirname "${logFile}")"
-    local section=${log_section:-hyde}
+    local section=${log_section:-}
     {
         [ -n "${section}" ] && echo -ne "\e[32m[$section] \e[0m"
         while (("$#")); do
