@@ -210,7 +210,7 @@ EOF
 
     if [ "${flg_DryRun}" -ne 1 ]; then
         "$HOME/.local/lib/hyde/swwwallcache.sh" -t ""
-        "$HOME/.local/lib/hyde/themeswitch.sh" -q
+        "$HOME/.local/lib/hyde/themeswitch.sh" -q || true
         echo "[install] reload :: Hyprland"
     fi
 
