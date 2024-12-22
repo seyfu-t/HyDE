@@ -134,6 +134,7 @@ EOF
     #--------------------------------#
     # add nvidia drivers to the list #
     #--------------------------------#
+    echo "#user packages" >>"${scrDir}/install_pkg.lst"
     if nvidia_detect; then
         if [ ${flg_Nvidia} -eq 1 ]; then
             cat /usr/lib/modules/*/pkgbase | while read -r kernel; do
@@ -210,7 +211,11 @@ EOF
         fi
     fi
 
-    cat "${scrDir}/install_pkg.lst"
+    if ! grep "#user packages" "${scrDir}/install_pkg.lst"; then
+        print_log -sec "pkg" -crit "No user packages found..." "Log file at ${cacheDir}/logs/${HYDE_LOG}/install.sh"
+        exit 1
+    fi
+
     #--------------------------------#
     # install packages from the list #
     #--------------------------------#
