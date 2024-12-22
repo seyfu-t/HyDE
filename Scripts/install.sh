@@ -199,6 +199,7 @@ EOF
             export myShell="zsh"
             ;;
         esac
+        print_log -sec "shell" -stat "Added as shell" "${myShell}"
         echo "${myShell}" >>"${scrDir}/install_pkg.lst"
     fi
 
@@ -290,6 +291,12 @@ EOF
     done <"${scrDir}/system_ctl.lst"
 fi
 
-print_log -stat "\nInstallation" " :: " "completed"
+if [ $flg_Install -eq 1 ]; then
+    print_log -stat "\nInstallation" " :: " "completed"
+fi
 print_log -stat "Log" " :: " "View logs at ${cacheDir}/logs/${HYDE_LOG}"
-print_log -stat "HyDE" " :: " "Please restart your system to apply changes"
+if [ $flg_Install -eq 1 ] ||
+    [ $flg_Restore -eq 1 ] ||
+    [ $flg_Service -eq 1 ]; then
+    print_log -stat "HyDE" " :: " "Please restart your system to apply changes"
+fi
