@@ -126,7 +126,7 @@ EOF
     shift $((OPTIND - 1))
     custom_pkg=$1
     cp "${scrDir}/pkg_core.lst" "${scrDir}/install_pkg.lst"
-    trap 'rm "${scrDir}/install_pkg.lst"' EXIT
+    trap 'mv "${scrDir}/install_pkg.lst" "${cacheDir}/logs/${HYDE_LOG}/install_pkg.lst"' EXIT
 
     if [ -f "${custom_pkg}" ] && [ -n "${custom_pkg}" ]; then
         cat "${custom_pkg}" >>"${scrDir}/install_pkg.lst"
