@@ -201,19 +201,20 @@ EOF
         esac
         print_log -sec "shell" -stat "Added as shell" "${myShell}"
         echo "${myShell}" >>"${scrDir}/install_pkg.lst"
-    fi
 
-    if [[ -z "$myShell" ]]; then
-        print_log -sec "shell" -crit "No shell found..." "Log file at ${cacheDir}/logs/${HYDE_LOG}"
-        exit 1
-    else
-        print_log -sec "shell" -stat "detected :: " "${myShell}"
+        if [[ -z "$myShell" ]]; then
+            print_log -sec "shell" -crit "No shell found..." "Log file at ${cacheDir}/logs/${HYDE_LOG}"
+            exit 1
+        else
+            print_log -sec "shell" -stat "detected :: " "${myShell}"
+        fi
     fi
 
     #--------------------------------#
     # install packages from the list #
     #--------------------------------#
     [ ${flg_DryRun} -eq 1 ] || "${scrDir}/install_pkg.sh" "${scrDir}/install_pkg.lst"
+    cat "${scrDir}/install_pkg.lst"
 fi
 
 #---------------------------#
