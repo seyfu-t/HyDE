@@ -210,11 +210,11 @@ EOF
         fi
     fi
 
+    cat "${scrDir}/install_pkg.lst"
     #--------------------------------#
     # install packages from the list #
     #--------------------------------#
     [ ${flg_DryRun} -eq 1 ] || "${scrDir}/install_pkg.sh" "${scrDir}/install_pkg.lst"
-    cat "${scrDir}/install_pkg.lst"
 fi
 
 #---------------------------#
