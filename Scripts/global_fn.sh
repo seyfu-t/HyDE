@@ -143,15 +143,15 @@ print_log() {
                 shift 2
                 ;; # Neon
             -stat)
-                echo -ne "\e[4;30;46m $2 \e[0m :: "
+                echo -ne "\e[30;46m $2 \e[0m :: "
                 shift 2
                 ;; # status
             -crit)
-                echo -ne "\e[30;41m $2 \e[0m :: "
+                echo -ne "\e[97;41m $2 \e[0m :: "
                 shift 2
                 ;; # critical
             -warn)
-                echo -ne "WARNING :: \e[30;43m $2 \e[0m :: "
+                echo -ne "WARNING :: \e[97;43m $2 \e[0m :: "
                 shift 2
                 ;; # warning
             +)
