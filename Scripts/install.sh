@@ -152,6 +152,7 @@ EOF
     echo ""
     if ! chk_list "aurhlpr" "${aurList[@]}"; then
         print_log -c "\nAUR Helpers :: "
+        aurList+=("yay-bin" "paru-bin") # Add this here instead of in global_fn.sh
         for i in "${!aurList[@]}"; do
             print_log -sec "$((i + 1))" " ${aurList[$i]} "
         done
