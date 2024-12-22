@@ -173,10 +173,10 @@ EOF
             export getAur="yay-bin"
             ;;
         esac
-    fi
-    if [[ -z "$aurhlpr" ]]; then
-        print_log -sec "AUR" -crit "No AUR helper found..." "Log file at ${cacheDir}/logs/${HYDE_LOG}"
-        exit 1
+        if [[ -z "$getAur" ]]; then
+            print_log -sec "AUR" -crit "No AUR helper found..." "Log file at ${cacheDir}/logs/${HYDE_LOG}"
+            exit 1
+        fi
     fi
 
     if ! chk_list "myShell" "${shlList[@]}"; then
@@ -194,7 +194,7 @@ EOF
             exit 1
             ;;
         *)
-            print_log -sec "hell" -warn "Defaulting to zsh"
+            print_log -sec "shell" -warn "Defaulting to zsh"
             export myShell="zsh"
             ;;
         esac
@@ -289,6 +289,6 @@ EOF
     done <"${scrDir}/system_ctl.lst"
 fi
 
-print_log -g "\nInstallation" " :: " "completed"
-print_log -g "Log" " :: " "View logs at ${cacheDir}/logs/${HYDE_LOG}"
-print_log -g "HyDE" " :: " "Please restart your system to apply changes"
+print_log -stat "\nInstallation" " :: " "completed"
+print_log -stat "Log" " :: " "View logs at ${cacheDir}/logs/${HYDE_LOG}"
+print_log -stat "HyDE" " :: " "Please restart your system to apply changes"
