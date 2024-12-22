@@ -211,7 +211,7 @@ EOF
         fi
     fi
 
-    if ! grep "#user packages" "${scrDir}/install_pkg.lst"; then
+    if ! grep -q "^#user packages" "${scrDir}/install_pkg.lst"; then
         print_log -sec "pkg" -crit "No user packages found..." "Log file at ${cacheDir}/logs/${HYDE_LOG}/install.sh"
         exit 1
     fi
