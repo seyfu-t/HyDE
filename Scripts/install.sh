@@ -131,10 +131,10 @@ EOF
     if [ -f "${custom_pkg}" ] && [ -n "${custom_pkg}" ]; then
         cat "${custom_pkg}" >>"${scrDir}/install_pkg.lst"
     fi
+    echo -e "\n#user packages" >>"${scrDir}/install_pkg.lst" # Add a marker for user packages
     #--------------------------------#
     # add nvidia drivers to the list #
     #--------------------------------#
-    echo "#user packages" >>"${scrDir}/install_pkg.lst"
     if nvidia_detect; then
         if [ ${flg_Nvidia} -eq 1 ]; then
             cat /usr/lib/modules/*/pkgbase | while read -r kernel; do
