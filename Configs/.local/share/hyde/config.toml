@@ -23,7 +23,7 @@ transition_default = "grow" # transition type for default wallpaper
 scale = 10 # rofi default scaling
 
 [rofi.hyprlock]
-scale = 8
+scale = 10
 
 [rofi.animation]
 scale = 8
