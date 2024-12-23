@@ -298,11 +298,11 @@ EOF
 fi
 
 if [ $flg_Install -eq 1 ]; then
-    print_log -stat "\nInstallation" " :: " "completed"
+    print_log -stat "\nInstallation" "completed"
 fi
-print_log -stat "Log" " :: " "View logs at ${cacheDir}/logs/${HYDE_LOG}"
+print_log -stat "Log" "View logs at ${cacheDir}/logs/${HYDE_LOG}"
 if [ $flg_Install -eq 1 ] ||
     [ $flg_Restore -eq 1 ] ||
     [ $flg_Service -eq 1 ]; then
-    print_log -stat "HyDE" " :: " "Please restart your system to apply changes"
+    print_log -stat "HyDE" "Please restart your system to apply changes"
 fi
