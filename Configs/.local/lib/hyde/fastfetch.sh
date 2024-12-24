@@ -57,7 +57,7 @@ case $1 in
 logo)
   (
     [ -f "$hyde_distro_logo" ] && echo "${hyde_distro_logo}"
-    find "${image_dirs[@]}" \( -name "*.icon" -o -name "*logo*" \) 2>/dev/null
+    find "${image_dirs[@]}" \( -name "*.icon" -o -name "*logo*" -o -name "*.png" \) ! -path "*/wallpapers/*.png" 2>/dev/null
   ) | shuf -n 1
 
   ;;
