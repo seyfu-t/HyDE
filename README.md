@@ -67,8 +67,11 @@ cd ~/HyDE/Scripts
 > ./install.sh pkg_custom.lst
 > ```
 
+<!--
+
 As a second install option, you can also use `Hyde-install`, which might be easier for some.
 View installation instructions for HyDE in [Hyde-cli - Usage](https://github.com/kRHYME7/Hyde-cli?tab=readme-ov-file#usage).
+-->
 
 Please reboot after the install script completes and takes you to the SDDM login screen (or black screen) for the first time.
 For more details, please refer to the [installation wiki](https://github.com/HyDE-Project/HyDE/wiki/installation).
@@ -84,11 +87,12 @@ git pull origin master
 ```
 
 > [!IMPORTANT]
-> Please note that any configurations you made will be overwritten if listed to be done so as listed by `Scripts/restore_cfg.lst`.
+> Please note that any configurations you made will be overwritten if listed to be done so as listed by `Scripts/restore_cfg.psv`.
 > However, all replaced configs are backed up and may be recovered from in `~/.config/cfg_backups`.
-
+<!--
 As a second update option, you can use `Hyde restore ...`, which does have a better way of managing restore and backup options.
 For more details, you can refer to [Hyde-cli - dots management wiki](https://github.com/kRHYME7/Hyde-cli/wiki/Dots-Management).
+-->
 
 <div align="right">
   <br>
