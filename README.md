@@ -79,7 +79,7 @@ To update HyDE, you will need to pull the latest changes from GitHub and restore
 
 ```shell
 cd ~/HyDE/Scripts
-git pull
+git pull origin master
 ./install.sh -r
 ```
 
