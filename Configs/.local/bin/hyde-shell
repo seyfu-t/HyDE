@@ -69,6 +69,40 @@ zoom() { #? Zoom in/out Hyprland
     esac
 }
 
+call_wallbashScript() {
+    local scriptName=$1
+    shift
+    local args=("${@}")
+    local dirs=("${wallbashDirs[@]}")
+    sanitized_dirs=()
+    for dir in "${dirs[@]}"; do
+        if [[ -d "$dir" ]]; then
+            sanitized_dirs+=("$dir")
+        fi
+    done
+    dirs=("${sanitized_dirs[@]}")
+    script_path=$(find "${dirs[@]}" -type f -path "*/scripts/*" -name "${scriptName}.sh" -exec echo {} \; -quit)
+
+    if [[ -n "$script_path" ]]; then
+        "$script_path" "${args[@]}"
+    else
+        case $scriptName in
+        *)
+            echo "Usage: wallbash [script-name] [args]"
+            echo "Executes the specified wallbash script with the provided arguments."
+            echo "Available scripts:"
+            for dir in "${dirs[@]}"; do
+                if [[ -d "$dir" ]]; then
+                    echo -e "\n[ $dir ]"
+                    find "$dir" -type f -path "*/scripts/*" -name "*.sh" -exec basename {} \;
+                fi
+            done
+            ;;
+        esac
+    fi
+
+}
+
 hyde_reload() {
 
     print_log -sec "hyde" "Reloading HyDE"
@@ -84,7 +118,12 @@ case $1 in
     hyde_reload
     ;;
 zoom)
-    zoom "${@:2}"
+    shift
+    zoom "$@"
+    ;;
+wallbash)
+    shift
+    call_wallbashScript "$@"
     ;;
 *)
     for func in $(compgen -A function); do
