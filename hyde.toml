@@ -1,17 +1,13 @@
-id = "hydeproject"
-owner = "The HyDE Project"
-version = "0.1.0"
-# dots = ["hyde", "waybar", "dunst", "kitty", "rofi", "nvidia"]
-dots = ["hyde"]
+dots = ["nvidia", "hyde", "dunst", "kitty", "rofi"]
 default_action = "preserve"
-user_home = "${HOME}"
-package_manager = ["pacman", "yay", "flatpak"]          # "auto" | "pacman" | "dnf"
-repository = "https://github.com/HyDE-Project/HyDE.git" # Only supports single repo
+package_manager = ["auto"]                             # "auto" | "pacman" | "dnf"
+git = "https://github.com/HyDE-Project/HyDE.git"       # Only supports single repo
+git_branch = "master"                                  # Default branch
 start_command = ["echo 'Starting Deez-Dots for HydE'"]
 end_command = ["echo 'Command ends'"]
 
 [dependency]
-'yay,paru' = ["hyde-cli-git"]
+'yay,paru' = [""]
 flatpak = ["dev.vencord.Vesktop"]
 pacman = [
     "hyprland",
@@ -26,13 +22,14 @@ pacman = [
 dnf = ["another-dependency"]
 
 [hyde]
-action = "preserve"                             # "preserve" | "overwrite" | "sync" // If child action is not defined use parent action
-pre_command = ["echo 'Pre commands for HyDE' "]
-post_command = ["echo 'post cmds'"]
+action = "preserve"                      # "preserve" | "overwrite" | "sync" // If child action is not defined use parent action
+pre_command = ["echo 'enter hyde' "]
+post_command = ["echo 'exit hyde dots'"]
 
 [hyde.dependency]
 pacman = ["hyprland", "nwg-look", "qt5ct", "qt6ct"]
 dnf = ["another-dependency"]
+
 
 [[hyde.files]]
 source_root = "Configs/.config"
@@ -61,13 +58,13 @@ paths = ".gtkrc-2.0"
 action = "overwrite"
 source_root = "Configs"
 target_root = "${HOME}"
-paths = [".local/lib/hyde", "${XDG_DATA_HOME}/hyde"]
+paths = [".local/lib/hyde", ".local/share/hyde"]
 
 [[hyde.files]]
 action = "sync"
 source_root = "Configs/.local/share"
 target_root = "${XDG_DATA_HOME}"
-paths = ["icons/Wallbash-Icon", "themes/Wallbash-Gtk"]
+# paths = ["icons/Wallbash-Icon", "themes/Wallbash-Gtk"]
 
 [waybar]
 pre_command = ["echo 'Pre commands '"]
@@ -81,8 +78,8 @@ target_root = "${XDG_CONFIG_HOME}/waybar"
 paths = ["config.ctl", "modules", "config.jsonc", "theme.css", "style.css"]
 
 [dunst]
-pre_command = ["echo 'Pre commands '"]
-post_command = ["echo 'HyDE backed up!'"]
+pre_command = ["echo 'enter dunst'"]
+post_command = ["echo 'exit dunst'"]
 
 
 [dunst.dependency]
@@ -90,45 +87,53 @@ pacman = ["dunst"]
 
 
 [[dunst.files]]
-source_root = "dunst"
+source_root = "Configs/.config"
 target_root = "${XDG_CONFIG_HOME}"
 paths = "dunst"
 
 [[dunst.files]]
 action = "overwrite"
-target_root = "${HOME}.local/lib"
-paths = "hyde/wallbash.dunst.sh"
+source_root = "Configs/.local/share/hyde/wallbash/scripts"
+target_root = "${HOME}/.local/share/hyde/wallbash/scripts"
+paths = "dunst.sh"
 
 [kitty]
-pre_command = ["echo 'Pre commands '"]
-post_command = ["echo 'HyDE backed up!'"]
+pre_command = ["echo 'enter kitty!'"]
+post_command = ["echo 'exit kitty!'"]
 
 [kitty.dependency]
 pacman = ["kitty"] # dependency
 
 [[kitty.files]]
-source_root = "kitty"
-target_root = "${XDG_CONFIG_HOME}"
-paths = "kitty"
+action = "preserve"
+source_root = "Configs/.config/kitty"
+target_root = "${XDG_CONFIG_HOME}/kitty"
+paths = ["kitty.conf"]
 
 [[kitty.files]]
 action = "overwrite"
-source_root = "kitty/hyde/wallbash/scripts"
-target_root = "${XDG_CONFIG_HOME}/hyde/wallbash/scripts"
+source_root = "Configs/.local/share/hyde/wallbash/scripts"
+target_root = "${XDG_DATA_HOME}/hyde/wallbash/scripts"
 paths = "kitty.sh"
+
+[[kitty.files]]
+action = "sync"
+source_root = "Configs/.config/kitty"
+target_root = "${XDG_CONFIG_HOME}"
+paths = ["theme.conf", "hyde.conf"]
 
 
 #  nvidia.conf is separate because it has a different dependency
 [nvidia]
-pre_command = "echo 'Pre commands '"    # Pre commands
-post_command = "echo 'HyDE backed up!'" # Post commands
-
+pre_command = ["echo 'enter nvidia'", "exit 0"] # Pre commands
+post_command = "echo 'exit nvidia!'"            # Post commands
 
 [[nvidia.files]]
 action = "preserve"
-source_root = "nvidia"
+source_root = "Configs/.config/hypr"
 target_root = "${XDG_CONFIG_HOME}/hypr"
 paths = "nvidia.conf"
+
 
 [nvidia.dependency]
 pacman = ["nvidia-utils", "nvidia"]
@@ -136,13 +141,14 @@ dnf = ["another-dependency"]
 
 
 [rofi]
-action = "preserve"                     # "preserve" | "overwrite" | "sync" // If child action is not defined use parent action
-pre_command = "echo 'Pre commands '"    # Pre commands
-post_command = "echo 'HyDE backed up!'" # Post commands
+action = "sync"                    # "preserve" | "overwrite" | "sync" // If child action is not defined use parent action
+pre_command = "echo 'enter rofi'"  # Pre commands
+post_command = "echo 'exit rofi!'" # Post commands
 
 [rofi.dependency]
-pacman = ["rofi"] # dependency
+pacman = ["rofi-wayland"] # dependency
 
 [[rofi.files]]
-source_root = "rofi"
+source_root = "Configs/.config"
 target_root = "${XDG_CONFIG_HOME}"
+paths = "rofi"
