@@ -32,22 +32,23 @@ Multi-language README support
 <div align="center">
   <div style="display: flex; flex-wrap: nowrap; justify-content: center;">
     <div style="flex: 0 1 auto; margin: 10px;">
-      <img src="Source/assets/archlinux.png" alt="Arch Linux" style="width: 100%; max-width: 100px;"/>
+      <img src="Source/assets/archlinux.png" alt="Arch Linux" style="width: 100%; max-width: 30px;"/>
     </div>
     <div style="flex: 0 1 auto; margin: 10px;">
-      <img src="Source/assets/cachyos.png" alt="CachyOS" style="width: 100%; max-width: 100px;"/>
+      <img src="Source/assets/cachyos.png" alt="CachyOS" style="width: 100%; max-width: 30px;"/>
     </div>
     <div style="flex: 0 1 auto; margin: 10px;">
-      <img src="Source/assets/endeavouros.png" alt="EndeavourOS" style="width: 100%; max-width: 100px;"/>
+      <img src="Source/assets/endeavouros.png" alt="EndeavourOS" style="width: 100%; max-width: 30px;"/>
     </div>
     <div style="flex: 0 1 auto; margin: 10px;">
-      <img src="Source/assets/garuda.png" alt="Garuda" style="width: 100%; max-width: 100px;"/>
+      <img src="Source/assets/garuda.png" alt="Garuda" style="width: 100%; max-width: 30px;"/>
     </div>
     <div style="flex: 0 1 auto; margin: 10px;">
-      <img src="Source/assets/nixos.png" alt="NixOS" style="width: 100%; max-width: 100px;"/>
+      <img src="Source/assets/nixos.png" alt="NixOS" style="width: 100%; max-width: 30px;"/>
     </div>
   </div>
 </div>
+
 Check this out for the full note:
 [Journey to HyDE and beyond](./Hyprdots-to-HyDE.md)
 
