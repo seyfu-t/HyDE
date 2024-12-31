@@ -30,27 +30,22 @@ Multi-language README support
 </div><br><br>
 
 <div align="center">
-  <style>
-    .responsive-table {
-      display: flex;
-      flex-wrap: wrap;
-      justify-content: center;
-    }
-    .responsive-table div {
-      flex: 1 1 50px;
-      margin: 10px;
-    }
-    .responsive-table img {
-      width: 100%;
-      max-width: 100px;
-    }
-  </style>
-  <div class="responsive-table">
-    <div><img src="Source/assets/archlinux.png" alt="Arch Linux"/></div>
-    <div><img src="Source/assets/cachyos.png" alt="CachyOS"/></div>
-    <div><img src="Source/assets/endeavouros.png" alt="EndeavourOS"/></div>
-    <div><img src="Source/assets/garuda.png" alt="Garuda"/></div>
-    <div><img src="Source/assets/nixos.png" alt="NixOS"/></div>
+  <div style="display: flex; flex-wrap: wrap; justify-content: center;">
+    <div style="flex: 1 1 100px; margin: 10px;">
+      <img src="Source/assets/archlinux.png" alt="Arch Linux" style="width: 100%; max-width: 100px;"/>
+    </div>
+    <div style="flex: 1 1 100px; margin: 10px;">
+      <img src="Source/assets/cachyos.png" alt="CachyOS" style="width: 100%; max-width: 100px;"/>
+    </div>
+    <div style="flex: 1 1 100px; margin: 10px;">
+      <img src="Source/assets/endeavouros.png" alt="EndeavourOS" style="width: 100%; max-width: 100px;"/>
+    </div>
+    <div style="flex: 1 1 100px; margin: 10px;">
+      <img src="Source/assets/garuda.png" alt="Garuda" style="width: 100%; max-width: 100px;"/>
+    </div>
+    <div style="flex: 1 1 100px; margin: 10px;">
+      <img src="Source/assets/nixos.png" alt="NixOS" style="width: 100%; max-width: 100px;"/>
+    </div>
   </div>
 </div>
 
@@ -220,7 +215,3 @@ For more information, visit [HyDE-Project/hyde-themes](https://github.com/HyDE-P
 <div align="right">
   <sub>Last edited on: <span id="last-edited"></span></sub>
 </div>
-
-<script>
-  document.getElementById('last-edited').textContent = new Date().toLocaleString();
-</script>
