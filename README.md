@@ -30,25 +30,24 @@ Multi-language README support
 </div><br><br>
 
 <div align="center">
-  <div style="display: flex; flex-wrap: wrap; justify-content: center;">
-    <div style="flex: 1 1 100px; margin: 10px;">
-      <img src="Source/assets/archlinux.png" alt="Arch Linux" style="width: 20%; max-width: 50px;"/>
+  <div style="display: flex; flex-wrap: nowrap; justify-content: center;">
+    <div style="flex: 0 1 auto; margin: 10px;">
+      <img src="Source/assets/archlinux.png" alt="Arch Linux" style="width: 100%; max-width: 100px;"/>
     </div>
-    <div style="flex: 1 1 100px; margin: 10px;">
-      <img src="Source/assets/cachyos.png" alt="CachyOS" style="width: 20%; max-width: 50px;"/>
+    <div style="flex: 0 1 auto; margin: 10px;">
+      <img src="Source/assets/cachyos.png" alt="CachyOS" style="width: 100%; max-width: 100px;"/>
     </div>
-    <div style="flex: 1 1 100px; margin: 10px;">
-      <img src="Source/assets/endeavouros.png" alt="EndeavourOS" style="width: 20%; max-width: 50px;"/>
+    <div style="flex: 0 1 auto; margin: 10px;">
+      <img src="Source/assets/endeavouros.png" alt="EndeavourOS" style="width: 100%; max-width: 100px;"/>
     </div>
-    <div style="flex: 1 1 100px; margin: 10px;">
-      <img src="Source/assets/garuda.png" alt="Garuda" style="width: 20%; max-width: 50px;"/>
+    <div style="flex: 0 1 auto; margin: 10px;">
+      <img src="Source/assets/garuda.png" alt="Garuda" style="width: 100%; max-width: 100px;"/>
     </div>
-    <div style="flex: 1 1 100px; margin: 10px;">
-      <img src="Source/assets/nixos.png" alt="NixOS" style="width: 20%; max-width: 50px;"/>
+    <div style="flex: 0 1 auto; margin: 10px;">
+      <img src="Source/assets/nixos.png" alt="NixOS" style="width: 100%; max-width: 100px;"/>
     </div>
   </div>
 </div>
-
 Check this out for the full note:
 [Journey to HyDE and beyond](./Hyprdots-to-HyDE.md)
 
