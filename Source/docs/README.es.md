@@ -195,3 +195,7 @@ Para obtener más información, visite [HyDE-Project/hyde-themes](https://github
   <br>
   <a href="#-design-by-t2"><kbd> <br> 🡅 <br> </kbd></a>
 </div>
+
+<script>
+  document.getElementById('last-edited').textContent = new Date().toLocaleString();
+</script>

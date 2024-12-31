@@ -216,3 +216,11 @@ For more information, visit [HyDE-Project/hyde-themes](https://github.com/HyDE-P
   <br>
   <a href="#-design-by-t2"><kbd> <br> 🡅 <br> </kbd></a>
 </div>
+
+<div align="right">
+  <sub>Last edited on: <span id="last-edited"></span></sub>
+</div>
+
+<script>
+  document.getElementById('last-edited').textContent = new Date().toLocaleString();
+</script>

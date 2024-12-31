@@ -218,3 +218,7 @@ Multi-language README support
 | :--------------------------------------------------------------------- | :-------------------------------------------------------- |
 | <kbd>SUPER</kbd> + <kbd>ALT</kbd> + <kbd>CTRL</kbd> + <kbd>Right</kbd> | mover la ventana al siguiente espacio de trabajo relativo |
 | <kbd>SUPER</kbd> + <kbd>ALT</kbd> + <kbd>CTRL</kbd> + <kbd>Left</kbd>  | mover la ventana al espacio de trabajo relativo anterior  |
+
+<script>
+  document.getElementById('last-edited').textContent = new Date().toLocaleString();
+</script>
