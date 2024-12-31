@@ -1,3 +1,10 @@
+<!--
+Multi-language README support
+-->
+
+[![en](https://img.shields.io/badge/lang-en-red.svg)](https://github.com/HyDE-Project/HyDE/blob/master/README.md)
+[![es](https://img.shields.io/badge/lang-es-yellow.svg)](https://github.com/HyDE-Project/HyDE/blob/master/Source/assets/readme/README.es.md)
+
 # Repositorio oficial del proyecto HyDE
 
 Consulte aquí la nota completa:
@@ -89,6 +96,7 @@ git pull origin master
 > [!IMPORTANT]
 > Tenga en cuenta que cualquier configuración que haya realizado se sobrescribirá si se indica que debe realizarse tal como se indica en `Scripts/restore_cfg.psv`.
 > Sin embargo, se realiza una copia de seguridad de todas las configuraciones reemplazadas y se pueden recuperar desde allí `~/.config/cfg_backups`.
+
 <!--
 As a second update option, you can use `Hyde restore ...`, which does have a better way of managing restore and backup options.
 For more details, you can refer to [Hyde-cli - dots management wiki](https://github.com/kRHYME7/Hyde-cli/wiki/Dots-Management).

@@ -1,25 +1,21 @@
-# Official HyDE Project Repository [wip]
-
-Check this out for the full note:
-[Journey to HyDE and beyond](./Hyprdots-to-HyDE.md)
-
-###### _<div align="right"><sub>// design by t2</sub></div>_
-
 <div align = center>
     <a href="https://discord.gg/AYbJ9MJez7">
 <img alt="Dynamic JSON Badge" src="https://img.shields.io/badge/dynamic/json?url=https%3A%2F%2Fdiscordapp.com%2Fapi%2Finvites%2FmT5YqjaJFh%3Fwith_counts%3Dtrue&query=%24.approximate_member_count&suffix=%20members&style=for-the-badge&logo=discord&logoSize=auto&label=The%20HyDe%20Project&labelColor=ebbcba&color=c79bf0">
     </a>
 </div>
 
-<!--
-<img alt="Dynamic JSON Badge" src="https://img.shields.io/badge/dynamic/json?url=https%3A%2F%2Fdiscordapp.com%2Fapi%2Finvites%2FmT5YqjaJFh%3Fwith_counts%3Dtrue&query=%24.approximate_member_count&suffix=%20members&style=for-the-badge&logo=discord&logoSize=auto&label=The%20HyDe%20Project&labelColor=ebbcba&color=c79bf0">
+###### _<div align="right"><sub>// design by t2</sub></div>_
 
-<img alt="Dynamic JSON Badge" src="https://img.shields.io/badge/dynamic/json?url=https%3A%2F%2Fdiscordapp.com%2Fapi%2Finvites%2FmT5YqjaJFh%3Fwith_counts%3Dtrue&query=%24.approximate_presence_count&suffix=%20online&style=for-the-badge&logo=discord&logoSize=auto&label=The%20HyDe%20Project&labelColor=ebbcba&color=c79bf0">
+![hyde_banner](Source/assets/hyde_banner.png)
+
+<!--
+Multi-language README support
 -->
 
-<div align="center">
+[![en](https://img.shields.io/badge/lang-en-red.svg)](https://github.com/HyDE-Project/HyDE/blob/master/README.md)
+[![es](https://img.shields.io/badge/lang-es-yellow.svg)](https://github.com/HyDE-Project/HyDE/blob/master/Source/assets/readme/README.es.md)
 
-![hyde_banner](https://raw.githubusercontent.com/prasanthrangan/hyprdots/main/Source/assets/hyde_banner.png)
+<div align="center">
 
 <br>
 
@@ -33,9 +29,41 @@ Check this out for the full note:
 
 </div><br><br>
 
-https://github.com/prasanthrangan/hyprdots/assets/106020512/7f8fadc8-e293-4482-a851-e9c6464f5265
+<div align="center">
+  <style>
+    .responsive-table {
+      display: flex;
+      flex-wrap: wrap;
+      justify-content: center;
+    }
+    .responsive-table div {
+      flex: 1 1 50px;
+      margin: 10px;
+    }
+    .responsive-table img {
+      width: 100%;
+      max-width: 100px;
+    }
+  </style>
+  <div class="responsive-table">
+    <div><img src="Source/assets/archlinux.png" alt="Arch Linux"/></div>
+    <div><img src="Source/assets/cachyos.png" alt="CachyOS"/></div>
+    <div><img src="Source/assets/endeavouros.png" alt="EndeavourOS"/></div>
+    <div><img src="Source/assets/garuda.png" alt="Garuda"/></div>
+    <div><img src="Source/assets/nixos.png" alt="NixOS"/></div>
+  </div>
+</div>
 
-<br><div align="center"><img width="12%" src="https://raw.githubusercontent.com/prasanthrangan/hyprdots/main/Source/assets/arch.png"/><br></div>
+Check this out for the full note:
+[Journey to HyDE and beyond](./Hyprdots-to-HyDE.md)
+
+<!--
+<img alt="Dynamic JSON Badge" src="https://img.shields.io/badge/dynamic/json?url=https%3A%2F%2Fdiscordapp.com%2Fapi%2Finvites%2FmT5YqjaJFh%3Fwith_counts%3Dtrue&query=%24.approximate_member_count&suffix=%20members&style=for-the-badge&logo=discord&logoSize=auto&label=The%20HyDe%20Project&labelColor=ebbcba&color=c79bf0">
+
+<img alt="Dynamic JSON Badge" src="https://img.shields.io/badge/dynamic/json?url=https%3A%2F%2Fdiscordapp.com%2Fapi%2Finvites%2FmT5YqjaJFh%3Fwith_counts%3Dtrue&query=%24.approximate_presence_count&suffix=%20online&style=for-the-badge&logo=discord&logoSize=auto&label=The%20HyDe%20Project&labelColor=ebbcba&color=c79bf0">
+-->
+
+https://github.com/prasanthrangan/hyprdots/assets/106020512/7f8fadc8-e293-4482-a851-e9c6464f5265
 
 ## Installation
 
@@ -89,6 +117,7 @@ git pull origin master
 > [!IMPORTANT]
 > Please note that any configurations you made will be overwritten if listed to be done so as listed by `Scripts/restore_cfg.psv`.
 > However, all replaced configs are backed up and may be recovered from in `~/.config/cfg_backups`.
+
 <!--
 As a second update option, you can use `Hyde restore ...`, which does have a better way of managing restore and backup options.
 For more details, you can refer to [Hyde-cli - dots management wiki](https://github.com/kRHYME7/Hyde-cli/wiki/Dots-Management).
