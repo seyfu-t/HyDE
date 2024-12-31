@@ -3,7 +3,7 @@ Multi-language README support
 -->
 
 [![en](https://img.shields.io/badge/lang-en-red.svg)](https://github.com/HyDE-Project/HyDE/blob/master/KEYBINDINGS.md)
-[![es](https://img.shields.io/badge/lang-es-yellow.svg)](https://github.com/HyDE-Project/HyDE/blob/master/Source/docs/KEYBINDINGS.md)
+[![es](https://img.shields.io/badge/lang-es-yellow.svg)](https://github.com/HyDE-Project/HyDE/blob/master/Source/docs/KEYBINDINGS.es.md)
 
 ## Window Management
 
