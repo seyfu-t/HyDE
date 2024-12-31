@@ -1,36 +1,9 @@
 #!/bin/env bash
 
-can_render_images() {
-  case "$TERM" in
-  xterm*)
-    return 0
-    ;;
-  *)
-    return 1
-    ;;
-  esac
-}
-
-# if can_render_images; then
-# echo "This terminal can render images."
-# else
-# echo "This terminal cannot render images."
-# fi
-# exit 0
-
 # Early load to maintain fastfetch speed
 if [ -z "${*}" ]; then
   clear
-  fastfetch
-  exit
-fi
-
-confDir="${XDG_CONFIG_HOME:-$HOME/.config}"
-iconDir="${XDG_DATA_HOME:-$HOME/.local/share}/icons"
-
-if [ -z "${*}" ]; then
-  clear
-  fastfetch
+  fastfetch --logo-type kitty
   exit
 fi
 
@@ -72,6 +45,6 @@ EOF
   ;;
 *)
   clear
-  fastfetch
+  fastfetch --logo-type kitty
   ;;
 esac
