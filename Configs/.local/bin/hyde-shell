@@ -4,9 +4,9 @@
 
 BIN_DIR=$(dirname "$(realpath "${BASH_SOURCE[0]}")")
 LIB_DIR="${BIN_DIR/\/bin/\/lib}"
-HYDE_SHARE_DIR="${BIN_DIR/\/bin/\/share}"
+SHARE_DIR="${BIN_DIR/\/bin/\/share}"
 
-export BIN_DIR LIB_DIR HYDE_SHARE_DIR
+export BIN_DIR LIB_DIR SHARE_DIR
 
 # shellcheck disable=SC1091
 if ! source "${LIB_DIR}/hyde/globalcontrol.sh"; then

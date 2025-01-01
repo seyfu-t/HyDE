@@ -2,7 +2,7 @@
 # Commands on startup (before the prompt is shown)
 # This is a good place to load graphic/ascii art, display system information, etc.
 
-# pokego --no-title -r 1,3,6
+pokego --no-title -r 1,3,6
 # fastfetch --logo-type kitty
 # fastfetch.sh
 
