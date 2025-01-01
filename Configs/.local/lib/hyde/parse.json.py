@@ -3,6 +3,38 @@ import json
 import argparse
 import sys
 import re
+import logging
+import os
+
+
+def fmt_logging():
+    class ColoredFormatter(logging.Formatter):
+        COLORS = {
+            "DEBUG": "\033[94m",  # Blue
+            "INFO": "\033[92m",  # Green
+            "WARNING": "\033[93m",  # Yellow
+            "ERROR": "\033[91m",  # Red
+            "CRITICAL": "\033[95m",  # Magenta
+        }
+        RESET = "\033[0m"
+        DATE_COLOR = "\033[96m"  # Cyan
+
+        def format(self, record):
+            log_color = self.COLORS.get(record.levelname, self.RESET)
+            record.levelname = f"{log_color}{record.levelname}{self.RESET}"
+            record.asctime = (
+                f"{self.DATE_COLOR}{self.formatTime(record, self.datefmt)}{self.RESET}"
+            )
+            return super().format(record)
+
+    log_level = os.getenv("LOG_LEVEL", "INFO").upper()
+    log_format = os.getenv(
+        "LOG_FORMAT", "%(asctime)s - %(name)s - %(levelname)s - %(message)s"
+    )
+    formatter = ColoredFormatter(log_format)
+    handler = logging.StreamHandler()
+    handler.setFormatter(formatter)
+    logging.basicConfig(level=log_level, handlers=[handler])
 
 
 def remove_comments(json_data):
@@ -58,12 +90,18 @@ def update_json(json_data, key, value, skip_comments):
         return None, f"Error: {e}"
 
 
-def main():
+def arg_parser():
     parser = argparse.ArgumentParser(description="A simple JSON parser similar to jq.")
     parser.add_argument(
-        "file", type=str, help="The JSON file to parse, or '-' to read from stdin."
+        "file",
+        type=str,
+        help="The JSON file to parse, or '-' to read from stdin.",
     )
-    parser.add_argument("--query", "-Q", help="The query to apply to the JSON data.")
+    parser.add_argument(
+        "--query",
+        "-Q",
+        help="The query to apply to the JSON data.",
+    )
     parser.add_argument(
         "--skip-comments",
         "-C",
@@ -83,8 +121,12 @@ def main():
         metavar=("KEY", "VALUE"),
         help="Update the JSON data with the specified key and value.",
     )
-    args = parser.parse_args()
+    return parser.parse_args()
 
+
+def main():
+    fmt_logging()
+    args = arg_parser()
     if args.file == "-":
         json_data = sys.stdin.read()
     else:
@@ -95,7 +137,9 @@ def main():
         key, value = args.update
         result, error = update_json(json_data, key, value, args.skip_comments)
         if error:
-            print(error, file=sys.stderr)
+            # print(error, file=sys.stderr)
+            logging.error(error, file=sys.stderr)
+
             sys.exit(1)
         if args.file == "-":
             print(result)
@@ -106,7 +150,9 @@ def main():
         result = parse_json(json_data, args.query, args.skip_comments, args.raw_output)
         print(result)
     else:
-        print("Error: Either --query or --update must be specified.", file=sys.stderr)
+        logging.error(
+            "Error: Either --query or --update must be specified.", file=sys.stderr
+        )
         sys.exit(1)
 
 
