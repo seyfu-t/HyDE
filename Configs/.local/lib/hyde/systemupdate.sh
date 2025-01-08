@@ -46,7 +46,7 @@ fi
 
 # Check for AUR updates
 aur=$(${aurhlpr} -Qua | wc -l) 
-ofc=$(pacman -Qu | wc -l)
+ofc=$(CHECKUPDATES_DB=$(mktemp -u) checkupdates | wc -l)
 
 # Check for flatpak updates
 if pkg_installed flatpak ; then
