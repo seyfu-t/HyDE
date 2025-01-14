@@ -33,7 +33,7 @@ fn_profile() {
 }
 
 fn_mpris() {
-    local player=${1:-"all"}
+    local player=${1:-""}
     THUMB="${cacheDir}/landing/mpris"
     if [ "$(playerctl -p "${player}" status)" == "Playing" ]; then
         playerctl -p "${player}" metadata --format "{{xesam:title}} $(mpris_icon "${player}")  {{xesam:artist}}"
@@ -79,7 +79,7 @@ mpris_icon() {
 }
 
 mpris_thumb() { # Generate thumbnail for mpris
-    local player=${1:-all}
+    local player=${1:-""}
     artUrl=$(playerctl -p "${player}" metadata --format '{{mpris:artUrl}}')
     [ "${artUrl}" == "$(cat "${THUMB}".lnk)" ] && [ -f "${THUMB}".png ] && exit 0
     echo "${artUrl}" >"${THUMB}".lnk
