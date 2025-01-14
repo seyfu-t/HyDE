@@ -105,7 +105,7 @@ left | right)
 esac
 
 export font_name=${WAYBAR_FONT:-"JetBrainsMono Nerd Font"}
-echo "font_name: $font_name"
+
 # list modules and generate theme style
 export modules_ls
 # modules_ls=$(grep -m 1 '".*.": {'  --exclude="$modules_dir/footer.jsonc" "${modules_dir}"/*.jsonc | cut -d '"' -f 2 | awk -F '/' '{ if($1=="custom") print "#custom-"$NF"," ; else print "#"$NF","}')
