@@ -115,7 +115,7 @@ file = "$HOME/.config/hyde/search.lst"
 [wallbash]
 skip_template = [
     "",
-] # skips the template when using wallbash. Requires full path to the template
+]    # skips the template when using wallbash. Requires full path to the template
 
 [waybar]
 font = "JetBrainsMono Nerd Font"
