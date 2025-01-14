@@ -119,9 +119,11 @@ skip_template = [
 
 [waybar]
 font = "JetBrainsMono Nerd Font"
-scale=30                            # total scaling
-# output = ["", ""]                # Default monitor output for waybar
+scale=30                                # total scaling
+# output = ["", ""]                     # Default monitor output for waybar
 
+[waybar.weather]
+loc = true                          # Show location in weather module
 
 [cava.stdout]
 # 'cava.sh stdout' configuration
