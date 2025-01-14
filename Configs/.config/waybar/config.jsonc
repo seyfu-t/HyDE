@@ -4,7 +4,7 @@
 // sourced from header module //
 
     "layer": "top",
-    "output": [ "eDP-1" ],
+    "output": [ "*" ],
     "position": "top",
     "mod": "dock",
     "height": 30,
@@ -34,31 +34,32 @@
     "on-scroll-down": "hyprctl dispatch workspace +1",
     "format": "{icon}",
     "persistent-workspaces": {
-        "*": 0
+        "*": 5
         },
         "format-icons": {
-            "1": "I",
-            "2": "II",
-            "3": "III",
-            "4": "IV",
-            "5": "V",
-            "6": "VI",
-            "7": "VII",
-            "8": "VIII",
-            "9": "IX",
-            "10": "X",
-            "11": "XI",
-            "12": "XII",
-            "13": "XIII",
-            "14": "XIV",
-            "15": "XV",
-            "16": "XVII",
-            "17": "XVI",
-            "18": "XVIII",
-            "19": "XIX",
-            "20": "XX",
+            "1": "一",
+            "2": "二",
+            "3": "三",
+            "4": "四",
+            "5": "五",
+            "6": "六",
+            "7": "七",
+            "8": "八",
+            "9": "九",
+            "10": "十",
+            "11": "十一",
+            "12": "十二",
+            "13": "十三",
+            "14": "十四",
+            "15": "十五",
+            "16": "十六",
+            "17": "十七",
+            "18": "十八",
+            "19": "十九",
+            "20": "二十",
             "urgent": "",
-            "focused": ""
+            "focused": "",
+            "default": " "
     }
 },// you can copy this file to your config directory and modify it to your needs
 "wlr/taskbar": {
