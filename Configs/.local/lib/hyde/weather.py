@@ -5,6 +5,21 @@ import requests
 from datetime import datetime
 import os
 
+
+def load_env_file(filepath):
+    with open(filepath) as f:
+        for line in f:
+            if line.strip() and not line.startswith('#'):
+                if line.startswith('export '):
+                    line = line[len('export '):]
+                key, value = line.strip().split('=', 1)
+                os.environ[key] = value.strip('"')
+
+# Load environment variables from the specified files
+load_env_file(os.path.expanduser('~/.local/state/hyde/staterc'))
+load_env_file(os.path.expanduser('~/.local/state/hyde/config'))
+
+
 WEATHER_CODES = {
     **dict.fromkeys(['113'], '☀️ '),
     **dict.fromkeys(['116'], '⛅ '),
@@ -15,6 +30,7 @@ WEATHER_CODES = {
     **dict.fromkeys(['329', '332', '335', '338', '371', '395'], '❄️ ')
 }
 data = {}
+
 
 
 weather = requests.get("https://wttr.in/?format=j1").json()
