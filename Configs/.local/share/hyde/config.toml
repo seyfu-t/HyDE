@@ -119,7 +119,7 @@ skip_template = [
 
 [waybar]
 font = "JetBrainsMono Nerd Font"
-font_size = 10
+scale=30                            # total scaling
 # output = ["", ""]                # Default monitor output for waybar
 
 

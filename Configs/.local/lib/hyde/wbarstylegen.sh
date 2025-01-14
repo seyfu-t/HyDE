@@ -15,7 +15,7 @@ src_file="${confDir}/hypr/themes/theme.conf"
 
 # calculate height from control file or monitor res
 
-b_height=$(grep '^1|' "$conf_ctl" | cut -d '|' -f 2)
+b_height=${WAYBAR_SCALE:-$(grep '^1|' "$conf_ctl" | cut -d '|' -f 2)}
 
 if [ -z "$b_height" ] || [ "$b_height" == "0" ]; then
     y_monres=$(cat /sys/class/drm/*/modes | head -1 | cut -d 'x' -f 2)
@@ -105,7 +105,7 @@ left | right)
 esac
 
 export font_name=${WAYBAR_FONT:-"JetBrainsMono Nerd Font"}
-
+echo "font_name: $font_name"
 # list modules and generate theme style
 export modules_ls
 # modules_ls=$(grep -m 1 '".*.": {'  --exclude="$modules_dir/footer.jsonc" "${modules_dir}"/*.jsonc | cut -d '"' -f 2 | awk -F '/' '{ if($1=="custom") print "#custom-"$NF"," ; else print "#"$NF","}')
