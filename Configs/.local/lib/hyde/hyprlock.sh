@@ -39,7 +39,6 @@ fn_mpris() {
         playerctl -p "${player}" metadata --format "{{xesam:title}} $(mpris_icon "${player}")  {{xesam:artist}}"
         mpris_thumb "${player}"
     else
-
         if [ -f "$HOME/.face.icon" ]; then
             if ! cmp -s "$HOME/.face.icon" "${THUMB}.png"; then
                 cp -f "$HOME/.face.icon" "${THUMB}.png"
@@ -52,6 +51,7 @@ fn_mpris() {
                 pkill -USR2 hyprlock 2>/dev/null # updates the mpris thumbnail
             fi
         fi
+        exit 1
     fi
 }
 
