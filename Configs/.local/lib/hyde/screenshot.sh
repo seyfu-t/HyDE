@@ -1,7 +1,5 @@
 #!/usr/bin/env bash
 
-touch /tmp/stutter
-
 SCREENSHOT_POST_COMMAND+=(
 )
 
@@ -58,14 +56,18 @@ EOF
 }
 
 case $1 in
-p) # print all outputs
-	"$LIB_DIR/hyde/grimblast" copysave screen $temp_screenshot && "${annotation_tool}" ${annotation_args} ;;
+p)                 # print all outputs
+	timeout 0.2 slurp # capture animation lol
+	"$LIB_DIR/hyde/grimblast" copysave screen $temp_screenshot && "${annotation_tool}" ${annotation_args}
+	;;
 s) # drag to manually snip an area / click on a window to print it
 	"$LIB_DIR/hyde/grimblast" copysave area $temp_screenshot && "${annotation_tool}" ${annotation_args} ;;
 sf) # frozen screen, drag to manually snip an area / click on a window to print it
-	"$LIB_DIR/hyde/grimblast" --freeze copysave area $temp_screenshot && "${annotation_tool}" ${annotation_args} ;;
-m) # print focused monitor
-	"$LIB_DIR/hyde/grimblast" copysave output $temp_screenshot && "${annotation_tool}" ${annotation_args} ;;
+	"$LIB_DIR/hyde/grimblast" --freeze --cursor copysave area $temp_screenshot && "${annotation_tool}" ${annotation_args} ;;
+m)                 # print focused monitor
+	timeout 0.2 slurp # capture animation lol
+	"$LIB_DIR/hyde/grimblast" copysave output $temp_screenshot && "${annotation_tool}" ${annotation_args}
+	;;
 *) # invalid option
 	print_error ;;
 esac
@@ -75,5 +77,3 @@ esac
 if [ -f "${save_dir}/${save_file}" ]; then
 	notify-send -a "HyDE Alert" -i "${save_dir}/${save_file}" "saved in ${save_dir}"
 fi
-
-rm /tmp/stutter
