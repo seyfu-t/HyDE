@@ -1,5 +1,7 @@
 #!/usr/bin/env bash
 
+touch /tmp/stutter
+
 SCREENSHOT_POST_COMMAND+=(
 )
 
@@ -10,18 +12,15 @@ pre_cmd() {
 	for cmd in "${SCREENSHOT_PRE_COMMAND[@]}"; do
 		eval "$cmd"
 	done
-	hyprctl -q keyword cursor:no_hardware_cursors false
+	trap 'post_cmd' EXIT
 }
 
 post_cmd() {
 	for cmd in "${SCREENSHOT_POST_COMMAND[@]}"; do
 		eval "$cmd"
 	done
-	hyprctl -q keyword cursor:no_hardware_cursors "$hwCursor"
 }
 
-hwCursor="$(hyprctl -j "getoption cursor:no_hardware_cursors" | jq .int)"
-trap 'hyprctl -q keyword cursor:no_hardware_cursors "${hwCursor}"' EXIT
 pre_cmd
 
 if [ -z "$XDG_PICTURES_DIR" ]; then
@@ -60,13 +59,13 @@ EOF
 
 case $1 in
 p) # print all outputs
-	"$LIB_DIR/hyde/grimblast" copysave screen $temp_screenshot && pre_cmd && "${annotation_tool}" ${annotation_args} ;;
+	"$LIB_DIR/hyde/grimblast" copysave screen $temp_screenshot && "${annotation_tool}" ${annotation_args} ;;
 s) # drag to manually snip an area / click on a window to print it
-	"$LIB_DIR/hyde/grimblast" copysave area $temp_screenshot && pre_cmd && "${annotation_tool}" ${annotation_args} ;;
+	"$LIB_DIR/hyde/grimblast" copysave area $temp_screenshot && "${annotation_tool}" ${annotation_args} ;;
 sf) # frozen screen, drag to manually snip an area / click on a window to print it
-	"$LIB_DIR/hyde/grimblast" --freeze copysave area $temp_screenshot && pre_cmd && "${annotation_tool}" ${annotation_args} ;;
+	"$LIB_DIR/hyde/grimblast" --freeze copysave area $temp_screenshot && "${annotation_tool}" ${annotation_args} ;;
 m) # print focused monitor
-	"$LIB_DIR/hyde/grimblast" copysave output $temp_screenshot && pre_cmd && "${annotation_tool}" ${annotation_args} ;;
+	"$LIB_DIR/hyde/grimblast" copysave output $temp_screenshot && "${annotation_tool}" ${annotation_args} ;;
 *) # invalid option
 	print_error ;;
 esac
@@ -76,3 +75,5 @@ esac
 if [ -f "${save_dir}/${save_file}" ]; then
 	notify-send -a "HyDE Alert" -i "${save_dir}/${save_file}" "saved in ${save_dir}"
 fi
+
+rm /tmp/stutter
