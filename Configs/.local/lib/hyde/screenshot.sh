@@ -10,10 +10,7 @@ pre_cmd() {
 	for cmd in "${SCREENSHOT_PRE_COMMAND[@]}"; do
 		eval "$cmd"
 	done
-	hwCursor="$(hyprctl -q -j "getoption cursor:no_hardware_cursors" | jq .int)"
 	hyprctl -q keyword cursor:no_hardware_cursors false
-	sleep 0.1
-	hyprctl -q -j "getoption cursor:no_hardware_cursors" | jq .int
 }
 
 post_cmd() {
@@ -23,6 +20,8 @@ post_cmd() {
 	hyprctl -q keyword cursor:no_hardware_cursors "$hwCursor"
 }
 
+hwCursor="$(hyprctl -j "getoption cursor:no_hardware_cursors" | jq .int)"
+trap 'hyprctl -q keyword cursor:no_hardware_cursors "${hwCursor}"' EXIT
 pre_cmd
 
 if [ -z "$XDG_PICTURES_DIR" ]; then
