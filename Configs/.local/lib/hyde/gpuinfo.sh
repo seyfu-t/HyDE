@@ -174,7 +174,7 @@ get_temp_color() {
     [0]="#00008b"  # Dark Blue for below 20
   )
 
-  for threshold in "${!temp_colors[@]}"; do
+  for threshold in $(echo "${!temp_colors[@]}" | tr ' ' '\n' | sort -nr); do
     if ((temp >= threshold)); then
       color=${temp_colors[$threshold]}
       if [[ -n $color ]]; then
