@@ -148,9 +148,10 @@ pkg_installed flatpak && flatpak \
     --filesystem="${themesDir}":ro \
     --filesystem="$HOME/.themes":ro \
     --filesystem="$HOME/.icons":ro \
-    --filesystem=~/.local/share/icons:ro \
+    --filesystem="$HOME/.local/share/icons":ro \
     --env=GTK_THEME="${gtk4Theme}" \
     --env=ICON_THEME="${gtkIcon}"
+pkg_installed flatpak && flatpak remote-add --user --if-not-exists flathub https://flathub.org/repo/flathub.flatpakrepo
 
 # // xsettingsd
 
@@ -166,7 +167,7 @@ if [ ! -d "$HOME/.themes" ]; then
 fi
 
 if [ ! -L "$HOME/.themes" ] && [ -d "${themesDir}/" ]; then
-    ln -snf "${themesDir}/" "$HOME/.themes"
+    ln -snf "${themesDir}"/* "$HOME/.themes"
 fi
 
 #// wallpaper
