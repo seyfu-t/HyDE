@@ -69,11 +69,11 @@ if tempint > 0 and tempint < 10:
 
 if with_location is True:
     data['text'] = ' '+WEATHER_CODES[weather['current_condition'][0]['weatherCode']] + \
-        " "+extrachar+weather['current_condition'][0]['FeelsLikeC']+"°" +" | "+ weather['nearest_area'][0]['areaName'][0]['value']+\
+        " "+extrachar+weather['current_condition'][0]['FeelsLikeC']+"°" +" | "+ weather['nearest_area'][0]['areaName'][0]['value']+\
         ", "  + weather['nearest_area'][0]['country'][0]['value']
 else:
     data['text'] = ' '+WEATHER_CODES[weather['current_condition'][0]['weatherCode']] + \
-        " "+extrachar+weather['current_condition'][0]['FeelsLikeC']+"°" 
+        " "+extrachar+weather['current_condition'][0]['FeelsLikeC']+"°" 
 
 
 data['tooltip'] = f"<b>{weather['current_condition'][0]['weatherDesc'][0]['value']} {weather['current_condition'][0]['temp_C']}°</b>\n"
