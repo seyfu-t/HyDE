@@ -315,9 +315,6 @@ fn_wallbash() {
 
     if [ -s "${temp_target_file}" ]; then
         mv "${temp_target_file}" "${target_file}"
-    else
-        echo "Error: ${temp_target_file} is empty or not created."
-        exit 1
     fi
     [ -z "${exec_command}" ] || bash -c "${exec_command}"
 }
