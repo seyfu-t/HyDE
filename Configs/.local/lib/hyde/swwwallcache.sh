@@ -53,7 +53,6 @@ fn_envar_cache() {
         mkdir -p "$XDG_DATA_HOME/rofi/themes"
         ln -snf "$XDG_DATA_HOME/hyde/rofi/themes"/* "$XDG_DATA_HOME/rofi/themes/"
     fi
-    exit 0
 }
 
 export -f fn_wallcache
