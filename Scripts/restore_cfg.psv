@@ -53,7 +53,7 @@ O|${HOME}/.local/lib|hyde|hyprland
  Editor 
 P|${HOME}/.config/Code - OSS/User|settings.json|code
 P|${HOME}/.config/Code/User|settings.json|visual-studio-code-bin
-P|${HOME}/.config/VSCodium/User|settings.json|vscodium-bin
+P|${HOME}/.config/VSCodium/User|settings.json|vscodium
 
  Bar 
 P|${HOME}/.config/waybar|config.ctl|waybar
@@ -87,7 +87,7 @@ P|${HOME}/.config|libinput-gestures.conf|libinput-gestures
 P|${HOME}/.config|spotify-flags.conf|spotify
 P|${HOME}/.config|code-flags.conf|code
 P|${HOME}/.config|code-flags.conf|visual-studio-code-bin
-P|${HOME}/.config|vscodium-flags.conf|vscodium-bin
+P|${HOME}/.config|vscodium-flags.conf|vscodium
 P|${HOME}/.config|electron-flags.conf|electron
 
  Notifications 

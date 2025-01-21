@@ -37,8 +37,8 @@ spicetify-cli                                          # cli to customize spotif
 # pokemon-colorscripts-git|zsh                           # display pokemon sprites (optional)
 
 # --------------------------------------------------- // Editor
-# vscodium-bin                                          # Full oss text editor
-# vscodium-marketplace|vscodium-bin                 # VSCodium marketplace
+# vscodium                                              # Full oss text editor
+# vscodium-marketplace|vscodium                         # VSCodium marketplace
 # code-marketplace|code                                 # Code-Oss marketplace
 # visual-studio-code-bin                                # MS  text editor
 
