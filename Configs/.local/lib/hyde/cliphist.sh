@@ -12,6 +12,9 @@ fi
 confDir="${confDir:-$XDG_CONFIG_HOME}"
 cacheDir="${cacheDir:-$XDG_CACHE_HOME/hyde}"
 favoritesFile="${cacheDir}/landing/cliphist_favorites"
+if [ -f "$HOME/.cliphist_favorites" ]; then
+    favoritesFile="$HOME/.cliphist_favorites"
+fi
 cliphist_style="${ROFI_CLIPHIST_STYLE:-clipboard}"
 delMode=false
 
