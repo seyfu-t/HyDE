@@ -41,9 +41,10 @@ if [[ -z "$annotation_tool" ]]; then
 	pkg_installed "satty" && annotation_tool="satty"
 fi
 
-annotation_args=${SCREENSHOT_ANNOTATION_ARGS:-"-o" "${save_dir}/${save_file}" "-f" "${temp_screenshot}"}
-annotation_args=$(eval echo "$annotation_args")
+annotation_args=("-o" "${save_dir}/${save_file}" "-f" "${temp_screenshot}")
 
+annotation_args+=("${SCREENSHOT_ANNOTATION_ARGS[@]}")
+evaluated_annotation_args=$(eval echo "${annotation_args[@]}")
 mkdir -p "$save_dir"
 
 # Fixes the issue where the annotation tool doesn't save the file in the correct directory
@@ -69,15 +70,19 @@ pre_cmd
 case $1 in
 p)                 # print all outputs
 	timeout 0.2 slurp # capture animation lol
-	"$LIB_DIR/hyde/grimblast" copysave screen $temp_screenshot && "${annotation_tool}" ${annotation_args}
+	# shellcheck disable=SC2086
+	"$LIB_DIR/hyde/grimblast" copysave screen $temp_screenshot && "${annotation_tool}" ${evaluated_annotation_args} # intended globbing
 	;;
 s) # drag to manually snip an area / click on a window to print it
-	"$LIB_DIR/hyde/grimblast" copysave area $temp_screenshot && "${annotation_tool}" ${annotation_args} ;;
-sf) # frozen screen, drag to manually snip an area / click on a window to print it
-	"$LIB_DIR/hyde/grimblast" --freeze --cursor copysave area $temp_screenshot && "${annotation_tool}" ${annotation_args} ;;
-m)                 # print focused monitor
-	timeout 0.2 slurp # capture animation lol
-	"$LIB_DIR/hyde/grimblast" copysave output $temp_screenshot && "${annotation_tool}" ${annotation_args}
+	# shellcheck disable=SC2086
+	"$LIB_DIR/hyde/grimblast" copysave area $temp_screenshot && "${annotation_tool}" ${evaluated_annotation_args} ;; # intended globbing
+sf)                                                                                                               # frozen screen, drag to manually snip an area / click on a window to print it
+	# shellcheck disable=SC2086
+	"$LIB_DIR/hyde/grimblast" --freeze --cursor copysave area $temp_screenshot && "${annotation_tool}" ${evaluated_annotation_args} ;; # intended globbing
+m)                                                                                                                                  # print focused monitor
+	timeout 0.2 slurp                                                                                                                  # capture animation lol
+	# shellcheck disable=SC2086
+	"$LIB_DIR/hyde/grimblast" copysave output $temp_screenshot && "${annotation_tool}" ${evaluated_annotation_args} # intended globbing
 	;;
 *) # invalid option
 	print_error ;;
