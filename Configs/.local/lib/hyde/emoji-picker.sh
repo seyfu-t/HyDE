@@ -11,7 +11,15 @@ cacheDir="${cacheDir:-$XDG_CACHE_HOME/hyde}"
 # Set rofi scaling
 font_scale="${ROFI_EMOJI_SCALE}"
 [[ "${font_scale}" =~ ^[0-9]+$ ]] || font_scale=${ROFI_SCALE:-10}
-font_override="* {font: \"JetBrainsMono Nerd Font ${font_scale}\";}"
+
+# set font name
+font_name=${ROFI_variable_FONT:-$ROFI_FONT}
+font_name=${font_name:-$(get_hyprConf "ROFI_FONT")}
+font_name=${font_name:-$(get_hyprConf "FONT")}
+
+# set rofi font override
+font_override="* {font: \"${font_name:-"JetBrainsMono Nerd Font"} ${font_scale}\";}"
+
 hypr_border=${hypr_border:-"$(hyprctl -j getoption decoration:rounding | jq '.int')"}
 wind_border=$((hypr_border * 3 / 2))
 elem_border=$((hypr_border == 0 ? 5 : hypr_border))

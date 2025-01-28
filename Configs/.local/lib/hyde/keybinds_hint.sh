@@ -47,8 +47,16 @@ r_listview="listview { lines: ${kb_hint_line:-13}; }"
 r_override="window {$r_height $r_width border: ${hypr_width}px; border-radius: ${wind_border}px;} entry {border-radius: ${elem_border}px;} element {border-radius: ${elem_border}px;} ${r_listview} "
 
 # Read hypr font size
-font_scale=$(gsettings get org.gnome.desktop.interface font-name | awk '{gsub(/'\''/,""); print $NF}')
-font_override="* {font: \"JetBrainsMono Nerd Font ${font_scale}\";}"
+font_scale="${ROFI_KEYBIND_HINT_SCALE:-$(gsettings get org.gnome.desktop.interface font-name | awk '{gsub(/'\''/,""); print $NF}')}"
+[[ "${font_scale}" =~ ^[0-9]+$ ]] || font_scale=${ROFI_SCALE:-10}
+
+# set font name
+font_name=${ROFI_variable_FONT:-$ROFI_FONT}
+font_name=${font_name:-$(get_hyprConf "ROFI_FONT")}
+font_name=${font_name:-$(get_hyprConf "FONT")}
+
+# set rofi font override
+font_override="* {font: \"${font_name:-"JetBrainsMono Nerd Font"} ${font_scale}\";}"
 
 # Read hypr theme icon
 icon_override=$(gsettings get org.gnome.desktop.interface icon-theme | sed "s/'//g")

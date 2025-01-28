@@ -24,7 +24,7 @@ font_scale="${ROFI_LAUNCHER_SCALE}"
 case "${1}" in
 d | --drun)
     r_mode="drun"
-    rofi_config="${ROFI_LAUNCH_STYLE:-$rofi_config}"
+    rofi_config="${ROFI_LAUNCH_DRUN_STYLE:-$rofi_config}"
     ;;
 w | --window)
     r_mode="window"
@@ -64,7 +64,15 @@ fi
 
 [ "${hypr_border}" -eq 0 ] && elem_border="10" || elem_border=$((hypr_border * 2))
 r_override="window {border: ${hypr_width}px; border-radius: ${wind_border}px;} element {border-radius: ${elem_border}px;}"
-font_override="* {font: \"JetBrainsMono Nerd Font ${font_scale}\";}"
+
+# set font name
+font_name=${ROFI_variable_FONT:-$ROFI_FONT}
+font_name=${font_name:-$(get_hyprConf "ROFI_FONT")}
+font_name=${font_name:-$(get_hyprConf "FONT")}
+
+# set rofi font override
+font_override="* {font: \"${font_name:-"JetBrainsMono Nerd Font"} ${font_scale}\";}"
+
 i_override="$(get_hyprConf "ICON_THEME")"
 i_override="configuration {icon-theme: \"${i_override}\";}"
 

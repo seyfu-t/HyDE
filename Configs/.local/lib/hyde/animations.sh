@@ -31,7 +31,14 @@ fn_select() {
     # Set rofi scaling
     font_scale="${ROFI_ANIMATION_SCALE}"
     [[ "${font_scale}" =~ ^[0-9]+$ ]] || font_scale=${ROFI_SCALE:-10}
-    font_override="* {font: \"JetBrainsMono Nerd Font ${font_scale}\";}"
+
+    # Set font name
+    font_name=${ROFI_ANIMATION_FONT:-$ROFI_FONT}
+    font_name=${font_name:-$(get_hyprConf "ROFI_FONT")}
+    font_name=${font_name:-$(get_hyprConf "FONT")}
+
+    # Set rofi font override
+    font_override="* {font: \"${font_name:-"JetBrainsMono Nerd Font"} ${font_scale}\";}"
 
     # Window and element styling
     hypr_border=${hypr_border:-"$(hyprctl -j getoption decoration:rounding | jq '.int')"}
