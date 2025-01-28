@@ -51,7 +51,7 @@ font_scale="${ROFI_KEYBIND_HINT_SCALE:-$(gsettings get org.gnome.desktop.interfa
 [[ "${font_scale}" =~ ^[0-9]+$ ]] || font_scale=${ROFI_SCALE:-10}
 
 # set font name
-font_name=${ROFI_variable_FONT:-$ROFI_FONT}
+font_name=${ROFI_KEYBIND_HINT_FONT:-$ROFI_FONT}
 font_name=${font_name:-$(get_hyprConf "ROFI_FONT")}
 font_name=${font_name:-$(get_hyprConf "FONT")}
 

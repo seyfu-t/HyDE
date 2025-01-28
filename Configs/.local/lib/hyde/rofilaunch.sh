@@ -48,7 +48,8 @@ h | --help)
     ;;
 *)
     r_mode="drun"
-    rofi_config="${ROFI_LAUNCH_STYLE:-$rofi_config}"
+    ROFI_LAUNCH_DRUN_STYLE="${ROFI_LAUNCH_DRUN_STYLE:-$ROFI_LAUNCH_STYLE}"
+    rofi_config="${ROFI_LAUNCH_DRUN_STYLE:-$rofi_config}"
     ;;
 esac
 
@@ -57,7 +58,7 @@ hypr_border="${hypr_border:-10}"
 hypr_width="${hypr_width:-2}"
 wind_border=$((hypr_border * 3))
 
-if [[ "$ROFI_LAUNCH_FULLSCREEN" == "true" ]]; then
+if [[ -f "${HYDE_STATE_HOME}/fullscreen_${r_mode}" ]]; then
     hypr_width="0"
     wind_border="0"
 fi
@@ -66,7 +67,7 @@ fi
 r_override="window {border: ${hypr_width}px; border-radius: ${wind_border}px;} element {border-radius: ${elem_border}px;}"
 
 # set font name
-font_name=${ROFI_variable_FONT:-$ROFI_FONT}
+font_name=${ROFI_LAUNCH_FONT:-$ROFI_FONT}
 font_name=${font_name:-$(get_hyprConf "ROFI_FONT")}
 font_name=${font_name:-$(get_hyprConf "FONT")}
 
