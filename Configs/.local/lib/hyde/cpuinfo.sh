@@ -143,7 +143,7 @@ objects) |
 to_entries[] | 
 select(.key | 
 test("temp[0-9]+_input")) | 
-.value | floor))%") | 
+.value | floor))°C") | 
 join("\\n\t")' <<<"$sensors_json")"
 
 if [ -n "${CPUINFO_TEMPERATURE_ID}" ]; then
