@@ -29,7 +29,6 @@ selector_menu() {
     elem_border=$((hypr_border * 5))
     icon_border=$((elem_border - 5))
     elm_width=$((256 * 2)) #TODO: This is 256 as the images are 256x256 px
-    echo "$elm_width"
     max_avail=$((mon_x_res - (4 * font_scale)))
     col_count=$((max_avail / elm_width))
     [[ "${col_count}" -gt 5 ]] && col_count=5
