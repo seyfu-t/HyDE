@@ -23,17 +23,21 @@ mon_x_res=$((mon_x_res * 100 / mon_scale))
 selector_menu() {
 
     #// set rofi scaling
-    rofiScale="${ROFI_THEME_MENU_SCALE}"
-    [[ "${rofiScale}" =~ ^[0-9]+$ ]] || rofiScale=${ROFI_SCALE:-10}
-    font_override="* {font: \"JetBrainsMono Nerd Font ${rofiScale}\";}"
+    font_scale="${ROFI_THEME_MENU_SCALE}"
+    [[ "${font_scale}" =~ ^[0-9]+$ ]] || font_scale=${ROFI_SCALE:-10}
+    font_override="* {font: \"JetBrainsMono Nerd Font ${font_scale}\";}"
     elem_border=$((hypr_border * 5))
     icon_border=$((elem_border - 5))
-
-    elm_width=$(((20 + 12 + 16) * rofiScale))
-    max_avail=$((mon_x_res - (4 * rofiScale)))
+    elm_width=$((256 * 2)) #TODO: This is 256 as the images are 256x256 px
+    echo "$elm_width"
+    max_avail=$((mon_x_res - (4 * font_scale)))
     col_count=$((max_avail / elm_width))
     [[ "${col_count}" -gt 5 ]] && col_count=5
-    r_override="window{width:100%;} listview{columns:${col_count};} element{orientation:vertical;border-radius:${elem_border}px;} element-icon{border-radius:${icon_border}px;size:20em;} element-text{enabled:false;}"
+    r_override="window{width:100%;} 
+                listview{columns:${col_count};} 
+                element{orientation:vertical;border-radius:${elem_border}px;} 
+                element-icon{border-radius:${icon_border}px;size:20em;} 
+                element-text{enabled:false;}"
 
     #// launch rofi menu
     RofiSel=$(
@@ -90,9 +94,9 @@ case "$1" in
 
     #// set rofi scaling
     # shellcheck disable=SC2153
-    rofiScale="${ROFI_THEME_SCALE}"
-    [[ "${rofiScale}" =~ ^[0-9]+$ ]] || rofiScale=${ROFI_SCALE:-10}
-    font_override="* {font: \"JetBrainsMono Nerd Font ${rofiScale}\";}"
+    font_scale="${ROFI_THEME_SCALE}"
+    [[ "${font_scale}" =~ ^[0-9]+$ ]] || font_scale=${ROFI_SCALE:-10}
+    font_override="* {font: \"JetBrainsMono Nerd Font ${font_scale}\";}"
     # shellcheck disable=SC2154
     elem_border=$((hypr_border * 5))
     icon_border=$((elem_border - 5))
@@ -103,8 +107,8 @@ case "$1" in
     # shellcheck disable=SC2154
     case "${ROFI_THEME_STYLE}" in
     2 | "quad") # adapt to style 2
-        elm_width=$(((20 + 12) * rofiScale * 2))
-        max_avail=$((mon_x_res - (4 * rofiScale)))
+        elm_width=$(((20 + 12) * font_scale * 2))
+        max_avail=$((mon_x_res - (4 * font_scale)))
         col_count=$((max_avail / elm_width))
         r_override="window{width:100%;background-color:#00000003;} 
                             listview{columns:${col_count};} 
@@ -114,8 +118,8 @@ case "$1" in
         ROFI_THEME_STYLE="selector"
         ;;
     1 | "square") # default to style 1
-        elm_width=$(((23 + 12 + 1) * rofiScale * 2))
-        max_avail=$((mon_x_res - (4 * rofiScale)))
+        elm_width=$(((23 + 12 + 1) * font_scale * 2))
+        max_avail=$((mon_x_res - (4 * font_scale)))
         col_count=$((max_avail / elm_width))
         r_override="window{width:100%;} 
                             listview{columns:${col_count};} 

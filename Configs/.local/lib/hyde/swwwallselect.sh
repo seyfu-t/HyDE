@@ -8,9 +8,9 @@ source "${scrDir}/globalcontrol.sh"
 
 #// set rofi scaling
 
-rofiScale="${ROFI_WALLPAPER_SCALE}"
-[[ "${rofiScale}" =~ ^[0-9]+$ ]] || rofiScale=${ROFI_SCALE:-10}
-font_override="* {font: \"JetBrainsMono Nerd Font ${rofiScale}\";}"
+font_scale="${ROFI_WALLPAPER_SCALE}"
+[[ "${font_scale}" =~ ^[0-9]+$ ]] || font_scale=${ROFI_SCALE:-10}
+font_override="* {font: \"JetBrainsMono Nerd Font ${font_scale}\";}"
 # shellcheck disable=SC2154
 elem_border=$((hypr_border * 3))
 
@@ -20,8 +20,8 @@ mon_x_res=$(hyprctl -j monitors | jq '.[] | select(.focused == true) | (.width /
 
 #// generate config
 
-elm_width=$(((28 + 8 + 5) * rofiScale))
-max_avail=$((mon_x_res - (4 * rofiScale)))
+elm_width=$(((28 + 8 + 5) * font_scale))
+max_avail=$((mon_x_res - (4 * font_scale)))
 col_count=$((max_avail / elm_width))
 r_override="window{width:100%;}
     listview{columns:${col_count};spacing:5em;}

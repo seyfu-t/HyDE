@@ -16,8 +16,8 @@ fi
 
 rofi_config="${ROFI_LAUNCH_STYLE:-$rofi_config}"
 
-rofiScale="${ROFI_LAUNCHER_SCALE}"
-[[ "${rofiScale}" =~ ^[0-9]+$ ]] || rofiScale=${ROFI_SCALE:-10}
+font_scale="${ROFI_LAUNCHER_SCALE}"
+[[ "${font_scale}" =~ ^[0-9]+$ ]] || font_scale=${ROFI_SCALE:-10}
 
 #// rofi action
 
@@ -48,7 +48,7 @@ fi
 
 [ "${hypr_border}" -eq 0 ] && elem_border="10" || elem_border=$((hypr_border * 2))
 r_override="window {border: ${hypr_width}px; border-radius: ${wind_border}px;} element {border-radius: ${elem_border}px;}"
-font_override="* {font: \"JetBrainsMono Nerd Font ${rofiScale}\";}"
+font_override="* {font: \"JetBrainsMono Nerd Font ${font_scale}\";}"
 i_override="$(get_hyprConf "ICON_THEME")"
 i_override="configuration {icon-theme: \"${i_override}\";}"
 

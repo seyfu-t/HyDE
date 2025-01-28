@@ -14,9 +14,9 @@ rofiStyleDir="${SHARE_DIR}/hyde/rofi/themes"
 rofiAssetDir="${SHARE_DIR}/hyde/rofi/assets"
 
 #// set rofi scaling
-rofiScale=$ROFI_SELECT_SCALE
-[[ "${rofiScale}" =~ ^[0-9]+$ ]] || rofiScale=${ROFI_SCALE:-10}
-font_override="* {font: \"JetBrainsMono Nerd Font ${rofiScale}\";}"
+font_scale=$ROFI_SELECT_SCALE
+[[ "${font_scale}" =~ ^[0-9]+$ ]] || font_scale=${ROFI_SCALE:-10}
+font_override="* {font: \"JetBrainsMono Nerd Font ${font_scale}\";}"
 elem_border=$((hypr_border * 5))
 icon_border=$((elem_border - 5))
 
@@ -28,8 +28,8 @@ mon_x_res=$((mon_x_res * 100 / mon_scale))
 
 #// generate config
 
-elm_width=$(((20 + 12 + 16) * rofiScale))
-max_avail=$((mon_x_res - (4 * rofiScale)))
+elm_width=$(((20 + 12 + 16) * font_scale))
+max_avail=$((mon_x_res - (4 * font_scale)))
 col_count=$((max_avail / elm_width))
 [[ "${col_count}" -gt 5 ]] && col_count=5
 r_override="window{width:100%;} 

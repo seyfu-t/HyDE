@@ -47,8 +47,8 @@ r_listview="listview { lines: ${kb_hint_line:-13}; }"
 r_override="window {$r_height $r_width border: ${hypr_width}px; border-radius: ${wind_border}px;} entry {border-radius: ${elem_border}px;} element {border-radius: ${elem_border}px;} ${r_listview} "
 
 # Read hypr font size
-font_override=$(gsettings get org.gnome.desktop.interface font-name | awk '{gsub(/'\''/,""); print $NF}')
-font_override="* {font: \"JetBrainsMono Nerd Font ${font_override}\";}"
+font_scale=$(gsettings get org.gnome.desktop.interface font-name | awk '{gsub(/'\''/,""); print $NF}')
+font_override="* {font: \"JetBrainsMono Nerd Font ${font_scale}\";}"
 
 # Read hypr theme icon
 icon_override=$(gsettings get org.gnome.desktop.interface icon-theme | sed "s/'//g")

@@ -84,9 +84,9 @@ checkContent() {
 }
 
 # Set rofi scaling
-rofiScale="${ROFI_CLIPHIST_SCALE}"
-[[ "${rofiScale}" =~ ^[0-9]+$ ]] || rofiScale=${ROFI_SCALE:-10}
-font_override="* {font: \"JetBrainsMono Nerd Font ${rofiScale}\";}"
+font_scale="${ROFI_CLIPHIST_SCALE}"
+[[ "${font_scale}" =~ ^[0-9]+$ ]] || font_scale=${ROFI_SCALE:-10}
+font_override="* {font: \"JetBrainsMono Nerd Font ${font_scale}\";}"
 hypr_border=${hypr_border:-"$(hyprctl -j getoption decoration:rounding | jq '.int')"}
 wind_border=$((hypr_border * 3 / 2))
 elem_border=$((hypr_border == 0 ? 5 : hypr_border))
