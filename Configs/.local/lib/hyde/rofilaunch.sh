@@ -22,18 +22,34 @@ font_scale="${ROFI_LAUNCHER_SCALE}"
 #// rofi action
 
 case "${1}" in
-d | --drun) r_mode="drun" ;;
-w | --window) r_mode="window" ;;
-f | --filebrowser) r_mode="filebrowser" ;;
-r | --run) r_mode="run" ;;
+d | --drun)
+    r_mode="drun"
+    rofi_config="${ROFI_LAUNCH_STYLE:-$rofi_config}"
+    ;;
+w | --window)
+    r_mode="window"
+    rofi_config="${ROFI_LAUNCH_WINDOW_STYLE:-$rofi_config}"
+    ;;
+f | --filebrowser)
+    r_mode="filebrowser"
+    rofi_config="${ROFI_LAUNCH_FILEBROWSER_STYLE:-$rofi_config}"
+    ;;
+r | --run)
+    r_mode="run"
+    rofi_config="${ROFI_LAUNCH_RUN_STYLE:-$rofi_config}"
+    ;;
 h | --help)
     echo -e "$(basename "${0}") [action]"
     echo "d :  drun mode"
     echo "w :  window mode"
     echo "f :  filebrowser mode,"
+    echo "r :  run mode"
     exit 0
     ;;
-*) r_mode="drun" ;;
+*)
+    r_mode="drun"
+    rofi_config="${ROFI_LAUNCH_STYLE:-$rofi_config}"
+    ;;
 esac
 
 #// set overrides
@@ -55,7 +71,6 @@ i_override="configuration {icon-theme: \"${i_override}\";}"
 #// launch rofi
 rofi -show "${r_mode}" \
     -show-icons \
-    -config "${rofi_config}" \
     -theme-str "${font_override}" \
     -theme-str "${i_override}" \
     -theme-str "${r_override}" \
