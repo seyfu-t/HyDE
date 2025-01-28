@@ -10,7 +10,7 @@ source "${scrDir}/globalcontrol.sh"
 
 rofiScale="${ROFI_WALLPAPER_SCALE}"
 [[ "${rofiScale}" =~ ^[0-9]+$ ]] || rofiScale=${ROFI_SCALE:-10}
-r_scale="configuration {font: \"JetBrainsMono Nerd Font ${rofiScale}\";}"
+r_scale="* {font: \"JetBrainsMono Nerd Font ${rofiScale}\";}"
 # shellcheck disable=SC2154
 elem_border=$((hypr_border * 3))
 

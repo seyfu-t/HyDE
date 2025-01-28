@@ -48,7 +48,7 @@ fi
 
 [ "${hypr_border}" -eq 0 ] && elem_border="10" || elem_border=$((hypr_border * 2))
 r_override="window {border: ${hypr_width}px; border-radius: ${wind_border}px;} element {border-radius: ${elem_border}px;}"
-r_scale="configuration {font: \"JetBrainsMono Nerd Font ${rofiScale}\";}"
+r_scale="* {font: \"JetBrainsMono Nerd Font ${rofiScale}\";}"
 i_override="$(get_hyprConf "ICON_THEME")"
 i_override="configuration {icon-theme: \"${i_override}\";}"
 

@@ -17,7 +17,7 @@ fi
 
 # Set rofi scaling
 [[ "${rofiScale}" =~ ^[0-9]+$ ]] || rofiScale=${ROFI_SCALE:-10}
-r_scale="configuration {font: \"JetBrainsMono Nerd Font ${rofiScale}\";}"
+r_scale="* {font: \"JetBrainsMono Nerd Font ${rofiScale}\";}"
 hypr_border=${hypr_border:-"$(hyprctl -j getoption decoration:rounding | jq '.int')"}
 wind_border=$((hypr_border * 3 / 2))
 elem_border=$((hypr_border == 0 ? 5 : hypr_border))

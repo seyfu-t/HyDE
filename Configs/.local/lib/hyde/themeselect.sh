@@ -25,7 +25,7 @@ selector_menu() {
     #// set rofi scaling
     rofiScale="${ROFI_THEME_MENU_SCALE}"
     [[ "${rofiScale}" =~ ^[0-9]+$ ]] || rofiScale=${ROFI_SCALE:-10}
-    r_scale="configuration {font: \"JetBrainsMono Nerd Font ${rofiScale}\";}"
+    r_scale="* {font: \"JetBrainsMono Nerd Font ${rofiScale}\";}"
     elem_border=$((hypr_border * 5))
     icon_border=$((elem_border - 5))
 
@@ -92,7 +92,7 @@ case "$1" in
     # shellcheck disable=SC2153
     rofiScale="${ROFI_THEME_SCALE}"
     [[ "${rofiScale}" =~ ^[0-9]+$ ]] || rofiScale=${ROFI_SCALE:-10}
-    r_scale="configuration {font: \"JetBrainsMono Nerd Font ${rofiScale}\";}"
+    r_scale="* {font: \"JetBrainsMono Nerd Font ${rofiScale}\";}"
     # shellcheck disable=SC2154
     elem_border=$((hypr_border * 5))
     icon_border=$((elem_border - 5))

@@ -31,7 +31,7 @@ fn_select() {
     # Set rofi scaling
     rofiScale="${ROFI_ANIMATION_SCALE}"
     [[ "${rofiScale}" =~ ^[0-9]+$ ]] || rofiScale=${ROFI_SCALE:-10}
-    r_scale="configuration {font: \"JetBrainsMono Nerd Font ${rofiScale}\";}"
+    r_scale="* {font: \"JetBrainsMono Nerd Font ${rofiScale}\";}"
 
     # Window and element styling
     hypr_border=${hypr_border:-"$(hyprctl -j getoption decoration:rounding | jq '.int')"}

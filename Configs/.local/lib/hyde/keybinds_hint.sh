@@ -48,7 +48,7 @@ r_override="window {$r_height $r_width border: ${hypr_width}px; border-radius: $
 
 # Read hypr font size
 fnt_override=$(gsettings get org.gnome.desktop.interface font-name | awk '{gsub(/'\''/,""); print $NF}')
-fnt_override="configuration {font: \"JetBrainsMono Nerd Font ${fnt_override}\";}"
+fnt_override="* {font: \"JetBrainsMono Nerd Font ${fnt_override}\";}"
 
 # Read hypr theme icon
 icon_override=$(gsettings get org.gnome.desktop.interface icon-theme | sed "s/'//g")
