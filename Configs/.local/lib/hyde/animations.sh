@@ -31,7 +31,7 @@ fn_select() {
     # Set rofi scaling
     rofiScale="${ROFI_ANIMATION_SCALE}"
     [[ "${rofiScale}" =~ ^[0-9]+$ ]] || rofiScale=${ROFI_SCALE:-10}
-    r_scale="* {font: \"JetBrainsMono Nerd Font ${rofiScale}\";}"
+    font_override="* {font: \"JetBrainsMono Nerd Font ${rofiScale}\";}"
 
     # Window and element styling
     hypr_border=${hypr_border:-"$(hyprctl -j getoption decoration:rounding | jq '.int')"}
@@ -51,7 +51,7 @@ $animation_items"
         rofi -dmenu -i -select "$rofi_select" \
             -p "Select animation" \
             -theme-str "entry { placeholder: \"Select animation...\"; }" \
-            -theme-str "${r_scale}" \
+            -theme-str "${font_override}" \
             -theme-str "${r_override}" \
             -theme-str "$(get_rofi_pos)" \
             -theme "clipboard")

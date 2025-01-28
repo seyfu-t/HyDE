@@ -16,7 +16,7 @@ rofiAssetDir="${SHARE_DIR}/hyde/rofi/assets"
 #// set rofi scaling
 rofiScale=$ROFI_SELECT_SCALE
 [[ "${rofiScale}" =~ ^[0-9]+$ ]] || rofiScale=${ROFI_SCALE:-10}
-r_scale="* {font: \"JetBrainsMono Nerd Font ${rofiScale}\";}"
+font_override="* {font: \"JetBrainsMono Nerd Font ${rofiScale}\";}"
 elem_border=$((hypr_border * 5))
 icon_border=$((elem_border - 5))
 
@@ -47,7 +47,7 @@ RofiSel=$(
         while read styleNum; do
             echo -en "${styleNum}\x00icon\x1f${rofiAssetDir}/style_${styleNum}.png\n"
         done | sort -n | rofi -dmenu \
-        -theme-str "${r_scale}" \
+        -theme-str "${font_override}" \
         -theme-str "${r_override}" \
         -theme "${ROFI_SELECT_STYLE:-selector}" \
         -select "${rofiStyle}"

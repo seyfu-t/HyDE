@@ -48,7 +48,7 @@ fi
 
 [ "${hypr_border}" -eq 0 ] && elem_border="10" || elem_border=$((hypr_border * 2))
 r_override="window {border: ${hypr_width}px; border-radius: ${wind_border}px;} element {border-radius: ${elem_border}px;}"
-r_scale="* {font: \"JetBrainsMono Nerd Font ${rofiScale}\";}"
+font_override="* {font: \"JetBrainsMono Nerd Font ${rofiScale}\";}"
 i_override="$(get_hyprConf "ICON_THEME")"
 i_override="configuration {icon-theme: \"${i_override}\";}"
 
@@ -56,7 +56,7 @@ i_override="configuration {icon-theme: \"${i_override}\";}"
 rofi -show "${r_mode}" \
     -show-icons \
     -config "${rofi_config}" \
-    -theme-str "${r_scale}" \
+    -theme-str "${font_override}" \
     -theme-str "${i_override}" \
     -theme-str "${r_override}" \
     -theme "${rofi_config}" &
@@ -72,7 +72,7 @@ disown
 rofi -show "${r_mode}" \
     -show-icons \
     -config "${rofi_config}" \
-    -theme-str "${r_scale}" \
+    -theme-str "${font_override}" \
     -theme-str "${i_override}" \
     -theme-str "${r_override}" \
     -theme "${rofi_config}" \

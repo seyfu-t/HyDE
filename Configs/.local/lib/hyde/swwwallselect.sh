@@ -10,7 +10,7 @@ source "${scrDir}/globalcontrol.sh"
 
 rofiScale="${ROFI_WALLPAPER_SCALE}"
 [[ "${rofiScale}" =~ ^[0-9]+$ ]] || rofiScale=${ROFI_SCALE:-10}
-r_scale="* {font: \"JetBrainsMono Nerd Font ${rofiScale}\";}"
+font_override="* {font: \"JetBrainsMono Nerd Font ${rofiScale}\";}"
 # shellcheck disable=SC2154
 elem_border=$((hypr_border * 3))
 
@@ -47,7 +47,7 @@ done
 rofiSel=$(paste <(printf "%s\n" "${wallListBase[@]}") <(printf "|%s\n" "${wallHash[@]}") |
     awk -F '|' -v thmbDir="${thmbDir}" '{split($1, arr, "/"); print arr[length(arr)] "\x00icon\x1f" thmbDir "/" $2 ".sqre"}' |
     rofi -dmenu \
-        -theme-str "${r_scale}" \
+        -theme-str "${font_override}" \
         -theme-str "${r_override}" \
         -theme "${ROFI_WALLPAPER_STYLE:-selector}" \
         -select "${currentWall}" | xargs)
