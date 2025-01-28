@@ -63,10 +63,31 @@ set +e
 # error function
 ask_help() {
     cat <<HELP
-...Usage...
-$(print_prompt "$0 " -y "Theme-Name " -c "/Path/to/Configs")
-$(print_prompt "$0 " -y "Theme-Name " -c "https://github.com/User/Repository")
-$(print_prompt "$0 " -y "Theme-Name " -c "https://github.com/User/Repository/tree/branch")
+Usage:
+    $(print_prompt "$0 " -y "Theme-Name " -c "/Path/to/Configs")
+    $(print_prompt "$0 " -y "Theme-Name " -c "https://github.com/User/Repository")
+    $(print_prompt "$0 " -y "Theme-Name " -c "https://github.com/User/Repository/tree/branch")
+
+Options:
+    'export FORCE_THEME_UPDATE=true'       Overwrites the archived files (useful for updates and changes in gtk/icons/cursor archives)
+
+Supported Archive Format:
+    | File prfx       | Hyprland variable | Target dir                      |
+    | --------------- | ----------------- | --------------------------------|
+    | Gtk_            | \$GTK_THEME        | \$HOME/.local/share/themes     |
+    | Icon_           | \$ICON_THEME       | \$HOME/.local/share/icons      |
+    | Cursor_         | \$CURSOR_THEME     | \$HOME/.local/share/icons      |
+    | Sddm_           | \$SDDM_THEME       | /usr/share/sddm/themes         |
+    | Font_           | \$FONT             | \$HOME/.local/share/fonts      |
+    | Document-Font_  | \$DOCUMENT_FONT    | \$HOME/.local/share/fonts      |
+    | Monospace-Font_ | \$MONOSPACE_FONT   | \$HOME/.local/share/fonts      |
+    | Waybar-Font_    | \$WAYBAR_FONT      | \$HOME/.local/share/fonts      |
+    | Rofi-Font_      | \$ROFI_FONT        | \$HOME/.local/share/fonts      |
+
+Note:
+    Target directories without enough permissions will be skipped.
+        run 'sudo chmod -R 777 <target directory>'
+            example: 'sudo chmod -R 777 /usr/share/sddm/themes'
 HELP
 }
 
@@ -141,7 +162,7 @@ restore_list=""
 
 while IFS= read -r fileCheck; do
     if [[ -e "${Theme_Dir}/Configs/${fileCheck}" ]]; then
-        print_prompt -g "[FOUND] " "${fileCheck}"
+        print_prompt -g "[found] " "${fileCheck}"
         fileBase=$(basename "${fileCheck}")
         fileDir=$(dirname "${fileCheck}")
         restore_list+="Y|Y|\${HOME}/${fileDir}|${fileBase}|hyprland\n"
@@ -195,6 +216,9 @@ check_tars() {
         waybar-font)
             grep "^[[:space:]]*\$WAYBAR[-_]FONT\s*=" "${Fav_Theme_Dir}/hypr.theme" | cut -d '=' -f2 | sed 's/^[[:space:]]*//;s/[[:space:]]*$//'
             ;;
+        rofi-font)
+            grep "^[[:space:]]*\$ROFI[-_]FONT\s*=" "${Fav_Theme_Dir}/hypr.theme" | cut -d '=' -f2 | sed 's/^[[:space:]]*//;s/[[:space:]]*$//'
+            ;;
 
         *) # fallback to older method
             awk -F"[\"']" '/^[[:space:]]*exec[[:space:]]*=[[:space:]]*gsettings[[:space:]]*set[[:space:]]*org.gnome.desktop.interface[[:space:]]*'"${gsLow}"'-theme[[:space:]]*/ {last=$2} END {print last}' "${Fav_Theme_Dir}/hypr.theme"
@@ -225,6 +249,7 @@ check_tars Font
 check_tars Document-Font
 check_tars Monospace-Font
 check_tars Waybar-Font
+check_tars Rofi-Font
 print_prompt "" && [[ "${exit_flag}" = true ]] && exit 1
 
 # extract arcs
@@ -237,6 +262,7 @@ declare -A archive_map=(
     ["Document-Font"]="${HOME}/.local/share/fonts"
     ["Monospace-Font"]="${HOME}/.local/share/fonts"
     ["Waybar-Font"]="${HOME}/.local/share/fonts"
+    ["Rofi-Font"]="${HOME}/.local/share/fonts"
 )
 
 for prefix in "${!archive_map[@]}"; do
