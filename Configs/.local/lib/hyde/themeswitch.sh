@@ -28,6 +28,22 @@ Theme_Change() {
     done
 }
 
+toml_write() {
+    # Use kwriteconfig6 to write to config files in toml format
+    local config_file=$1
+    local group=$2
+    local key=$3
+    local value=$4
+
+    if ! kwriteconfig6 --file "${config_file}" --group "${group}" --key "${key}" "${value}" 2>/dev/null; then
+        if ! grep -q "^\[${group}\]" "${config_file}"; then
+            echo -e "\n[${group}]\n${key}=${value}" >>"${config_file}"
+        elif ! grep -q "^${key}=" "${config_file}"; then
+            sed -i "/^\[${group}\]/a ${key}=${value}" "${config_file}"
+        fi
+    fi
+}
+
 #// evaluate options
 quiet=false
 while getopts "qnps:" option; do
@@ -83,6 +99,8 @@ else
 fi
 gtkIcon="$(get_hyprConf "ICON_THEME")"
 cursorTheme="$(get_hyprConf "CURSOR_THEME")"
+font_name="$(get_hyprConf "FONT")"
+monospace_font_name="$(get_hyprConf "MONOSPACE_FONT")"
 
 # legacy and directory resolution
 if [ -d /run/current-system/sw/share/themes ]; then
@@ -93,43 +111,28 @@ if [ ! -d "${themesDir}/${gtkTheme}" ] && [ -d "$HOME/.themes/${gtkTheme}" ]; th
     cp -rns "$HOME/.themes/${gtkTheme}" "${themesDir}/${gtkTheme}"
 fi
 
-#// qtct
+#// qt5ct
 
-if ! kwriteconfig6 --file "${confDir}/qt5ct/qt5ct.conf" --group "Appearance" --key "icon_theme" "${gtkIcon}" 2>/dev/null; then
-    sed -i "/^icon_theme=/c\icon_theme=${gtkIcon}" "${confDir}/qt5ct/qt5ct.conf"
-fi
-if ! kwriteconfig6 --file "${confDir}/qt6ct/qt6ct.conf" --group "Appearance" --key "icon_theme" "${gtkIcon}" 2>/dev/null; then
-    sed -i "/^icon_theme=/c\icon_theme=${gtkIcon}" "${confDir}/qt6ct/qt6ct.conf"
-fi
+toml_write "${confDir}/qt5ct/qt5ct.conf" "Appearance" "icon_theme" "${gtkIcon}"
+toml_write "${confDir}/qt5ct/qt5ct.conf" "Fonts" "font" "\"${font_name},9\""
+toml_write "${confDir}/qt5ct/qt5ct.conf" "Fonts" "fixed" "\"${monospace_font_name},8\""
+
+# // qt6ct
+
+toml_write "${confDir}/qt6ct/qt6ct.conf" "Appearance" "icon_theme" "${gtkIcon}"
+toml_write "${confDir}/qt6ct/qt6ct.conf" "Fonts" "general" "\"${font_name},9\""
+toml_write "${confDir}/qt6ct/qt6ct.conf" "Fonts" "fixed" "\"${monospace_font_name},8\""
+
 # // kde plasma
-if ! kwriteconfig6 --file "${confDir}/kdeglobals" --group "Icons" --key "Theme" "${gtkIcon}" 2>/dev/null; then
-    sed -i "/^Theme=/c\Theme=${gtkIcon}" "${confDir}/kdeglobals"
-fi
 
-# Ensure [UiSettings] ColorScheme exists in kdeglobals // dolphin fix
-if ! kwriteconfig6 --file "${confDir}/kdeglobals" --group "UiSettings" --key "ColorScheme" "${gtkTheme}" 2>/dev/null; then
-    if ! grep -q "^\[UiSettings\]" "${confDir}/kdeglobals"; then
-        echo -e "\n[UiSettings]\nColorScheme=${gtkTheme}" >>"${confDir}/kdeglobals"
-    elif ! grep -q "^ColorScheme=" "${confDir}/kdeglobals"; then
-        sed -i "/^\[UiSettings\]/a ColorScheme=${gtkTheme}" "${confDir}/kdeglobals"
-    fi
-fi
+toml_write "${confDir}/kdeglobals" "Icons" "Theme" "${gtkIcon}"
+toml_write "${confDir}/kdeglobals" "UISettings" "ColorScheme" "${gtkTheme}"
+toml_write "${confDir}/kdeglobals" "General" "TerminalApplication" "${TERMINAL}"
 
 # For KDE stuff
-if ! kwriteconfig6 --file "${confDir}/kdeglobals" --group "KDE" --key "windgetStyke" "kvantum" 2>/dev/null; then
-    if ! grep -q "^\[KDE\]" "${confDir}/kdeglobals"; then
-        echo -e "\n[KDE]\nwidgetStyle=kvantum" >>"${confDir}/kdeglobals"
-    elif ! grep -q "^widgetStyle=" "${confDir}/kdeglobals"; then
-        sed -i "/^\[KDE\]/a widgetStyle=kvantum" "${confDir}/kdeglobals"
-    fi
-fi
-if ! kwriteconfig6 --file "${confDir}/kdeglobals" --group "Colors:View" --key "BackgroundNormal" "#00000000" 2>/dev/null; then
-    if ! grep -q "^\[Colors:View\]" "${confDir}/kdeglobals"; then
-        echo -e "\n[Colors:View]\nBackgroundNormal=#00000000" >>"${confDir}/kdeglobals"
-    elif ! grep -q "^BackgroundNormal=" "${confDir}/kdeglobals"; then
-        sed -i "/^\[Colors:View\]/a BackgroundNormal=#00000000" "${confDir}/kdeglobals"
-    fi
-fi
+
+toml_write "${confDir}/kdeglobals" "KDE" "widgetStyle" "kvantum"
+toml_write "${confDir}/kdeglobals" "Colors:View" "BackgroundNormal" "#00000000"
 
 # // gtk2
 
@@ -155,16 +158,19 @@ ln -s "${themesDir}/${gtk4Theme}/gtk-4.0" "${confDir}/gtk-4.0"
 
 #// flatpak GTK
 
-pkg_installed flatpak && flatpak \
-    --user override \
-    --filesystem="${themesDir}":ro \
-    --filesystem="$HOME/.themes":ro \
-    --filesystem="$HOME/.icons":ro \
-    --filesystem="$HOME/.local/share/icons":ro \
-    --env=GTK_THEME="${gtk4Theme}" \
-    --env=ICON_THEME="${gtkIcon}"
-pkg_installed flatpak && flatpak remote-add --user --if-not-exists flathub https://flathub.org/repo/flathub.flatpakrepo
+if pkg_installed flatpak; then
+    flatpak \
+        --user override \
+        --filesystem="${themesDir}":ro \
+        --filesystem="$HOME/.themes":ro \
+        --filesystem="$HOME/.icons":ro \
+        --filesystem="$HOME/.local/share/icons":ro \
+        --env=GTK_THEME="${gtk4Theme}" \
+        --env=ICON_THEME="${gtkIcon}"
 
+    flatpak remote-add --user --if-not-exists flathub https://flathub.org/repo/flathub.flatpakrepo &
+
+fi
 # // xsettingsd
 
 sed -i -e "/^Net\/ThemeName /c\Net\/ThemeName \"${gtkTheme}\"" \
