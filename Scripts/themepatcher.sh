@@ -83,6 +83,7 @@ Supported Archive Format:
     | Monospace-Font_ | \$MONOSPACE_FONT   | \$HOME/.local/share/fonts      |
     | Waybar-Font_    | \$WAYBAR_FONT      | \$HOME/.local/share/fonts      |
     | Rofi-Font_      | \$ROFI_FONT        | \$HOME/.local/share/fonts      |
+    | Notification-Font_ | \$NOTIFICATION_FONT | \$HOME/.local/share/fonts  |
 
 Note:
     Target directories without enough permissions will be skipped.
@@ -219,6 +220,9 @@ check_tars() {
         rofi-font)
             grep "^[[:space:]]*\$ROFI[-_]FONT\s*=" "${Fav_Theme_Dir}/hypr.theme" | cut -d '=' -f2 | sed 's/^[[:space:]]*//;s/[[:space:]]*$//'
             ;;
+        notification-font)
+            grep "^[[:space:]]*\$NOTIFICATION[-_]FONT\s*=" "${Fav_Theme_Dir}/hypr.theme" | cut -d '=' -f2 | sed 's/^[[:space:]]*//;s/[[:space:]]*$//'
+            ;;
 
         *) # fallback to older method
             awk -F"[\"']" '/^[[:space:]]*exec[[:space:]]*=[[:space:]]*gsettings[[:space:]]*set[[:space:]]*org.gnome.desktop.interface[[:space:]]*'"${gsLow}"'-theme[[:space:]]*/ {last=$2} END {print last}' "${Fav_Theme_Dir}/hypr.theme"
@@ -250,6 +254,7 @@ check_tars Document-Font
 check_tars Monospace-Font
 check_tars Waybar-Font
 check_tars Rofi-Font
+check_tars Notification-Font
 print_prompt "" && [[ "${exit_flag}" = true ]] && exit 1
 
 # extract arcs
@@ -263,6 +268,7 @@ declare -A archive_map=(
     ["Monospace-Font"]="${HOME}/.local/share/fonts"
     ["Waybar-Font"]="${HOME}/.local/share/fonts"
     ["Rofi-Font"]="${HOME}/.local/share/fonts"
+    ["Notification-Font"]="${HOME}/.local/share/fonts"
 )
 
 for prefix in "${!archive_map[@]}"; do
