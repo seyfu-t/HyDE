@@ -101,4 +101,4 @@ rofi -show "${r_mode}" \
     -theme-str "${r_override}" \
     -theme "${rofi_config}" \
     -dump-theme |
-    { grep -q "fullscreen.*true" && set_conf "ROFI_LAUNCH_FULLSCREEN" "true"; } || set_conf "ROFI_LAUNCH_FULLSCREEN" "false"
+    { grep -q "fullscreen.*true" && touch "${HYDE_STATE_HOME}/fullscreen_${r_mode}"; } || rm -f "${HYDE_STATE_HOME}/fullscreen_${r_mode}"
