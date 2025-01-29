@@ -347,8 +347,10 @@ if [ -n "${single_template}" ]; then
 fi
 
 # Run when hyprland is running
-[ -n "$HYPRLAND_INSTANCE_SIGNATURE" ] && hyprctl keyword misc:disable_autoreload 1 -q && trap 'print_log -sec "[wallbash]" -stat "reload"  "Hyprland" && hyprctl reload -q' EXIT
-
+if [ -n "$HYPRLAND_INSTANCE_SIGNATURE" ]; then
+    hyprctl keyword misc:disable_autoreload 1 -q
+    trap 'print_log -sec "[wallbash]" -stat "reload"  "Hyprland" && hyprctl reload -q' EXIT
+fi
 # Print to terminal the colors
 [ -t 1 ] && "${scrDir}/wallbash.print.colors.sh"
 

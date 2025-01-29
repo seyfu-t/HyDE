@@ -88,7 +88,9 @@ export reload_flag=1
 source "${scrDir}/globalcontrol.sh"
 
 #// hypr
-[ -n "$HYPRLAND_INSTANCE_SIGNATURE" ] && hyprctl keyword misc:disable_autoreload 1 -q
+if [ -n "$HYPRLAND_INSTANCE_SIGNATURE" ]; then
+    hyprctl keyword misc:disable_autoreload 1
+fi
 # shellcheck disable=SC2154
 sed '1d' "${HYDE_THEME_DIR}/hypr.theme" >"${confDir}/hypr/themes/theme.conf" # Useless and already handled by swwwallbash.sh but kept for robustness
 # shellcheck disable=SC2154
@@ -114,14 +116,14 @@ fi
 #// qt5ct
 
 toml_write "${confDir}/qt5ct/qt5ct.conf" "Appearance" "icon_theme" "${gtkIcon}"
-toml_write "${confDir}/qt5ct/qt5ct.conf" "Fonts" "font" "\"${font_name},9\""
-toml_write "${confDir}/qt5ct/qt5ct.conf" "Fonts" "fixed" "\"${monospace_font_name},8\""
+toml_write "${confDir}/qt5ct/qt5ct.conf" "Fonts" "general" "\"${font_name},10,-1,5,400,0,0,0,0,0,0,0,0,0,0,1,\""
+toml_write "${confDir}/qt5ct/qt5ct.conf" "Fonts" "fixed" "\"${monospace_font_name},9,-1,5,400,0,0,0,0,0,0,0,0,0,0,1,\""
 
 # // qt6ct
 
 toml_write "${confDir}/qt6ct/qt6ct.conf" "Appearance" "icon_theme" "${gtkIcon}"
-toml_write "${confDir}/qt6ct/qt6ct.conf" "Fonts" "general" "\"${font_name},9\""
-toml_write "${confDir}/qt6ct/qt6ct.conf" "Fonts" "fixed" "\"${monospace_font_name},8\""
+toml_write "${confDir}/qt6ct/qt6ct.conf" "Fonts" "general" "\"${font_name},10,-1,5,400,0,0,0,0,0,0,0,0,0,0,1,\""
+toml_write "${confDir}/qt6ct/qt6ct.conf" "Fonts" "fixed" "\"${monospace_font_name},9,-1,5,400,0,0,0,0,0,0,0,0,0,0,1,\""
 
 # // kde plasma
 
