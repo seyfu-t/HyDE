@@ -69,7 +69,7 @@ Usage:
     $(print_prompt "$0 " -y "Theme-Name " -c "https://github.com/User/Repository/tree/branch")
 
 Options:
-    'export FORCE_THEME_UPDATE=true'       Overwrites the archived files (useful for updates and changes in gtk/icons/cursor archives)
+    'export FULL_THEME_UPDATE=true'       Overwrites the archived files (useful for updates and changes in gtk/icons/cursor archives)
 
 Supported Archive Format:
     | File prfx       | Hyprland variable | Target dir                      |
@@ -271,7 +271,7 @@ for prefix in "${!archive_map[@]}"; do
     tgtDir="${archive_map[$prefix]}"
     [ -d "${tgtDir}" ] || mkdir -p "${tgtDir}"
     tgtChk="$(basename "$(tar -tf "${tarFile}" | cut -d '/' -f1 | sort -u)")"
-    [ -d "${tgtDir}/${tgtChk}" ] && print_prompt -y "[skip] " "\"${tgtDir}/${tgtChk}\" already exists" && continue
+    [[ "${FULL_THEME_UPDATE}" = true ]] || { [ -d "${tgtDir[indx]}/${tgtChk}" ] && print_prompt -y "[skip] " "\"${tgtDir[indx]}/${tgtChk}\" already exists" && continue; }
     print_prompt -g "[extracting] " "${tarFile} --> ${tgtDir}"
     tar -xf "${tarFile}" -C "${tgtDir}"
 done
