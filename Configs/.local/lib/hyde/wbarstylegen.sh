@@ -105,7 +105,6 @@ left | right)
 esac
 
 font_name=${WAYBAR_FONT:-$(get_hyprConf "WAYBAR_FONT")}
-font_name=${font_name:-$(get_hyprConf "FONT")}
 export font_name=${font_name:-"JetBrainsMono Nerd Font"}
 
 # list modules and generate theme style
