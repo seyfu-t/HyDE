@@ -180,12 +180,11 @@ sed -i -e "/^Net\/ThemeName /c\Net\/ThemeName \"${gtkTheme}\"" \
 
 # // Legacy themes using ~/.themes also fixed GTK4 not following xdg
 
-if [ ! -d "$HOME/.themes" ]; then
+if [ ! -L "$HOME/.themes/${gtkTheme}" ] && [ -d "${themesDir}/${gtkTheme}" ]; then
+    print_log -sec "theme" -warn "linking" "${gtkTheme} to ~/.themes to fix GTK4 not following xdg"
     mkdir -p "$HOME/.themes"
-fi
-
-if [ ! -L "$HOME/.themes" ] && [ -d "${themesDir}/" ]; then
-    ln -snf "${themesDir}"/* "$HOME/.themes"
+    rm -rf "$HOME/.themes/${gtkTheme}"
+    ln -snf "${themesDir}/${gtkTheme}" "$HOME/.themes/"
 fi
 
 #// wallpaper
