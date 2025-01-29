@@ -90,7 +90,7 @@ HELP
 
 case "$1" in
 
--s | --select-menu)
+-m | -s | --select-menu)
     selector_menu
     ;;
 -*)
