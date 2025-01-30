@@ -69,21 +69,21 @@ Usage:
     $(print_prompt "$0 " -y "Theme-Name " -c "https://github.com/User/Repository/tree/branch")
 
 Options:
-    'export FULL_THEME_UPDATE=true'       Overwrites the archived files (useful for updates and changes in gtk/icons/cursor archives)
+    'export FULL_THEME_UPDATE=true'       Overwrites the archived files (useful for updates and changes in archives)
 
 Supported Archive Format:
-    | File prfx       | Hyprland variable | Target dir                      |
-    | --------------- | ----------------- | --------------------------------|
-    | Gtk_            | \$GTK_THEME        | \$HOME/.local/share/themes     |
-    | Icon_           | \$ICON_THEME       | \$HOME/.local/share/icons      |
-    | Cursor_         | \$CURSOR_THEME     | \$HOME/.local/share/icons      |
-    | Sddm_           | \$SDDM_THEME       | /usr/share/sddm/themes         |
-    | Font_           | \$FONT             | \$HOME/.local/share/fonts      |
-    | Document-Font_  | \$DOCUMENT_FONT    | \$HOME/.local/share/fonts      |
-    | Monospace-Font_ | \$MONOSPACE_FONT   | \$HOME/.local/share/fonts      |
-    | Waybar-Font_    | \$WAYBAR_FONT      | \$HOME/.local/share/fonts      |
-    | Rofi-Font_      | \$ROFI_FONT        | \$HOME/.local/share/fonts      |
+    | File prfx          | Hyprland variable | Target dir                      |
+    | ---------------    | ----------------- | --------------------------------|
+    | Gtk_               | \$GTK_THEME        | \$HOME/.local/share/themes     |
+    | Icon_              | \$ICON_THEME       | \$HOME/.local/share/icons      |
+    | Cursor_            | \$CURSOR_THEME     | \$HOME/.local/share/icons      |
+    | Sddm_              | \$SDDM_THEME       | /usr/share/sddm/themes         |
+    | Font_              | \$FONT             | \$HOME/.local/share/fonts      |
+    | Document-Font_     | \$DOCUMENT_FONT    | \$HOME/.local/share/fonts      |
+    | Monospace-Font_    | \$MONOSPACE_FONT   | \$HOME/.local/share/fonts      |
     | Notification-Font_ | \$NOTIFICATION_FONT | \$HOME/.local/share/fonts  |
+    | Bar-Font_          | \$BAR_FONT         | \$HOME/.local/share/fonts      |
+    | Menu-Font_         | \$MENU_FONT        | \$HOME/.local/share/fonts      |
 
 Note:
     Target directories without enough permissions will be skipped.
@@ -214,11 +214,11 @@ check_tars() {
         monospace-font)
             grep "^[[:space:]]*\$MONOSPACE[-_]FONT\s*=" "${Fav_Theme_Dir}/hypr.theme" | cut -d '=' -f2 | sed 's/^[[:space:]]*//;s/[[:space:]]*$//'
             ;;
-        waybar-font)
-            grep "^[[:space:]]*\$WAYBAR[-_]FONT\s*=" "${Fav_Theme_Dir}/hypr.theme" | cut -d '=' -f2 | sed 's/^[[:space:]]*//;s/[[:space:]]*$//'
+        bar-font)
+            grep "^[[:space:]]*\$BAR[-_]FONT\s*=" "${Fav_Theme_Dir}/hypr.theme" | cut -d '=' -f2 | sed 's/^[[:space:]]*//;s/[[:space:]]*$//'
             ;;
-        rofi-font)
-            grep "^[[:space:]]*\$ROFI[-_]FONT\s*=" "${Fav_Theme_Dir}/hypr.theme" | cut -d '=' -f2 | sed 's/^[[:space:]]*//;s/[[:space:]]*$//'
+        menu-font)
+            grep "^[[:space:]]*\$MENU[-_]FONT\s*=" "${Fav_Theme_Dir}/hypr.theme" | cut -d '=' -f2 | sed 's/^[[:space:]]*//;s/[[:space:]]*$//'
             ;;
         notification-font)
             grep "^[[:space:]]*\$NOTIFICATION[-_]FONT\s*=" "${Fav_Theme_Dir}/hypr.theme" | cut -d '=' -f2 | sed 's/^[[:space:]]*//;s/[[:space:]]*$//'
@@ -252,8 +252,8 @@ check_tars Sddm
 check_tars Font
 check_tars Document-Font
 check_tars Monospace-Font
-check_tars Waybar-Font
-check_tars Rofi-Font
+check_tars Bar-Font
+check_tars Menu-Font
 check_tars Notification-Font
 print_prompt "" && [[ "${exit_flag}" = true ]] && exit 1
 
@@ -266,8 +266,8 @@ declare -A archive_map=(
     ["Font"]="${HOME}/.local/share/fonts"
     ["Document-Font"]="${HOME}/.local/share/fonts"
     ["Monospace-Font"]="${HOME}/.local/share/fonts"
-    ["Waybar-Font"]="${HOME}/.local/share/fonts"
-    ["Rofi-Font"]="${HOME}/.local/share/fonts"
+    ["Bar-Font"]="${HOME}/.local/share/fonts"
+    ["Menu-Font"]="${HOME}/.local/share/fonts"
     ["Notification-Font"]="${HOME}/.local/share/fonts"
 )
 
