@@ -234,14 +234,19 @@ check_tars() {
     gsVal=${gsVal:-$(awk -F"[\"']" '/^[[:space:]]*exec[[:space:]]*=[[:space:]]*gsettings[[:space:]]*set[[:space:]]*org.gnome.desktop.interface[[:space:]]*'"${gsLow}"'-theme[[:space:]]*/ {last=$2} END {print last}' "${Fav_Theme_Dir}/hypr.theme")}
 
     if [ -n "${gsVal}" ]; then
-        print_prompt -g "[OK] " "hypr.theme :: [${gsLow}]" -b " ${gsVal}"
-        trArc="$(find "${Theme_Dir}" -type f -name "${inVal}_*.tar.*")"
-        [ -f "${trArc}" ] && [ "$(echo "${trArc}" | wc -l)" -eq 1 ] && trVal="$(basename "$(tar -tf "${trArc}" | cut -d '/' -f1 | sort -u)")" && trVal="$(echo "${trVal}" | grep -w "${gsVal}")"
-        print_prompt -g "[OK] " "../*.tar.* :: [${gsLow}]" -b " ${trVal}"
-        [ "${trVal}" != "${gsVal}" ] && print_prompt -r "[ERROR] " "${gsLow}-theme set in hypr.theme does not exist in ${inVal}_*.tar.*" && exit_flag=true
+
+        if [[ "${gsVal}" =~ ^\$\{?[A-Za-z_][A-Za-z0-9_]*\}?$ ]]; then # check is a variable is set into a variable eg $FONT=$DOCUMENT_FONT
+            print_prompt -y "[warn] " "Variable ${gsVal} detected,be sure ${gsVal} is set in hypr.theme, skipping check"
+        else
+            print_prompt -g "[OK] " "hypr.theme :: [${gsLow}]" -b " ${gsVal}"
+            trArc="$(find "${Theme_Dir}" -type f -name "${inVal}_*.tar.*")"
+            [ -f "${trArc}" ] && [ "$(echo "${trArc}" | wc -l)" -eq 1 ] && trVal="$(basename "$(tar -tf "${trArc}" | cut -d '/' -f1 | sort -u)")" && trVal="$(echo "${trVal}" | grep -w "${gsVal}")"
+            print_prompt -g "[OK] " "../*.tar.* :: [${gsLow}]" -b " ${trVal}"
+            [ "${trVal}" != "${gsVal}" ] && print_prompt -r "[ERROR] " "${gsLow} set in hypr.theme does not exist in ${inVal}_*.tar.*" && exit_flag=true
+        fi
     else
         [ "${2}" == "--mandatory" ] && print_prompt -r "[ERROR] " "hypr.theme :: [${gsLow}] Not Found" && exit_flag=true && return 0
-        print_prompt -y "[warn] " "hypr.theme :: [${gsLow}] Not Found"
+        print_prompt -y "[warn] " "hypr.theme :: [${gsLow}] Not Found, don't worry if it's not needed"
     fi
 }
 
