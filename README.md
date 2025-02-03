@@ -15,6 +15,7 @@ Multi-language README support
 <!-- [![en](https://img.shields.io/badge/lang-en-red.svg)](README.md) -->
 [![es](https://img.shields.io/badge/lang-es-yellow.svg)](Source/docs/README.es.md)
 [![de](https://img.shields.io/badge/lang-de-black.svg)](Source/docs/README.de.md)
+[![中文](https://img.shields.io/badge/lang-中文-orange.svg)](Source/docs/README.zh.md)
 
 <div align="center">
 
@@ -49,7 +50,7 @@ Check this out for the full note:
 <img alt="Dynamic JSON Badge" src="https://img.shields.io/badge/dynamic/json?url=https%3A%2F%2Fdiscordapp.com%2Fapi%2Finvites%2FmT5YqjaJFh%3Fwith_counts%3Dtrue&query=%24.approximate_presence_count&suffix=%20online&style=for-the-badge&logo=discord&logoSize=auto&label=The%20HyDe%20Project&labelColor=ebbcba&color=c79bf0">
 -->
 
-https://github.com/prasanthrangan/hyprdots/assets/106020512/7f8fadc8-e293-4482-a851-e9c6464f5265
+<https://github.com/prasanthrangan/hyprdots/assets/106020512/7f8fadc8-e293-4482-a851-e9c6464f5265>
 
 <a id="installation"></a>
 <img src="https://readme-typing-svg.herokuapp.com?font=Lexend+Giga&size=25&pause=1000&color=CCA9DD&width=435&lines=INSTALLATION" width="450"/>
