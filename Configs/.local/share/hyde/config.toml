@@ -175,3 +175,9 @@ steps = 5     # Number of steps to increase/decrease brightness
 #  sysmonlaunch.sh configuration // System monitor configuration
 execute = "btop"                   # Default command to execute // accepts executable or app.desktop
 commands = ["btop", "htop", "top"] # Fallback command options
+
+
+[notification]
+# notification script can use this configuration
+font = "mononoki Nerd Font"         # Font for notifications
+font_size = 8                     # Font size for notifications
