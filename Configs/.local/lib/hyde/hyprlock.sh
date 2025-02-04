@@ -225,15 +225,15 @@ source = ${hyde_hyprlock_conf}
 # - Note that you needed to have a network connection to download the font.
 # - You also need to restart Hyprlock to apply the font.
 
-# cmd [update:1000] $MPRIS_TEXT
+# cmd [update:1000] \$MPRIS_TEXT
 # - Text from media players in "Title  Author" format.
 
 
-# cmd [update:1000] $SPLASH_CMD
+# cmd [update:1000] \$SPLASH_CMD
 # - Outputs the song title when MPRIS is available,
 # - otherwise, it will output the splash command.
 
-# cmd [update:1] $CAVA_CMD
+# cmd [update:1] \$CAVA_CMD
 # - The command to be executed to get the CAVA output.
 # - ⚠️ (Use with caution as it eats up the CPU.)
 
