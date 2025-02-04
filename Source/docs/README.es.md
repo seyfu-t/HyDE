@@ -1,19 +1,21 @@
 <div align = center>
-    <a href="https://discord.gg/AYbJ9MJez7">
-<img alt="Dynamic JSON Badge" src="https://img.shields.io/badge/dynamic/json?url=https%3A%2F%2Fdiscordapp.com%2Fapi%2Finvites%2FmT5YqjaJFh%3Fwith_counts%3Dtrue&query=%24.approximate_member_count&suffix=%20members&style=for-the-badge&logo=discord&logoSize=auto&label=The%20HyDe%20Project&labelColor=ebbcba&color=c79bf0">
-    </a>
+  <a href="https://discord.gg/AYbJ9MJez7">
+    <img alt="Dynamic JSON Badge" src="https://img.shields.io/badge/dynamic/json?url=https%3A%2F%2Fdiscordapp.com%2Fapi%2Finvites%2FmT5YqjaJFh%3Fwith_counts%3Dtrue&query=%24.approximate_member_count&suffix=%20members&style=for-the-badge&logo=discord&logoSize=auto&label=The%20HyDe%20Project&labelColor=ebbcba&color=c79bf0">
+  </a>
 </div>
 
-###### _<div align="right"><sub>// diseño por t2</sub></div>_
+###### _<div align="right"><a id=-design-by-t2></a><sub>// diseño por t2</sub></div>_
 
-![hyde_banner](https://github.com/HyDE-Project/HyDE/blob/master/Source/assets/hyde_banner.png?raw=true)
+![hyde_banner](../assets/hyde_banner.png)
 
 <!--
-Multi-language README support
+Soporte multilingüe para el README
 -->
 
-[![en](https://img.shields.io/badge/lang-en-red.svg)](https://github.com/HyDE-Project/HyDE/blob/master/README.md)
-[![es](https://img.shields.io/badge/lang-es-yellow.svg)](https://github.com/HyDE-Project/HyDE/blob/master/Source/docs/README.es.md)
+[![en](https://img.shields.io/badge/lang-en-red.svg)](../../README.md)
+[![de](https://img.shields.io/badge/lang-de-black.svg)](README.de.md)
+[![中文](https://img.shields.io/badge/lang-中文-orange.svg)](README.zh.md)
+<!-- [![es](https://img.shields.io/badge/lang-es-yellow.svg)](README.es.md) -->
 
 <div align="center">
 
@@ -31,11 +33,11 @@ Multi-language README support
 
 <div align="center">
   <div style="display: flex; flex-wrap: nowrap; justify-content: center;">
-    <img src="https://github.com/HyDE-Project/HyDE/blob/master/Source/assets/archlinux.png?raw=true" alt="Arch Linux" style="width: 10%; margin: 10px;"/>
-    <img src="https://github.com/HyDE-Project/HyDE/blob/master/Source/assets/cachyos.png?raw=true" alt="CachyOS" style="width: 10%; margin: 10px;"/>
-    <img src="https://github.com/HyDE-Project/HyDE/blob/master/Source/assets/endeavouros.png?raw=true" alt="EndeavourOS" style="width: 10%; margin: 10px;"/>
-    <img src="https://github.com/HyDE-Project/HyDE/blob/master/Source/assets/garuda.png?raw=true" alt="Garuda" style="width: 10%; margin: 10px;"/>
-    <img src="https://github.com/HyDE-Project/HyDE/blob/master/Source/assets/nixos.png?raw=true" alt="NixOS" style="width: 10%; margin: 10px;"/>
+    <img src="../assets/archlinux.png" alt="Arch Linux" style="width: 10%; margin: 10px;"/>
+    <img src="../assets/cachyos.png" alt="CachyOS" style="width: 10%; margin: 10px;"/>
+    <img src="../assets/endeavouros.png" alt="EndeavourOS" style="width: 10%; margin: 10px;"/>
+    <img src="../assets/garuda.png" alt="Garuda" style="width: 10%; margin: 10px;"/>
+    <img src="../assets/nixos.png" alt="NixOS" style="width: 10%; margin: 10px;"/>
   </div>
 </div>
 
@@ -48,7 +50,7 @@ Mira esto para ver la nota completa:
 <img alt="Dynamic JSON Badge" src="https://img.shields.io/badge/dynamic/json?url=https%3A%2F%2Fdiscordapp.com%2Fapi%2Finvites%2FmT5YqjaJFh%3Fwith_counts%3Dtrue&query=%24.approximate_presence_count&suffix=%20online&style=for-the-badge&logo=discord&logoSize=auto&label=The%20HyDe%20Project&labelColor=ebbcba&color=c79bf0">
 -->
 
-https://github.com/prasanthrangan/hyprdots/assets/106020512/7f8fadc8-e293-4482-a851-e9c6464f5265
+<https://github.com/prasanthrangan/hyprdots/assets/106020512/7f8fadc8-e293-4482-a851-e9c6464f5265>
 
 <a id="instalación"></a>  
 <img src="https://readme-typing-svg.herokuapp.com?font=Lexend+Giga&size=25&pause=1000&color=CCA9DD&width=435&lines=INSTALACI%C3%93N" width="450"/>
@@ -82,7 +84,6 @@ cd ~/HyDE/Scripts
 > ```
 
 <!--
-
 As a second install option, you can also use `Hyde-install`, which might be easier for some.
 View installation instructions for HyDE in [Hyde-cli - Usage](https://github.com/kRHYME7/Hyde-cli?tab=readme-ov-file#usage).
 -->
@@ -195,6 +196,7 @@ Para obtener más información, visite [Temas HyDE](https://github.com/HyDE-Proj
 <img src="https://raw.githubusercontent.com/prasanthrangan/hyprdots/main/Source/assets/game_launch_4.png"/></td><td>
 <img src="https://raw.githubusercontent.com/prasanthrangan/hyprdots/main/Source/assets/game_launch_5.png"/></td></tr></table></div>
 
+<!--
 <div align="right">
   <br>
   <a href="#-design-by-t2"><kbd> <br> 🡅 <br> </kbd></a>
@@ -203,6 +205,7 @@ Para obtener más información, visite [Temas HyDE](https://github.com/HyDE-Proj
 <div align="center">
 
 </div>
+-->
 
 <div align="right">
   <br>

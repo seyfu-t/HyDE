@@ -1,22 +1,49 @@
+<div align = center>
+  <a href="https://discord.gg/AYbJ9MJez7">
+    <img alt="Dynamic JSON Badge" src="https://img.shields.io/badge/dynamic/json?url=https%3A%2F%2Fdiscordapp.com%2Fapi%2Finvites%2FmT5YqjaJFh%3Fwith_counts%3Dtrue&query=%24.approximate_member_count&suffix=%20members&style=for-the-badge&logo=discord&logoSize=auto&label=The%20HyDe%20Project&labelColor=ebbcba&color=c79bf0">
+  </a>
+</div>
+
+###### _<div align="right"><a id=-design-by-t2></a><sub>// design by t2</sub></div>_
+
+![hyde_banner](../assets/hyde_banner.png)
+
 <!--
 Multi-language README support
 -->
 
-[![en](https://img.shields.io/badge/lang-en-red.svg)](https://github.com/HyDE-Project/HyDE/blob/master/README.md)
-[![es](https://img.shields.io/badge/lang-es-yellow.svg)](https://github.com/HyDE-Project/HyDE/blob/master/Source/assets/readme/README.es.md)
+<!-- [![en](https://img.shields.io/badge/lang-en-red.svg)](README.md) -->
 
-# Repositorio oficial del proyecto HyDE
+[![en](https://img.shields.io/badge/lang-en-red.svg)](../../README.md)
+[![es](https://img.shields.io/badge/lang-es-yellow.svg)](README.es.md)
+[![de](https://img.shields.io/badge/lang-de-black.svg)](README.de.md)
 
-Consulte aquí la nota completa:
-[Viaje a HyDE y más allá](./Hyprdots-to-HyDE.md)
+<div align="center">
 
-###### _<div align="right"><sub>// design by t2</sub></div>_
+<br>
 
-<div align = center>
-    <a href="https://discord.gg/AYbJ9MJez7">
-<img alt="Dynamic JSON Badge" src="https://img.shields.io/badge/dynamic/json?url=https%3A%2F%2Fdiscordapp.com%2Fapi%2Finvites%2FmT5YqjaJFh%3Fwith_counts%3Dtrue&query=%24.approximate_member_count&suffix=%20members&style=for-the-badge&logo=discord&logoSize=auto&label=The%20HyDe%20Project&labelColor=ebbcba&color=c79bf0">
-    </a>
+<a href="#installation"><kbd> <br> 安装 <br> </kbd></a>&ensp;&ensp;
+<a href="#themes"><kbd> <br> 主题 <br> </kbd></a>&ensp;&ensp;
+<a href="#styles"><kbd> <br> 风格 <br> </kbd></a>&ensp;&ensp;
+<a href="KEYBINDINGS.md"><kbd> <br> 按键映射 <br> </kbd></a>&ensp;&ensp;
+<a href="https://www.youtube.com/watch?v=2rWqdKU1vu8&list=PLt8rU_ebLsc5yEHUVsAQTqokIBMtx3RFY&index=1"><kbd> <br> Youtube <br> </kbd></a>&ensp;&ensp;
+<a href="https://github.com/hyde-project/hyde/wiki"><kbd> <br> Wiki <br> </kbd></a>&ensp;&ensp;
+<a href="https://discord.gg/qWehcFJxPa"><kbd> <br> Discord <br> </kbd></a>
+
+</div><br><br>
+
+<div align="center">
+  <div style="display: flex; flex-wrap: nowrap; justify-content: center;">
+    <img src="../assets/archlinux.png" alt="Arch Linux" style="width: 10%; margin: 10px;"/>
+    <img src="../assets/cachyos.png" alt="CachyOS" style="width: 10%; margin: 10px;"/>
+    <img src="../assets/endeavouros.png" alt="EndeavourOS" style="width: 10%; margin: 10px;"/>
+    <img src="../assets/garuda.png" alt="Garuda" style="width: 10%; margin: 10px;"/>
+    <img src="../assets/nixos.png" alt="NixOS" style="width: 10%; margin: 10px;"/>
+  </div>
 </div>
+
+看这里了解完整说明：
+[Journey to HyDE and beyond](./Hyprdots-to-HyDE.md)
 
 <!--
 <img alt="Dynamic JSON Badge" src="https://img.shields.io/badge/dynamic/json?url=https%3A%2F%2Fdiscordapp.com%2Fapi%2Finvites%2FmT5YqjaJFh%3Fwith_counts%3Dtrue&query=%24.approximate_member_count&suffix=%20members&style=for-the-badge&logo=discord&logoSize=auto&label=The%20HyDe%20Project&labelColor=ebbcba&color=c79bf0">
@@ -24,41 +51,27 @@ Consulte aquí la nota completa:
 <img alt="Dynamic JSON Badge" src="https://img.shields.io/badge/dynamic/json?url=https%3A%2F%2Fdiscordapp.com%2Fapi%2Finvites%2FmT5YqjaJFh%3Fwith_counts%3Dtrue&query=%24.approximate_presence_count&suffix=%20online&style=for-the-badge&logo=discord&logoSize=auto&label=The%20HyDe%20Project&labelColor=ebbcba&color=c79bf0">
 -->
 
-<div align="center">
+<https://github.com/prasanthrangan/hyprdots/assets/106020512/7f8fadc8-e293-4482-a851-e9c6464f5265>
 
-![hyde_banner](https://raw.githubusercontent.com/prasanthrangan/hyprdots/main/Source/assets/hyde_banner.png)
+<a id="installation"></a>
+<img src="https://readme-typing-svg.herokuapp.com?font=Lexend+Giga&size=25&pause=1000&color=CCA9DD&width=435&lines=INSTALLATION" width="450"/>
 
-<br>
+---
 
-<a href="#instalación"><kbd> <br> Instalación <br> </kbd></a>&ensp;&ensp;
-<a href="#temas"><kbd> <br> Temas <br> </kbd></a>&ensp;&ensp;
-<a href="#estilos"><kbd> <br> Estilos <br> </kbd></a>&ensp;&ensp;
-<a href="KEYBINDINGS.es.md"><kbd> <br> Combinaciones <br> </kbd></a>&ensp;&ensp;
-<a href="https://www.youtube.com/watch?v=2rWqdKU1vu8&list=PLt8rU_ebLsc5yEHUVsAQTqokIBMtx3RFY&index=1"><kbd> <br> Youtube <br> </kbd></a>&ensp;&ensp;
-<a href="https://github.com/hyde-project/hyde/wiki"><kbd> <br> Wiki <br> </kbd></a>&ensp;&ensp;
-<a href="https://discord.gg/qWehcFJxPa"><kbd> <br> Discord <br> </kbd></a>
+安装脚本适用于最小 [Arch Linux](https://wiki.archlinux.org/title/Arch_Linux) 系统，但在某些[基于 Arch 的发行版](https://wiki.archlinux.org/title/Arch-based_distributions)上**可能**也能正常运行.
 
-</div><br><br>
+HyDE是一个高度自定义的预设，在其他[桌面环境](https://wiki.archlinux.org/title/Desktop_environment)/[窗口管理器](https://wiki.archlinux.org/title/Window_manager)的上安装HyDE也许可行，但它可能会与您的[GTK](https://wiki.archlinux.org/title/GTK)/[Qt](https://wiki.archlinux.org/title/Qt) 主题, [Shell](https://wiki.archlinux.org/title/Command-line_shell), [SDDM](https://wiki.archlinux.org/title/SDDM), [GRUB](https://wiki.archlinux.org/title/GRUB)等等配置相冲突.您需自行承担风险。
 
-https://github.com/prasanthrangan/hyprdots/assets/106020512/7f8fadc8-e293-4482-a851-e9c6464f5265
-
-<br><div align="center"><img width="12%" src="https://raw.githubusercontent.com/prasanthrangan/hyprdots/main/Source/assets/arch.png"/><br></div>
-
-## Instalación
-
-El script de instalación está diseñado para un mínimo [Arch Linux](https://wiki.archlinux.org/title/Arch_Linux) instalar, pero **puede** funcionar en algunos [Arch-based distro](https://wiki.archlinux.org/title/Arch-based_distributions).
-Al instalar HyDE junto con otro [DE](https://wiki.archlinux.org/title/Desktop_environment)/[WM](https://wiki.archlinux.org/title/Window_manager) debería funcionar, debido a que es una configuración muy personalizada, **tendrá** conflicto con su [GTK](https://wiki.archlinux.org/title/GTK)/[Qt](https://wiki.archlinux.org/title/Qt) tematización, [Shell](https://wiki.archlinux.org/title/Command-line_shell), [SDDM](https://wiki.archlinux.org/title/SDDM), [GRUB](https://wiki.archlinux.org/title/GRUB), etc. y es bajo su propio riesgo.
-
-Para apoyar a Nixos se mantiene un proyecto separado @ [Hydenix](https://github.com/richen604/hydenix/tree/main)
+我们支持 Nixos， 但作为一个单独的仓库在 [Hydenix](https://github.com/richen604/hydenix/tree/main) 提供。
 
 > [!IMPORTANT]
-> El script de instalación detectará automáticamente una tarjeta NVIDIA e instalará los controladores nvidia-dkms para su kernel.
-> Asegúrese de que su tarjeta NVIDIA admita los controladores dkms en la lista proporcionada [AQUÍ](https://wiki.archlinux.org/title/NVIDIA).
+> 安装脚本会自动检测英伟达显卡并安装 nvidia-dkms 内核驱动。
+> 请确保您的英伟达显卡支持 dkms 驱动，支持的具体型号可以查看[这个列表](https://wiki.archlinux.org/title/NVIDIA)。
 
 > [!CAUTION]
-> El script modifica su configuración `grub` o `systemd-boot` para habilitar NVIDIA DRM.
+> 这个脚本会修改您的 `grub` 或 `systemd-boot` 配置以启用英伟达DRM。
 
-Para instalar, ejecute los siguientes comandos:
+若要安装，请执行以下命令：
 
 ```shell
 pacman -S --needed git base-devel
@@ -68,11 +81,16 @@ cd ~/HyDE/Scripts
 ```
 
 > [!TIP]
-> También puedes agregar cualquier otra aplicación que desees instalar junto con HyDE. `Scripts/pkg_extra.lst` y pasar el archivo como parámetro para instalarlo así:
+> 您可以在 `Scripts/pkg_user.lst` 中添加您想随 HyDE 一同安装的应用，并将此文件作为参数传入安装脚本，像这样：
 >
 > ```shell
-> ./install.sh pkg_extra.lst
+> ./install.sh pkg_user.lst
 > ```
+
+> [!IMPORTANT]
+> 请参照 `Scripts/pkg_extra.lst`编写您的安装列表，
+>
+> 如果您想安装额外的软件包，也可以  `cp Scripts/pkg_extra.lst Scripts/pkg_user.lst`。
 
 <!--
 
@@ -80,12 +98,14 @@ As a second install option, you can also use `Hyde-install`, which might be easi
 View installation instructions for HyDE in [Hyde-cli - Usage](https://github.com/kRHYME7/Hyde-cli?tab=readme-ov-file#usage).
 -->
 
-Reinicie el sistema después de que se complete el script de instalación y lo lleve a la pantalla de inicio de sesión de SDDM (o pantalla negra) por primera vez.
-Para obtener más detalles, consulte la [wiki de instalación](https://github.com/HyDE-Project/HyDE/wiki/installation).
+在安装脚本运行完成后请重启，首次启动时您将看到SDDM登录界面（或者黑屏）。更多细节请看[安装 wiki](https://github.com/HyDE-Project/HyDE/wiki/installation)
 
-## Actualizar
+<a id="updating"></a>
+<img src="https://readme-typing-svg.herokuapp.com?font=Lexend+Giga&size=25&pause=1000&color=CCA9DD&width=435&lines=UPDATING" width="450"/>
 
-Para actualizar HyDE, necesitarás extraer los últimos cambios de GitHub y restaurar las configuraciones ejecutando los siguientes comandos:
+---
+
+要更新 HyDE, 您需要从 GitHub 中拉取最新更改并通过运行以下命令恢复配置：
 
 ```shell
 cd ~/HyDE/Scripts
@@ -94,8 +114,8 @@ git pull origin master
 ```
 
 > [!IMPORTANT]
-> Tenga en cuenta que cualquier configuración que haya realizado se sobrescribirá si se indica que debe realizarse tal como se indica en `Scripts/restore_cfg.psv`.
-> Sin embargo, se realiza una copia de seguridad de todas las configuraciones reemplazadas y se pueden recuperar desde allí `~/.config/cfg_backups`.
+> 请注意，在`Sctipts/restore_cfg.psv`中列出的配置中，您所做的任何个性化配置都会被覆盖。
+> 但是，所有被覆盖的配置会先被备份到`~/.config/cfg_backups/`中，以便找回。
 
 <!--
 As a second update option, you can use `Hyde restore ...`, which does have a better way of managing restore and backup options.
@@ -107,10 +127,13 @@ For more details, you can refer to [Hyde-cli - dots management wiki](https://git
   <a href="#-design-by-t2"><kbd> <br> 🡅 <br> </kbd></a>
 </div>
 
-## Temas
+<a id="themes"></a>  
+<img src="https://readme-typing-svg.herokuapp.com?font=Lexend+Giga&size=25&pause=1000&color=CCA9DD&width=435&lines=THEMES" width="450"/>
 
-Todos nuestros temas oficiales se almacenan en un repositorio independiente, lo que permite a los usuarios instalarlos mediante themepatcher.
-Para obtener más información, visite [HyDE-Project/hyde-themes](https://github.com/HyDE-Project/hyde-themes).
+---
+
+所有的官方主题都作为单独的仓库存储，您可以用过主题补丁程序安装。
+详情请见[HyDE-Project/hyde-themes](https://github.com/HyDE-Project/hyde-themes)。
 
 <div align="center">
   <table><tr><td>
@@ -128,34 +151,37 @@ Para obtener más información, visite [HyDE-Project/hyde-themes](https://github
 [![Synth-Wave](https://placehold.co/130x30/495495/ff7edb?text=Synth-Wave&font=Oswald)](https://github.com/HyDE-Project/hyde-themes/tree/Synth-Wave)
 [![Tokyo-Night](https://placehold.co/130x30/7aa2f7/24283b?text=Tokyo-Night&font=Oswald)](https://github.com/HyDE-Project/hyde-themes/tree/Tokyo-Night)
 
-  </td></tr></table>
+</td></tr></table>
 </div>
 
 > [!TIP]
-> Todos, incluido usted, pueden crear, mantener y compartir temas adicionales, ¡todos los cuales pueden instalarse usando themepatcher!
-> Para crear su propio tema personalizado, consulte la [theming wiki](https://github.com/prasanthrangan/hyprdots/wiki/Theming).
-> Si desea que se muestre su tema de Hyde o desea encontrar algunos temas no oficiales, visite [kRHYME7/hyde-gallery](https://github.com/kRHYME7/hyde-gallery)!
+> 包括您在内的所有人都可以创建、维护、分享主题！它们都可以通过主题补丁程序安装。
+> 请参阅[主题 wiki](https://github.com/prasanthrangan/hyprdots/wiki/Theming) 来创建您的个性化主题。
+> 如果您想展示您的 hyde 主题，或者您想寻找非官方主题，请看[kRHYME7/hyde-gallery](https://github.com/kRHYME7/hyde-gallery)。
 
 <div align="right">
   <br>
   <a href="#-design-by-t2"><kbd> <br> 🡅 <br> </kbd></a>
 </div>
 
-## Estilos
+<a id="styles"></a>  
+<img src="https://readme-typing-svg.herokuapp.com?font=Lexend+Giga&size=25&pause=1000&color=CCA9DD&width=435&lines=STYLES" width="450"/>
 
-<div align="center"><table><tr>Seleccionar tema</tr></tr><tr><td>
+---
+
+<div align="center"><table><tr>主题选择</tr><tr><td>
 <img src="https://raw.githubusercontent.com/prasanthrangan/hyprdots/main/Source/assets/theme_select_1.png"/></td><td>
 <img src="https://raw.githubusercontent.com/prasanthrangan/hyprdots/main/Source/assets/theme_select_2.png"/></td></tr></table></div>
 
-<div align="center"><table><tr><td>Seleccionar fondo de pantalla</td><td>Seleccionar Lanzador</td></tr><tr><td>
+<div align="center"><table><tr><td>壁纸选择</td><td>启动器界面选择</td></tr><tr><td>
 <img src="https://raw.githubusercontent.com/prasanthrangan/hyprdots/main/Source/assets/walls_select.png"/></td><td>
 <img src="https://raw.githubusercontent.com/prasanthrangan/hyprdots/main/Source/assets/rofi_style_sel.png"/></td></tr>
-<tr><td>Modos de Wallbash</td><td>Acción de notificación</td></tr><tr><td>
+<tr><td>Wallbash 模式</td><td>通知</td></tr><tr><td>
 <img src="https://raw.githubusercontent.com/prasanthrangan/hyprdots/main/Source/assets/wb_mode_sel.png"/></td><td>
 <img src="https://raw.githubusercontent.com/prasanthrangan/hyprdots/main/Source/assets/notif_action_sel.png"/></td></tr>
 </table></div>
 
-<div align="center"><table><tr>Lanzador de Rofi</tr><tr><td>
+<div align="center"><table><tr>Rofi 启动器</tr><tr><td>
 <img src="https://raw.githubusercontent.com/prasanthrangan/hyprdots/main/Source/assets/rofi_style_1.png"/></td><td>
 <img src="https://raw.githubusercontent.com/prasanthrangan/hyprdots/main/Source/assets/rofi_style_2.png"/></td><td>
 <img src="https://raw.githubusercontent.com/prasanthrangan/hyprdots/main/Source/assets/rofi_style_3.png"/></td></tr><tr><td>
@@ -170,11 +196,11 @@ Para obtener más información, visite [HyDE-Project/hyde-themes](https://github
 <img src="https://raw.githubusercontent.com/prasanthrangan/hyprdots/main/Source/assets/rofi_style_12.png"/></td></tr>
 </table></div>
 
-<div align="center"><table><tr>Estilos de menu Wlogout</tr><tr><td>
+<div align="center"><table><tr>Wlogout 菜单</tr><tr><td>
 <img src="https://raw.githubusercontent.com/prasanthrangan/hyprdots/main/Source/assets/wlog_style_1.png"/></td><td>
 <img src="https://raw.githubusercontent.com/prasanthrangan/hyprdots/main/Source/assets/wlog_style_2.png"/></td></tr></table></div>
 
-<div align="center"><table><tr>Lanzador de juegos</tr><tr><td>
+<div align="center"><table><tr>游戏启动器</tr><tr><td>
 <img src="https://raw.githubusercontent.com/prasanthrangan/hyprdots/main/Source/assets/game_launch_1.png"/></td><td>
 <img src="https://raw.githubusercontent.com/prasanthrangan/hyprdots/main/Source/assets/game_launch_2.png"/></td><td>
 <img src="https://raw.githubusercontent.com/prasanthrangan/hyprdots/main/Source/assets/game_launch_3.png"/></td></tr></table></div>
@@ -182,6 +208,7 @@ Para obtener más información, visite [HyDE-Project/hyde-themes](https://github
 <img src="https://raw.githubusercontent.com/prasanthrangan/hyprdots/main/Source/assets/game_launch_4.png"/></td><td>
 <img src="https://raw.githubusercontent.com/prasanthrangan/hyprdots/main/Source/assets/game_launch_5.png"/></td></tr></table></div>
 
+<!--
 <div align="right">
   <br>
   <a href="#-design-by-t2"><kbd> <br> 🡅 <br> </kbd></a>
@@ -190,8 +217,13 @@ Para obtener más información, visite [HyDE-Project/hyde-themes](https://github
 <div align="center">
 
 </div>
+-->
 
 <div align="right">
   <br>
   <a href="#-design-by-t2"><kbd> <br> 🡅 <br> </kbd></a>
+</div>
+
+<div align="right">
+  <sub>最后编辑: 02/01/2025<span id="last-edited"></span></sub>
 </div>
