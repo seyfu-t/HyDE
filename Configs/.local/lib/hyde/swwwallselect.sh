@@ -68,7 +68,7 @@ if [ -n "${rofiSel}" ]; then
         [ -z "${setWall}" ] || break
     done
     if [ -n "${setWall}" ]; then
-        "${scrDir}/swwwallpaper.sh" -s "${setWall}"
+        "${scrDir}/wallpaper.sh" -s "${setWall}" --backend swww --global
         notify-send -a "HyDE Alert" -i "${thmbDir}/$(set_hash "${setWall}").sqre" " ${rofiSel}"
     else
         notify-send -a "HyDE Alert" "Wallpaper not found"
