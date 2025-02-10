@@ -277,6 +277,7 @@ main() {
         link)
             Wall_Hash
             Wall_Cache
+            exit 0
             ;;
         esac
     fi
