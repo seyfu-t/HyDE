@@ -257,13 +257,11 @@ main() {
 
     # TODO Add more backends. backend functions are used to e,g apply wallpaper or just a post processing like we do with swww
     # Apply wallpaper to  backend
-    if [ -n "${wallpaper_backend}" ]; then
+    if [ -f "${scrDir}/wallpaper.${wallpaper_backend}.sh" ] && [ -n "${wallpaper_backend}" ]; then
         print_log -sec "wallpaper" "Using backend: ${wallpaper_backend}"
-        case "${wallpaper_backend}" in
-        swww)
-            "${scrDir}/wallpaper.swww.sh" "${wallSet}"
-            ;;
-        esac
+        "${scrDir}/wallpaper.${wallpaper_backend}.sh" "${wallSet}"
+    else
+        print_log -err "wallpaper" "Backend not found: ${wallpaper_backend}"
     fi
 
     if [ "${wallpaper_setter_flag}" == "select" ]; then
