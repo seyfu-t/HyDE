@@ -133,32 +133,36 @@ hyde_reload() {
     "$LIB_DIR/hyde/themeswitch.sh"
 }
 
-case $1 in
--i | interactive)
-    interactive_shell
-    ;;
--r | reload)
-    hyde_reload
-    ;;
-zoom)
-    shift
-    zoom "$@"
-    ;;
-wallbash)
-    shift
-    call_wallbashScript "$@"
-    ;;
---help | help | -h)
-    USAGE
-    ;;
-"")
-    for func in $(compgen -A function); do
-        export -f "${func?}"
-    done
-    ;;
-*)
-    if [ -f "$LIB_DIR/hyde/$1.sh" ]; then
-        "$LIB_DIR/hyde/$1.sh" "${@:2}"
-    fi
-    ;;
-esac
+if [[ ! "${BASH_SOURCE[0]}" != "${0}" ]]; then
+
+    case $1 in
+    -i | interactive)
+        interactive_shell
+        ;;
+    -r | reload)
+        hyde_reload
+        ;;
+    zoom)
+        shift
+        zoom "$@"
+        ;;
+    wallbash)
+        shift
+        call_wallbashScript "$@"
+        ;;
+    --help | help | -h)
+        USAGE
+        ;;
+    "")
+        for func in $(compgen -A function); do
+            export -f "${func?}"
+        done
+        ;;
+    *)
+        if [ -f "$LIB_DIR/hyde/$1.sh" ]; then
+            "$LIB_DIR/hyde/$1.sh" "${@:2}"
+        fi
+        ;;
+    esac
+
+fi
