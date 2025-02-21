@@ -12,6 +12,27 @@ confDir="${confDir:-$XDG_CONFIG_HOME}"
 cacheDir="${HYDE_CACHE_HOME:-"${XDG_CACHE_HOME}/hyde"}"
 WALLPAPER="${cacheDir}/wall.set"
 
+USAGE() {
+    cat <<EOF
+    Usage: $(basename "${0}") --[arg]
+
+    arguments:
+      --background -b    - Converts and ensures background to be a png
+                            : \$BACKGROUND_PATH
+      --mpris <player>   - Handles mpris thumbnail generation
+                            : \$MPRIS_IMAGE
+      --profile          - Generates the profile picture
+                            : \$PROFILE_IMAGE
+      --cava             - Placeholder function for cava
+                            : \$CAVA_CMD
+      --art              - Prints the path to the mpris art"
+                            : \$MPRIS_ART
+      --select      -s     - Selects the hyprlock layout"
+                            : \$LAYOUT_PATH
+      --help       -h    - Displays this help message"
+EOF
+}
+
 # Converts and ensures background to be a png
 fn_background() {
     WP="$(realpath "${WALLPAPER}")"
@@ -253,26 +274,6 @@ source = ${hyde_hyprlock_conf}
 CONF
 }
 
-fn_help() {
-    cat <<EOF
-    Usage: hyprlock.sh [command]"
-    Commands:"
-      --background -b    - Converts and ensures background to be a png
-                            : \$BACKGROUND_PATH
-      --mpris           - Handles mpris thumbnail generation
-                            : \$MPRIS_IMAGE
-      --profile          - Generates the profile picture
-                            : \$PROFILE_IMAGE
-      --cava             - Placeholder function for cava
-                            : \$CAVA_CMD
-      --art              - Prints the path to the mpris art"
-                            : \$MPRIS_ART
-      --select      -s     - Selects the hyprlock layout"
-                            : \$LAYOUT_PATH
-      --help       -h    - Displays this help message"
-EOF
-}
-
 if [ -z "${*}" ]; then
     if [ ! -f "$HYDE_CACHE_HOME/wallpapers/hyprlock.png" ]; then
         print_log -sec "hyprlock" -stat "setting" " $HYDE_CACHE_HOME/wallpapers/hyprlock.png"
@@ -321,7 +322,7 @@ while true; do
         exit 0
         ;;
     help | --help | -h)
-        fn_help
+        USAGE
         exit 0
         ;;
     --)
