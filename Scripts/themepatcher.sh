@@ -178,9 +178,16 @@ fi
 readonly restore_list
 
 # Get Wallpapers
-wallpapers=$(find "${Fav_Theme_Dir}" -type f \( -iname "*.gif" -o -iname "*.jpg" -o -iname "*.jpeg" -o -iname "*.png" \))
-wpCount="$(echo "${wallpapers}" | wc -l)"
+wallpapers=$(
+    find "${Fav_Theme_Dir}" -type f \( -iname "*.gif" -o -iname "*.jpg" -o -iname "*.jpeg" -o -iname "*.png" \) ! -path "*/logo/*"
+)
+wpCount="$(wc -l <<<"${wallpapers}")"
 { [ -z "${wallpapers}" ] && print_prompt -r "[ERROR] " "No wallpapers found" && exit_flag=true; } || { readonly wallpapers && print_prompt -g "\n[OK] " "wallpapers :: [count] ${wpCount} (.gif+.jpg+.jpeg+.png)"; }
+
+# Get logos
+logos=$(find "${Fav_Theme_Dir}/logo" -type f \( -iname "*.gif" -o -iname "*.jpg" -o -iname "*.jpeg" -o -iname "*.png" \))
+logosCount="$(wc -l <<<"${logos}")"
+{ [ -z "${logos}" ] && print_prompt -y "[warn] " "No logos found"; } || { readonly logos && print_prompt -g "[OK] " "logos :: [count] ${logosCount}\n"; }
 
 # parse thoroughly 😁
 check_tars() {
@@ -309,13 +316,21 @@ for prefix in "${!archive_map[@]}"; do
 
 done
 
+confDir=${XDG_CONFIG_HOME:-"$HOME/.config"}
+
 # populate wallpaper
-confDir=${confDir:-"$HOME/.config"}
 Fav_Theme_Walls="${confDir}/hyde/themes/${Fav_Theme}/wallpapers"
 [ ! -d "${Fav_Theme_Walls}" ] && mkdir -p "${Fav_Theme_Walls}"
 while IFS= read -r walls; do
     cp -f "${walls}" "${Fav_Theme_Walls}"
 done <<<"${wallpapers}"
+
+# populate logos
+Fav_Theme_Logos="${confDir}/hyde/themes/${Fav_Theme}/logo"
+[ ! -d "${Fav_Theme_Logos}" ] && mkdir -p "${Fav_Theme_Logos}"
+while IFS= read -r logo; do
+    cp -f "${logo}" "${Fav_Theme_Logos}"
+done <<<"${logos}"
 
 # restore configs with theme override
 echo -en "${restore_list}" >"${Theme_Dir}/restore_cfg.lst"
