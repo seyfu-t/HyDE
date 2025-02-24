@@ -185,9 +185,11 @@ wpCount="$(wc -l <<<"${wallpapers}")"
 { [ -z "${wallpapers}" ] && print_prompt -r "[ERROR] " "No wallpapers found" && exit_flag=true; } || { readonly wallpapers && print_prompt -g "\n[OK] " "wallpapers :: [count] ${wpCount} (.gif+.jpg+.jpeg+.png)"; }
 
 # Get logos
-logos=$(find "${Fav_Theme_Dir}/logo" -type f \( -iname "*.gif" -o -iname "*.jpg" -o -iname "*.jpeg" -o -iname "*.png" \))
-logosCount="$(wc -l <<<"${logos}")"
-{ [ -z "${logos}" ] && print_prompt -y "[warn] " "No logos found"; } || { readonly logos && print_prompt -g "[OK] " "logos :: [count] ${logosCount}\n"; }
+if [ -d "${Fav_Theme_Dir}/logo" ]; then
+    logos=$(find "${Fav_Theme_Dir}/logo" -type f \( -iname "*.gif" -o -iname "*.jpg" -o -iname "*.jpeg" -o -iname "*.png" \))
+    logosCount="$(wc -l <<<"${logos}")"
+    { [ -z "${logos}" ] && print_prompt -y "[warn] " "No logos found"; } || { readonly logos && print_prompt -g "[OK] " "logos :: [count] ${logosCount}\n"; }
+fi
 
 # parse thoroughly 😁
 check_tars() {
@@ -327,10 +329,16 @@ done <<<"${wallpapers}"
 
 # populate logos
 Fav_Theme_Logos="${confDir}/hyde/themes/${Fav_Theme}/logo"
-[ ! -d "${Fav_Theme_Logos}" ] && mkdir -p "${Fav_Theme_Logos}"
-while IFS= read -r logo; do
-    cp -f "${logo}" "${Fav_Theme_Logos}"
-done <<<"${logos}"
+if [ -n "${logos}" ]; then
+    [ ! -d "${Fav_Theme_Logos}" ] && mkdir -p "${Fav_Theme_Logos}"
+    while IFS= read -r logo; do
+        if [ -f "${logo}" ]; then
+            cp -f "${logo}" "${Fav_Theme_Logos}"
+        else
+            print_prompt -y "[warn] " "${logo} --> do not exist"
+        fi
+    done <<<"${logos}"
+fi
 
 # restore configs with theme override
 echo -en "${restore_list}" >"${Theme_Dir}/restore_cfg.lst"
