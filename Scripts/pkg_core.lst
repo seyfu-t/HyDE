@@ -104,7 +104,7 @@ pandoc-bin
 pdftk
 rsync
 usbmuxd
-v4l2loopback-utils
+# v4l2loopback-utils
 virt-manager
 wev
 yt-dlp
