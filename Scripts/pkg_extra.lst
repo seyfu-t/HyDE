@@ -9,10 +9,6 @@ ddcui                                                  # GUI to control brightne
 # hyprgui-bin                                          # GUI for hyprland configuration // might mess your userprefs but convenient // Just disappeared
 # swappy                                               # screenshot editor, DEPRECATED in favor for satty
 
-# --------------------------------------------------- // Shell
-# oh-my-zsh-git|zsh                                      # Optional plugin manager for zsh // already installed locally
-
-
 # --------------------------------------------------- // Misc
 xdg-desktop-portal-gtk                                 # xdg desktop portal using gtk
 # emote                                                # emoji picker gtk3
@@ -29,10 +25,6 @@ cava                                                   # audio visualizer
 
 # --------------------------------------------------- // Apps
 # neovim                                               # vim based text editor
-
-# --------------------------------------------------- // Shell
-# oh-my-zsh-git|zsh                                      # Optional plugin manager for zsh
-# pokemon-colorscripts-git|zsh                           # display pokemon sprites (optional)
 
 # --------------------------------------------------- // Editor
 # vscodium                                              # Full oss text editor
