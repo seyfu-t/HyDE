@@ -12,13 +12,11 @@ cloneDir="${CLONE_DIR:-${cloneDir}}"
 confDir="${XDG_CONFIG_HOME:-$HOME/.config}"
 cacheDir="${XDG_CACHE_HOME:-$HOME/.cache}/hyde"
 aurList=("yay" "paru")
-shlList=("zsh" "fish")
 
 export cloneDir
 export confDir
 export cacheDir
 export aurList
-export shlList
 
 pkg_installed() {
     local PkgIn=$1
