@@ -11,16 +11,6 @@ if ! source "${scrDir}/global_fn.sh"; then
     exit 1
 fi
 
-shlList=("fish")
-
-# shellcheck disable=SC2154
-if chk_list "myShell" "${shlList[@]}"; then
-    print_log -sec "SHELL" -stat "detected" "${myShell}"
-else
-    print_log -sec "SHELL" -err "error" "no shell found..."
-    exit 1
-fi
-
 # set shell
 if [[ "$(grep "/${USER}:" /etc/passwd | awk -F '/' '{print $NF}')" != "${myShell}" ]]; then
     print_log -sec "SHELL" -stat "change" "shell to ${myShell}..."
