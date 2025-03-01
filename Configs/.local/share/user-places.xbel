@@ -1,0 +1,256 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE xbel>
+<xbel xmlns:bookmark="http://www.freedesktop.org/standards/desktop-bookmarks" xmlns:kdepriv="http://www.kde.org/kdepriv" xmlns:mime="http://www.freedesktop.org/standards/shared-mime-info">
+ <info>
+  <metadata owner="http://www.kde.org">
+   <kde_places_version>4</kde_places_version>
+   <GroupState-Places-IsHidden>false</GroupState-Places-IsHidden>
+   <GroupState-Remote-IsHidden>false</GroupState-Remote-IsHidden>
+   <GroupState-Devices-IsHidden>false</GroupState-Devices-IsHidden>
+   <GroupState-RemovableDevices-IsHidden>false</GroupState-RemovableDevices-IsHidden>
+   <GroupState-Tags-IsHidden>false</GroupState-Tags-IsHidden>
+  </metadata>
+ </info>
+ <bookmark href="file:///home/seyfu">
+  <title>Home</title>
+  <info>
+   <metadata owner="http://freedesktop.org">
+    <bookmark:icon name="user-home"/>
+   </metadata>
+   <metadata owner="http://www.kde.org">
+    <ID>1728002613/0</ID>
+    <isSystemItem>true</isSystemItem>
+   </metadata>
+  </info>
+ </bookmark>
+ <bookmark href="file:///home/seyfu/Downloads">
+  <title>Downloads</title>
+  <info>
+   <metadata owner="http://freedesktop.org">
+    <bookmark:icon name="folder-downloads"/>
+   </metadata>
+   <metadata owner="http://www.kde.org">
+    <ID>1728002613/1</ID>
+    <isSystemItem>true</isSystemItem>
+   </metadata>
+  </info>
+ </bookmark>
+ <bookmark href="file:///home/seyfu/Documents">
+  <title>Documents</title>
+  <info>
+   <metadata owner="http://freedesktop.org">
+    <bookmark:icon name="folder-documents"/>
+   </metadata>
+   <metadata owner="http://www.kde.org">
+    <ID>1728091529/0</ID>
+   </metadata>
+  </info>
+ </bookmark>
+ <bookmark href="remote:/">
+  <title>Network</title>
+  <info>
+   <metadata owner="http://freedesktop.org">
+    <bookmark:icon name="folder-network"/>
+   </metadata>
+   <metadata owner="http://www.kde.org">
+    <ID>1728002613/2</ID>
+    <isSystemItem>true</isSystemItem>
+   </metadata>
+  </info>
+ </bookmark>
+ <separator>
+  <info>
+   <metadata owner="http://www.kde.org">
+    <UDI>/org/freedesktop/UDisks2/block_devices/sda1</UDI>
+    <isSystemItem>true</isSystemItem>
+    <uuid>b36772e9-a2ba-4a45-9f32-aa1b1515bce9</uuid>
+   </metadata>
+  </info>
+ </separator>
+ <separator>
+  <info>
+   <metadata owner="http://www.kde.org">
+    <UDI>/org/freedesktop/UDisks2/block_devices/sda5</UDI>
+    <isSystemItem>true</isSystemItem>
+    <uuid>e601caa4-a754-45f2-b8e0-989c0b1c9cf0</uuid>
+   </metadata>
+  </info>
+ </separator>
+ <separator>
+  <info>
+   <metadata owner="http://www.kde.org">
+    <UDI>/org/freedesktop/UDisks2/block_devices/nvme1n1p2</UDI>
+    <isSystemItem>true</isSystemItem>
+    <uuid>3aec29b6ec296d77</uuid>
+    <IsHidden>true</IsHidden>
+   </metadata>
+  </info>
+ </separator>
+ <separator>
+  <info>
+   <metadata owner="http://www.kde.org">
+    <UDI>/org/freedesktop/UDisks2/block_devices/nvme0n1p2</UDI>
+    <isSystemItem>true</isSystemItem>
+    <uuid>a826c3bd-1355-47b1-8a72-d7bb543e8243</uuid>
+   </metadata>
+  </info>
+ </separator>
+ <bookmark href="sftp://homelab/home/seyfu">
+  <title>Homelab</title>
+  <info>
+   <metadata owner="http://freedesktop.org">
+    <bookmark:icon name="folder-remote"/>
+   </metadata>
+   <metadata owner="http://www.kde.org">
+    <ID>1728002861/0</ID>
+   </metadata>
+  </info>
+ </bookmark>
+ <separator>
+  <info>
+   <metadata owner="http://www.kde.org">
+    <UDI>/org/freedesktop/UDisks2/block_devices/sdb1</UDI>
+    <isSystemItem>true</isSystemItem>
+    <uuid>b2a6-eadf</uuid>
+   </metadata>
+  </info>
+ </separator>
+ <separator>
+  <info>
+   <metadata owner="http://www.kde.org">
+    <UDI>/org/freedesktop/UDisks2/block_devices/sdc2</UDI>
+    <isSystemItem>true</isSystemItem>
+    <uuid>223c-f3f8</uuid>
+   </metadata>
+  </info>
+ </separator>
+ <separator>
+  <info>
+   <metadata owner="http://www.kde.org">
+    <UDI>/org/freedesktop/UDisks2/block_devices/sdc1</UDI>
+    <isSystemItem>true</isSystemItem>
+    <uuid>1c063b2d063b06f4</uuid>
+   </metadata>
+  </info>
+ </separator>
+ <separator>
+  <info>
+   <metadata owner="http://www.kde.org">
+    <UDI>/org/freedesktop/UDisks2/block_devices/sda1</UDI>
+    <isSystemItem>true</isSystemItem>
+    <uuid>b8c4f2e7-12cd-4f74-b63d-e0faf7d9a419</uuid>
+   </metadata>
+  </info>
+ </separator>
+ <bookmark href="file:///home/seyfu/Nextcloud">
+  <title>Nextcloud</title>
+  <info>
+   <metadata owner="http://freedesktop.org">
+    <bookmark:icon name="Nextcloud"/>
+   </metadata>
+   <metadata owner="http://www.kde.org">
+    <ID>1728091542/1</ID>
+   </metadata>
+  </info>
+ </bookmark>
+ <bookmark href="file:///home/seyfu/Pictures">
+  <title>Pictures</title>
+  <info>
+   <metadata owner="http://freedesktop.org">
+    <bookmark:icon name="folder-pictures"/>
+   </metadata>
+   <metadata owner="http://www.kde.org">
+    <ID>1728091548/2</ID>
+   </metadata>
+  </info>
+ </bookmark>
+ <bookmark href="file:///home/seyfu/Videos">
+  <title>Videos</title>
+  <info>
+   <metadata owner="http://freedesktop.org">
+    <bookmark:icon name="org.videolan.VLC"/>
+   </metadata>
+   <metadata owner="http://www.kde.org">
+    <ID>1728091553/3</ID>
+   </metadata>
+  </info>
+ </bookmark>
+ <bookmark href="trash:/">
+  <title>Trash</title>
+  <info>
+   <metadata owner="http://freedesktop.org">
+    <bookmark:icon name="user-trash"/>
+   </metadata>
+   <metadata owner="http://www.kde.org">
+    <ID>1728002613/3</ID>
+    <isSystemItem>true</isSystemItem>
+   </metadata>
+  </info>
+ </bookmark>
+ <bookmark href="file:///home/seyfu/JDownloader">
+  <title>JDownloader</title>
+  <info>
+   <metadata owner="http://freedesktop.org">
+    <bookmark:icon name="jdownloader"/>
+   </metadata>
+   <metadata owner="http://www.kde.org">
+    <ID>1728255842/0</ID>
+   </metadata>
+  </info>
+ </bookmark>
+ <bookmark href="smb://192.168.2.186/share">
+  <title>Fileshare</title>
+  <info>
+   <metadata owner="http://freedesktop.org">
+    <bookmark:icon name="network-workgroup"/>
+   </metadata>
+   <metadata owner="http://www.kde.org">
+    <ID>1728265466/0</ID>
+   </metadata>
+  </info>
+ </bookmark>
+ <bookmark href="sftp://seyfu@192.168.2.186/home/seyfu">
+  <title>Fujitsu</title>
+  <info>
+   <metadata owner="http://freedesktop.org">
+    <bookmark:icon name="folder-remote"/>
+   </metadata>
+   <metadata owner="http://www.kde.org">
+    <ID>1728265504/1</ID>
+   </metadata>
+  </info>
+ </bookmark>
+ <bookmark href="sftp://seyfu@192.168.2.76/home/seyfu">
+  <title>Surface</title>
+  <info>
+   <metadata owner="http://freedesktop.org">
+    <bookmark:icon name="folder-remote"/>
+   </metadata>
+   <metadata owner="http://www.kde.org">
+    <ID>1728265538/2</ID>
+   </metadata>
+  </info>
+ </bookmark>
+ <bookmark href="file:///mnt/ssd/Code/Workspaces">
+  <title>Workspaces</title>
+  <info>
+   <metadata owner="http://freedesktop.org">
+    <bookmark:icon name="inode-directory"/>
+   </metadata>
+   <metadata owner="http://www.kde.org">
+    <ID>1732317505/0</ID>
+   </metadata>
+  </info>
+ </bookmark>
+ <bookmark href="smb://homelab.box/seyfu">
+  <title>Paperless</title>
+  <info>
+   <metadata owner="http://freedesktop.org">
+    <bookmark:icon name="network-workgroup"/>
+   </metadata>
+   <metadata owner="http://www.kde.org">
+    <ID>1734314930/0</ID>
+   </metadata>
+  </info>
+ </bookmark>
+</xbel>
