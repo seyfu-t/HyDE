@@ -11,6 +11,8 @@ if ! source "${scrDir}/global_fn.sh"; then
     exit 1
 fi
 
+myShell="fish"
+
 # set shell
 if [[ "$(grep "/${USER}:" /etc/passwd | awk -F '/' '{print $NF}')" != "${myShell}" ]]; then
     print_log -sec "SHELL" -stat "change" "shell to ${myShell}..."
