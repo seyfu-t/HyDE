@@ -50,22 +50,6 @@ if pkg_installed grub && [ -f /boot/grub/grub.cfg ]; then
     fi
 fi
 
-# systemd-boot
-if pkg_installed systemd && nvidia_detect && [ "$(bootctl status 2>/dev/null | awk '{if ($1 == "Product:") print $2}')" == "systemd-boot" ]; then
-    print_log -sec "bootloader" -stat "detected" "systemd-boot"
-
-    if [ "$(find /boot/loader/entries/ -type f -name '*.conf.hyde.bkp' 2>/dev/null | wc -l)" -ne "$(find /boot/loader/entries/ -type f -name '*.conf' 2>/dev/null | wc -l)" ]; then
-        print_log -g "[bootloader] " -b " :: " "nvidia detected, adding nvidia_drm.modeset=1 to boot option..."
-        find /boot/loader/entries/ -type f -name "*.conf" | while read -r imgconf; do
-            sudo cp "${imgconf}" "${imgconf}.hyde.bkp"
-            sdopt=$(grep -w "^options" "${imgconf}" | sed 's/\b quiet\b//g' | sed 's/\b splash\b//g' | sed 's/\b nvidia_drm.modeset=.\b//g')
-            sudo sed -i "/^options/c${sdopt} quiet splash nvidia_drm.modeset=1" "${imgconf}"
-        done
-    else
-        print_log -y "[bootloader] " -stat "skipped" "systemd-boot is already configured..."
-    fi
-fi
-
 # pacman
 
 if [ -f /etc/pacman.conf ] && [ ! -f /etc/pacman.conf.hyde.bkp ]; then
