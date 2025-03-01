@@ -80,3 +80,90 @@ fastfetch                                              # system information fetc
 # --------------------------------------------------- // HyDE
 # hyde-cli-git                                           # cli tool to manage hyde \\ Deprecated for HyDE
 hypridle                                               # idle daemon
+
+
+# General
+nextcloud
+floorp-bin
+bind
+dosfstools
+etcher-bin
+gnome-calculator
+gwenview
+## hoppscotch-app-bin
+imagemagick
+jq
+man-db
+mpv
+vlc
+## fastfetch
+openresolv
+p7zip
+pandoc-bin
+## pavucontrol
+pdftk
+rsync
+usbmuxd
+v4l2loopback-utils
+virt-manager
+wev
+yt-dlp
+nerd-fonts
+
+# Dev
+maven
+jdk-openjdk
+bun-bin
+chromium
+docker
+docker-compose
+
+# Nvidia
+lib32-nvidia-utils
+lib32-opencl-nvidia
+libva-nvidia-driver
+nvidia-dkms
+nvidia-utils
+nvidia-settings
+nvtop
+opencl-nvidia
+
+
+
+# Portals & XDG Stuff
+archlinux-xdg-menu
+## xdg-desktop-portal-gtk
+## xdg-desktop-portal-hyprland
+xdg-user-dirs
+
+# Dolphin
+dolphin-plugins
+kdegraphics-thumbnailers
+kimageformats
+libheif
+qt6-imageformats
+resvg
+kio
+kio-extras
+kio-gdrive
+ffmpegthumbs
+taglib
+
+# KWallet
+kwallet
+kwalletmanager
+kwallet-pam
+ksshaskpass
+audiocd-kio
+
+# Compilation
+base-devel
+linux-headers
+
+# Gaming
+steam
+gamemode
+lutris
+vkd3d
+lib32-vkd3d
+vulkan-tools
