@@ -5,7 +5,6 @@ update_info=dolphin_detailsmodesettings.upd:rename-leading-padding
 
 [General]
 ShowSelectionToggle=false
-ShowStatusBar=false
 Version=202
 ViewPropsTimestamp=2023,4,26,16,58,48.324
 
@@ -22,10 +21,6 @@ Places Icons Static Size=16
 
 [KPropertiesDialog]
 2560x1080 screen: Window-Maximized=true
-
-[MainWindow]
-MenuBar=Disabled
-ToolBarsMovable=Disabled
 
 [MainWindow][Toolbar mainToolBar]
 IconSize=16
