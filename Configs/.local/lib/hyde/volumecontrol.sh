@@ -38,7 +38,6 @@ Optional:
 Examples:
     $(basename "$0") -o i 5     # Increase output volume by 5
     $(basename "$0") -i m       # Toggle input mute
-    $(basename "$0") -p spotify d 10  # Decrease Spotify volume by 10
     $(basename "$0") -p '' d 10  # Decrease volume by 10 for all players
     $(basename "$0") -s          # Select output device
     $(basename "$0") -t          # Toggle to next output device

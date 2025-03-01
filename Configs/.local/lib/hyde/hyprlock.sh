@@ -82,7 +82,6 @@ mpris_icon() {
     local player=${1:-default}
     declare -A player_dict=(
         ["default"]=""
-        ["spotify"]=""
         ["firefox"]=""
         ["vlc"]="嗢"
         ["google-chrome"]=""
