@@ -161,7 +161,6 @@
                 "(.*) - Code - OSS": "$1 󰨞",
                 "(.*)Code - OSS": "Code 󰨞",
                 "(.*) — Dolphin": "$1 󰉋",
-                "(.*)Spotify": "Spotify 󰓇",
                 "(.*)Steam": "Steam 󰓓",
                 "(.*) - Discord": "$1  ",
                 "(.*)Netflix": "Netflix 󰝆 ",
@@ -169,8 +168,6 @@
                 "(.*)Google chrome": "Google chrome  ",
                 "(.*) — Github": "$1  ",
                 "(.*)Github": "Github ",
-                "(.*)Spotify Free": "Spotify 󰓇",
-                "(.*)Spotify Premiun": "Spotify 󰓇",
             },
             "max-length": 50
         },
@@ -317,7 +314,7 @@
             "exec": "echo ; echo  switch bar //  dock",
             "on-click": "wbarconfgen.sh n",
             "on-click-right": "wbarconfgen.sh p",
-            "on-click-middle": "sleep 0.1 && quickapps.sh kitty firefox spotify code dolphin",
+            "on-click-middle": "sleep 0.1 && quickapps.sh kitty firefox code dolphin",
             "interval" : 86400,
             "tooltip": true
         },
