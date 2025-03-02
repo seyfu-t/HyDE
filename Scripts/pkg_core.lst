@@ -69,7 +69,7 @@ dolphin                                                # kde file manager
 ark                                                    # kde file archiver
 unzip                                                  # extracting zip files
 vim                                                    # terminal text editor
-code                                                   # ide text editor
+#code                                                   # ide text editor
 nwg-displays                                           # monitor management utility
 
 # --------------------------------------------------- // Shell
@@ -108,7 +108,7 @@ usbmuxd
 virt-manager
 wev
 yt-dlp
-nerd-fonts
+#nerd-fonts
 
 # Dev
 maven

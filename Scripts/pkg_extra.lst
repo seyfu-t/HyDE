@@ -28,7 +28,7 @@ cava                                                   # audio visualizer
 
 # --------------------------------------------------- // Editor
 vscodium                                              # Full oss text editor
-vscodium-marketplace|vscodium                         # VSCodium marketplace
+vscodium-bin-marketplace                              # VSCodium marketplace
 vscodium-bin-features
 # code-marketplace|code                                 # Code-Oss marketplace
 # visual-studio-code-bin                                # MS  text editor
