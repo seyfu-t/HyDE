@@ -63,7 +63,7 @@ if [ -f /etc/pacman.conf ] && [ ! -f /etc/pacman.conf.hyde.bkp ]; then
     [ "${flg_DryRun}" -eq 1 ] || sudo sed -i '/^#\[multilib\]/,+1 s/^#//' /etc/pacman.conf
 
     print_log -g "[PACMAN] " -b "update :: " "packages..."
-    [ "${flg_DryRun}" -eq 1 ] || sudo pacman -Syyu
+    [ "${flg_DryRun}" -eq 1 ] || sudo pacman -Syyu --noconfirm
     [ "${flg_DryRun}" -eq 1 ] || sudo pacman -Fy
 else
     print_log -sec "PACMAN" -stat "skipped" "pacman is already configured..."
